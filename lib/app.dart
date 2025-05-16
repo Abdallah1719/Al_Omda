@@ -1,3 +1,4 @@
+import 'package:al_omda/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 
 class AlOmda extends StatelessWidget {
@@ -5,6 +6,9 @@ class AlOmda extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false);
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: router,
+    );
   }
 }
