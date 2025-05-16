@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class AppColors {
+class AppColors {
   final Color? lightGrey = Colors.grey[50];
   final Color? lightGrey1 = Colors.grey[100];
   final Color? lightGrey2 = Colors.grey[200];
