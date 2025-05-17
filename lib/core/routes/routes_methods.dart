@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class RoutesMethods {
+  // push Navigate
   static void customPushNavigate(context, String path) {
     GoRouter.of(context).push(path);
+  }
+
+  // pushReplacement Navigate
+  static void customReplacementNavigate(context, String path) {
+    GoRouter.of(context).pushReplacement(path);
   }
 
   //navigate to a new page with bottom tab bar

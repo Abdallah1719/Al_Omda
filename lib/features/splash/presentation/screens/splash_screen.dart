@@ -64,7 +64,7 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
 
   void goToNextView(context) {
     Future.delayed(Duration(seconds: 3), () {
-      RoutesMethods.customPushNavigate(context, "/onBoarding");
+      RoutesMethods.customReplacementNavigate(context, "/onBoarding");
     });
   }
 }

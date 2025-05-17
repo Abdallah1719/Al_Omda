@@ -14,7 +14,8 @@ class OnBoardingScreen extends StatelessWidget {
       child: Scaffold(
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: R.padding.p16),
-          child: Column(
+          child: ListView(
+            physics: BouncingScrollPhysics(),
             children: [
               VerticalSpace(4),
               Align(
@@ -25,9 +26,8 @@ class OnBoardingScreen extends StatelessWidget {
                 ),
               ),
               OnBoardingBody(),
-              VerticalSpace(3),
+              VerticalSpace(5),
               CustomGeneralButton(text: S.of(context).next),
-              VerticalSpace(15),
             ],
           ),
         ),
