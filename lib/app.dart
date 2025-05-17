@@ -17,25 +17,22 @@ class AlOmda extends StatelessWidget {
         BlocProvider(create: (context) => LocaleCubit()..loadSavedLocale()),
         BlocProvider(create: (context) => ThemeCubit()..loadSavedTheme()),
       ],
-      child: BlocBuilder<LocaleCubit, String>(
-        builder: (context, local) {
-          return BlocBuilder<ThemeCubit, ThemeState>(
-            builder: (context, state) {
-              return MaterialApp.router(
-                debugShowCheckedModeBanner: false,
-                routerConfig: router,
-                localizationsDelegates: LocaleCubit.localizationsDelegates,
-                supportedLocales: S.delegate.supportedLocales,
-                locale: Locale(local),
-                theme: context.read<ThemeCubit>().currentTheme(),
-                themeAnimationStyle: AnimationStyle(
-                  duration: Duration(seconds: 2),
-                  curve: Curves.decelerate,
-                ),
-              );
-            },
-          );
-        },
+      // child: BlocBuilder<LocaleCubit, String>(
+      //   builder: (context, localeState) {
+      //     return BlocBuilder<ThemeCubit, ThemeState>(
+      //       builder: (context, state) {
+      //         if (state is! LoadSavedState) {
+      //           return const SplashScreen();
+      //         }
+      //         final currentTheme = (context.read<ThemeCubit>().currentTheme());
+      //         final router = createAppRouter(Locale(localeState), currentTheme);
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: router,
+        localizationsDelegates: LocaleCubit.localizationsDelegates,
+        supportedLocales: S.delegate.supportedLocales,
+        // locale: Locale(localeState),
+        // theme: currentTheme,
       ),
     );
   }

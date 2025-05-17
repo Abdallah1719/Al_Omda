@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: R.colors.lightgreen,
+      backgroundColor: R.colors.primaryColor,
       body: SplashScreenBody(),
     );
   }
