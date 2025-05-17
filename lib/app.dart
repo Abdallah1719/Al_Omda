@@ -1,6 +1,9 @@
 import 'package:al_omda/core/routes/app_router.dart';
 import 'package:al_omda/core/utils/size_config.dart';
+import 'package:al_omda/generated/l10n.dart';
+import 'package:al_omda/l10n/cubit/local_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AlOmda extends StatelessWidget {
   const AlOmda({super.key});
@@ -8,9 +11,21 @@ class AlOmda extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig: router,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LocaleCubit()..loadSavedLocale()),
+      ],
+      child: BlocBuilder<LocaleCubit, String>(
+        builder: (context, local) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routerConfig: router,
+            localizationsDelegates: LocaleCubit.localizationsDelegates,
+            supportedLocales: S.delegate.supportedLocales,
+            locale: Locale(local),
+          );
+        },
+      ),
     );
   }
 }

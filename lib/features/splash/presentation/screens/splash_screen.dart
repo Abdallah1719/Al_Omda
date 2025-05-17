@@ -1,7 +1,6 @@
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/utils/app_assets.dart';
 import 'package:al_omda/core/utils/index.dart';
-import 'package:al_omda/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
