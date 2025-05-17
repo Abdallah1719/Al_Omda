@@ -49,6 +49,96 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message(
+      'Skip',
+      name: 'skip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `E shopping`
+  String get onBoardingTitle1 {
+    return Intl.message(
+      'E shopping',
+      name: 'onBoardingTitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Explore top organic fruits & grab them`
+  String get onBoardingText1 {
+    return Intl.message(
+      'Explore top organic fruits & grab them',
+      name: 'onBoardingText1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery on the way`
+  String get onBoardingTitle2 {
+    return Intl.message(
+      'Delivery on the way',
+      name: 'onBoardingTitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get your order by speed delivery`
+  String get onBoardingText2 {
+    return Intl.message(
+      'Get your order by speed delivery',
+      name: 'onBoardingText2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery Arrived`
+  String get onBoardingTitle3 {
+    return Intl.message(
+      'Delivery Arrived',
+      name: 'onBoardingTitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `order is arrived at your place`
+  String get onBoardingText3 {
+    return Intl.message(
+      'order is arrived at your place',
+      name: 'onBoardingText3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get started`
+  String get getStarted {
+    return Intl.message(
+      'Get started',
+      name: 'getStarted',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

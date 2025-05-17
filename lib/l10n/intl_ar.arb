@@ -1,1 +1,11 @@
-{}
+{
+    "skip": "تخطى",
+    "onBoardingTitle1": "تسوق إلكترونى",
+    "onBoardingText1": "استكشف أفضل الفواكه العضوية واحصل عليها",
+    "onBoardingTitle2": "الطلب فى الطريق",
+    "onBoardingText2": "استلم طلبك عبر توصيل سريع",
+    "onBoardingTitle3": "وصل التوصيل",
+    "onBoardingText3": "الطلبية وصلت إلى مكانك",
+    "next": "التالي",
+    "getStarted": "ابدأ"
+}

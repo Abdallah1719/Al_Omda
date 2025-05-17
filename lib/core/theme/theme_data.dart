@@ -47,9 +47,9 @@ class AppTheme {
       contentPadding: EdgeInsets.all(R.padding.p8),
       hintStyle: TextStyle(color: R.colors.darkgreen, fontSize: R.fontSize.s14),
 
-      errorStyle: TextStyle(color: R.colors.error),
+      // errorStyle: TextStyle(color: R.colors.error),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: R.colors.lightgreen1, width: 1.5),
+        borderSide: BorderSide(color: R.colors.lightgreen, width: 1.5),
         borderRadius: BorderRadius.circular(8),
       ),
       focusedBorder: OutlineInputBorder(
@@ -73,13 +73,13 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.all(R.padding.p8),
       hintStyle: TextStyle(color: R.colors.darkgreen, fontSize: R.fontSize.s14),
-      errorStyle: TextStyle(color: R.colors.error),
+      // errorStyle: TextStyle(color: R.colors.error),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: R.colors.lightgreen1, width: 1.5),
+        borderSide: BorderSide(color: R.colors.lightgreen, width: 1.5),
         borderRadius: BorderRadius.circular(8),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: R.colors.lightgreen1, width: 1.5),
+        borderSide: BorderSide(color: R.colors.lightgreen, width: 1.5),
         borderRadius: BorderRadius.circular(8),
       ),
     ),

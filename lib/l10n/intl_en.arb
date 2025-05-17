@@ -1,1 +1,11 @@
-{}
+{
+    "skip" : "Skip",
+    "onBoardingTitle1" : "E shopping",
+    "onBoardingText1" : "Explore top organic fruits & grab them",
+    "onBoardingTitle2" : "Delivery on the way",
+    "onBoardingText2" : "Get your order by speed delivery",
+    "onBoardingTitle3" : "Delivery Arrived",
+    "onBoardingText3" : "order is arrived at your place",
+    "next" : "Next",
+    "getStarted" : "Get started"
+}

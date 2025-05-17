@@ -28,6 +28,10 @@ class AlOmda extends StatelessWidget {
                 supportedLocales: S.delegate.supportedLocales,
                 locale: Locale(local),
                 theme: context.read<ThemeCubit>().currentTheme(),
+                themeAnimationStyle: AnimationStyle(
+                  duration: Duration(seconds: 2),
+                  curve: Curves.decelerate,
+                ),
               );
             },
           );
