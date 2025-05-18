@@ -1,4 +1,5 @@
 import 'package:al_omda/core/local_data_source/cache_helper.dart';
+import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +12,7 @@ class ThemeCubit extends Cubit<ThemeState> {
   bool lightMode = true;
   toggleTheme() async {
     lightMode ? lightMode = false : lightMode = true;
-    await CacheHelper().saveData(key: 'lightMode', value: lightMode);
+    await getIt<CacheHelper>().saveData(key: 'lightMode', value: lightMode);
     emit(ThemeMode());
   }
 
@@ -20,7 +21,7 @@ class ThemeCubit extends Cubit<ThemeState> {
   }
 
   void loadSavedTheme() async {
-    lightMode = await CacheHelper().getData(key: 'lightMode') ?? true;
+    lightMode = await getIt<CacheHelper>().getData(key: 'lightMode') ?? true;
     emit(LoadSavedState());
   }
 }

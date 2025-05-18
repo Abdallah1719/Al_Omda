@@ -1,9 +1,10 @@
 import 'package:al_omda/core/global_widgets/custom_buttons.dart';
 import 'package:al_omda/core/local_data_source/cache_helper.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
+import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/index.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
-import 'package:al_omda/features/on_boarding/data/on_boarding_model.dart';
+
 import 'package:al_omda/features/on_boarding/presentation/widgets/get_onboarding_buttons.dart';
 import 'package:al_omda/features/on_boarding/presentation/widgets/on_boarding_body.dart';
 import 'package:al_omda/generated/l10n.dart';
@@ -34,7 +35,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
                   onTap: () {
-                    CacheHelper().saveData(
+                    getIt<CacheHelper>().saveData(
                       key: "isOnBoardingVisited",
                       value: true,
                     );

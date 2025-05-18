@@ -1,6 +1,7 @@
 import 'package:al_omda/core/global_widgets/custom_buttons.dart';
 import 'package:al_omda/core/local_data_source/cache_helper.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
+import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/index.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:al_omda/features/on_boarding/data/on_boarding_model.dart';
@@ -25,14 +26,20 @@ class GetOnboardingButtons extends StatelessWidget {
             color: R.colors.primaryColor,
             text: 'get started',
             onTap: () {
-              CacheHelper().saveData(key: "isOnBoardingVisited", value: true);
+              getIt<CacheHelper>().saveData(
+                key: "isOnBoardingVisited",
+                value: true,
+              );
               RoutesMethods.customReplacementNavigate(context, "/home");
             },
           ),
           VerticalSpace(2),
           GestureDetector(
             onTap: () {
-              CacheHelper().saveData(key: "isOnBoardingVisited", value: true);
+              getIt<CacheHelper>().saveData(
+                key: "isOnBoardingVisited",
+                value: true,
+              );
               RoutesMethods.customReplacementNavigate(context, "/login");
             },
             child: Text(

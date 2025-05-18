@@ -1,4 +1,5 @@
 import 'package:al_omda/core/local_data_source/cache_helper.dart';
+import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,12 +22,13 @@ class LocaleCubit extends Cubit<String> {
 
   void toggleLocale() async {
     final newLocale = state == 'en' ? 'ar' : 'en';
-    await CacheHelper().saveData(key: 'locale', value: newLocale);
+    await getIt<CacheHelper>().saveData(key: 'locale', value: newLocale);
     emit(newLocale);
   }
 
   void loadSavedLocale() async {
-    final savedLocale = await CacheHelper().getData(key: 'locale') ?? 'en';
+    final savedLocale =
+        await getIt<CacheHelper>().getData(key: 'locale') ?? 'en';
     emit(savedLocale);
   }
 }

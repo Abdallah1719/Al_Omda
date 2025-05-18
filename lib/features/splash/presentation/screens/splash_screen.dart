@@ -1,5 +1,6 @@
 import 'package:al_omda/core/local_data_source/cache_helper.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
+import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/app_assets.dart';
 import 'package:al_omda/core/utils/index.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
 
     animationController?.repeat(reverse: true);
     bool isOnBoardingVisited =
-        CacheHelper().getData(key: "isOnBoardingVisited") ?? false;
+        getIt<CacheHelper>().getData(key: "isOnBoardingVisited") ?? false;
     if (isOnBoardingVisited == true) {
       goToNextView(context, "/home");
     } else {
