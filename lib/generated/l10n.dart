@@ -139,6 +139,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Login now`
+  String get loginNow {
+    return Intl.message(
+      'Login now',
+      name: 'loginNow',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

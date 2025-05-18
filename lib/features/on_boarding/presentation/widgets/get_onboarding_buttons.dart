@@ -24,7 +24,7 @@ class GetOnboardingButtons extends StatelessWidget {
         children: [
           CustomGeneralButton(
             color: R.colors.primaryColor,
-            text: 'get started',
+            text: S.of(context).getStarted,
             onTap: () {
               getIt<CacheHelper>().saveData(
                 key: "isOnBoardingVisited",
@@ -43,7 +43,7 @@ class GetOnboardingButtons extends StatelessWidget {
               RoutesMethods.customReplacementNavigate(context, "/login");
             },
             child: Text(
-              'Login now',
+              S.of(context).loginNow,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),

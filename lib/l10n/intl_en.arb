@@ -7,5 +7,6 @@
     "onBoardingTitle3" : "Delivery Arrived",
     "onBoardingText3" : "order is arrived at your place",
     "next" : "Next",
-    "getStarted" : "Get started"
+    "getStarted" : "Get started",
+    "loginNow": "Login now"
 }
