@@ -1,12 +1,12 @@
-import 'package:al_omda/core/utils/index.dart';
 import 'package:al_omda/core/utils/size_config.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:flutter/material.dart';
 
 class CustomGeneralButton extends StatelessWidget {
-  const CustomGeneralButton({super.key, this.text, this.onTap});
+  const CustomGeneralButton({super.key, this.text, this.onTap, this.color});
   final String? text;
   final VoidCallback? onTap;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,7 +15,7 @@ class CustomGeneralButton extends StatelessWidget {
         height: 60,
         width: SizeConfig.screenWidth,
         decoration: BoxDecoration(
-          color: R.colors.primaryColor,
+          color: color,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(

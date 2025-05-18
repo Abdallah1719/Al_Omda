@@ -1,3 +1,5 @@
+import 'package:al_omda/features/auth/presentation/screens/login_screen.dart';
+import 'package:al_omda/features/home/presentation/screens/home_screen.dart';
 import 'package:al_omda/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:al_omda/features/splash/presentation/screens/splash_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +11,8 @@ final GoRouter router = GoRouter(
       path: "/onBoarding",
       builder: (context, state) => OnBoardingScreen(),
     ),
+    GoRoute(path: "/login", builder: (context, state) => LoginScreen()),
+    GoRoute(path: "/home", builder: (context, state) => HomeScreen()),
   ],
 );
 

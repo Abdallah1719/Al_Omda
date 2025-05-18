@@ -1,21 +1,25 @@
-import 'package:al_omda/core/global_widgets/custom_buttons.dart';
-import 'package:al_omda/core/utils/app_assets.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:al_omda/features/on_boarding/data/on_boarding_model.dart';
 import 'package:al_omda/features/on_boarding/presentation/widgets/custom_smoothpage_indicator.dart';
-import 'package:al_omda/generated/l10n.dart';
+
 import 'package:flutter/material.dart';
 
 class OnBoardingBody extends StatelessWidget {
-  OnBoardingBody({super.key});
-  final PageController _controller = PageController();
+  const OnBoardingBody({
+    super.key,
+    required this.controller,
+    this.onPageChanged,
+  });
+  final PageController controller;
+  final void Function(int)? onPageChanged;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 500,
       child: PageView.builder(
+        onPageChanged: onPageChanged,
         physics: BouncingScrollPhysics(),
-        controller: _controller,
+        controller: controller,
         itemCount: onBoardingList.length,
         itemBuilder: (context, index) {
           return Column(
@@ -49,7 +53,7 @@ class OnBoardingBody extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               VerticalSpace(6),
-              Center(child: CustomSmoothPageIndicator(controller: _controller)),
+              Center(child: CustomSmoothPageIndicator(controller: controller)),
             ],
           );
         },
