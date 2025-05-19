@@ -1,4 +1,6 @@
+import 'package:al_omda/features/auth/presentation/screens/forget_password_screen.dart';
 import 'package:al_omda/features/auth/presentation/screens/login_screen.dart';
+import 'package:al_omda/features/auth/presentation/screens/register_screen.dart';
 import 'package:al_omda/features/home/presentation/screens/home_screen.dart';
 import 'package:al_omda/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:al_omda/features/splash/splash_screen.dart';
@@ -11,7 +13,12 @@ final GoRouter router = GoRouter(
       path: "/onBoarding",
       builder: (context, state) => OnBoardingScreen(),
     ),
-    GoRoute(path: "/login", builder: (context, state) => LoginScreen()),
+    GoRoute(path: "/login", builder: (context, state) => LoginPage()),
+    GoRoute(path: "/register", builder: (context, state) => RegisterPage()),
+    GoRoute(
+      path: "/forgetPassword",
+      builder: (context, state) => ForgetPasswordScreen(),
+    ),
     GoRoute(path: "/home", builder: (context, state) => HomeScreen()),
   ],
 );
