@@ -14,7 +14,7 @@ final GoRouter router = GoRouter(
       builder: (context, state) => OnBoardingScreen(),
     ),
     GoRoute(path: "/login", builder: (context, state) => LoginPage()),
-    GoRoute(path: "/register", builder: (context, state) => RegisterPage()),
+    GoRoute(path: "/register", builder: (context, state) => RegisterScreen()),
     GoRoute(
       path: "/forgetPassword",
       builder: (context, state) => ForgetPasswordScreen(),

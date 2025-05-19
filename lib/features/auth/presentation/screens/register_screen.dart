@@ -4,18 +4,16 @@ import 'package:al_omda/features/auth/presentation/components/custom_text_field.
 import 'package:al_omda/features/auth/presentation/components/primary_button.dart';
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _phoneController = TextEditingController();
-
-  String? _phoneNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 VerticalSpace(15),
-                // حقل رقم الهاتف
+
                 CustomTextFormField(
                   hintText: 'Phone Number',
                   controller: _phoneController,
@@ -45,20 +43,19 @@ class _RegisterPageState extends State<RegisterPage> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your phone number';
                     }
-                    // تحقق من صيغة رقم الهاتف الدولي
+
                     final phoneRegex = RegExp(r'^\+\d{10,15}$');
                     if (!phoneRegex.hasMatch(value)) {
                       return 'Invalid phone number format (e.g. +123456789)';
                     }
                     return null;
                   },
-                  onSaved: (value) => _phoneNumber = value,
+
                   keyboardType: TextInputType.phone,
                 ),
 
                 const SizedBox(height: 24),
 
-                // زر إرسال الكود
                 PrimaryButton(
                   text: 'Send Code',
                   onPressed: () {
