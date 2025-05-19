@@ -2,8 +2,10 @@ import 'package:al_omda/core/api/api_constances.dart';
 import 'package:al_omda/core/api/api_methods.dart';
 import 'package:al_omda/core/error/exception.dart';
 import 'package:al_omda/core/error/failure.dart';
+import 'package:al_omda/features/auth/data/models/login_model.dart';
 import 'package:al_omda/features/auth/domain/entities/login.dart';
 import 'package:al_omda/features/auth/domain/repository/base_login_repository.dart';
+import 'package:al_omda/features/auth/presentation/controller/cubit/login_cubit.dart';
 import 'package:dartz/dartz.dart';
 
 class LoginRepository implements BaseLoginRepository {
@@ -11,7 +13,7 @@ class LoginRepository implements BaseLoginRepository {
 
   LoginRepository({required this.api});
   @override
-  Future<Either<Failure, Login>> loginUser({
+  Future<Either<Failure, LoginModel>> loginUser({
     required String mobile,
     required String password,
   }) async {

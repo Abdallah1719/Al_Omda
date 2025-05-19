@@ -21,9 +21,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String? _email;
-  String? _password;
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -71,13 +68,6 @@ class _LoginPageState extends State<LoginPage> {
                               CustomTextFormField(
                                 hintText: 'Phone or Email',
                                 controller: c.mobileController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your email or phone';
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value) => _email = value,
                               ),
 
                               // حقل كلمة المرور
@@ -85,16 +75,6 @@ class _LoginPageState extends State<LoginPage> {
                                 hintText: 'Password',
                                 obscureText: true,
                                 controller: c.passwordController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter your password';
-                                  }
-                                  if (value.length < 6) {
-                                    return 'Password must be at least 6 characters';
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value) => _password = value,
                               ),
 
                               // نسيت كلمة المرور
@@ -111,7 +91,12 @@ class _LoginPageState extends State<LoginPage> {
 
                               const SizedBox(height: 16),
 
-                              PrimaryButton(text: 'LOGIN', onPressed: () {}),
+                              PrimaryButton(
+                                text: 'LOGIN',
+                                onPressed: () {
+                                  c.login();
+                                },
+                              ),
 
                               const SizedBox(height: 16),
 

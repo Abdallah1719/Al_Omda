@@ -15,8 +15,6 @@ class _RegisterPageState extends State<ForgetPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _phoneController = TextEditingController();
 
-  String? _phoneNumber;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +35,7 @@ class _RegisterPageState extends State<ForgetPasswordScreen> {
                   ),
                 ),
                 VerticalSpace(15),
-                // حقل رقم الهاتف
+
                 CustomTextFormField(
                   hintText: 'Phone Number',
                   controller: _phoneController,
@@ -45,20 +43,19 @@ class _RegisterPageState extends State<ForgetPasswordScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your phone number';
                     }
-                    // تحقق من صيغة رقم الهاتف الدولي
+
                     final phoneRegex = RegExp(r'^\+\d{10,15}$');
                     if (!phoneRegex.hasMatch(value)) {
                       return 'Invalid phone number format (e.g. +123456789)';
                     }
                     return null;
                   },
-                  onSaved: (value) => _phoneNumber = value,
+
                   keyboardType: TextInputType.phone,
                 ),
 
                 const SizedBox(height: 24),
 
-                // زر إرسال الكود
                 PrimaryButton(
                   text: 'Send Code',
                   onPressed: () {
