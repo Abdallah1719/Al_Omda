@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 class DioMethods extends ApiMethods {
   final Dio dio;
 
-  DioMethods({required this.dio}) {
+  DioMethods(this.dio) {
     dio.options.baseUrl = ApiConstances.baseUrl;
     dio.interceptors.add(Interceptor());
     dio.interceptors.add(

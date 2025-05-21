@@ -1,15 +1,12 @@
-import 'package:al_omda/core/api/dio_methods.dart';
+import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/app_assets.dart';
 import 'package:al_omda/core/utils/index.dart';
-import 'package:al_omda/features/auth/data/repository/login_repository.dart';
 import 'package:al_omda/features/auth/presentation/components/custom_app_bar.dart';
 import 'package:al_omda/features/auth/presentation/components/custom_text_field.dart';
 import 'package:al_omda/features/auth/presentation/components/primary_button.dart';
 import 'package:al_omda/features/auth/presentation/components/secondary_button.dart';
-import 'package:al_omda/features/auth/presentation/controller/cubit/login_cubit.dart';
+import 'package:al_omda/features/auth/presentation/controller/cubit/auth_cubit.dart';
 import 'package:al_omda/l10n/cubit/local_cubit.dart';
-import 'package:dio/dio.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,14 +21,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:
-          (context) => LoginCubit(LoginRepository(api: DioMethods(dio: Dio()))),
-      child: BlocConsumer<LoginCubit, LoginState>(
+      create: (context) => getIt<AuthCubit>(),
+      child: BlocConsumer<AuthCubit, LoginState>(
         listener: (context, state) {},
         builder: (context, state) {
-          return BlocBuilder<LoginCubit, LoginState>(
+          return BlocBuilder<AuthCubit, LoginState>(
             builder: (context, state) {
-              var c = context.read<LoginCubit>();
+              var c = context.read<AuthCubit>();
               return Scaffold(
                 backgroundColor: R.colors.white,
                 appBar: CustomAppBar(),
@@ -45,12 +41,10 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // اللوجو
                               Image.asset(Assets.imagesOmdaLogo, height: 100),
 
                               const SizedBox(height: 32),
 
-                              // عنوان الصفحة
                               Align(
                                 alignment:
                                     LocaleCubit.isArabic()
@@ -70,14 +64,12 @@ class _LoginPageState extends State<LoginPage> {
                                 controller: c.mobileController,
                               ),
 
-                              // حقل كلمة المرور
                               CustomTextFormField(
                                 hintText: 'Password',
                                 obscureText: true,
                                 controller: c.passwordController,
                               ),
 
-                              // نسيت كلمة المرور
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: TextButton(

@@ -4,15 +4,14 @@ import 'package:al_omda/core/error/exception.dart';
 import 'package:al_omda/core/local_data_source/cache_helper.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/features/auth/data/models/login_model.dart';
-import 'package:al_omda/features/auth/domain/repository/base_login_repository.dart';
+import 'package:al_omda/features/auth/domain/repository/base_auth_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
-class LoginRepository implements BaseLoginRepository {
+class AuthRepository implements BaseAuthRepository {
   final ApiMethods api;
 
-  LoginRepository({required this.api});
-
+  AuthRepository(this.api);
   @override
   Future<Either<String, LoginModel>> loginUser({
     required String mobile,
