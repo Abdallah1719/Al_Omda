@@ -1,14 +1,14 @@
 part of 'auth_cubit.dart';
 
-class LoginState {}
+class AuthState {}
 
-final class LoginInitial extends LoginState {}
+final class AuthInitial extends AuthState {}
 
-final class Loginlodding extends LoginState {}
+final class Loginlodding extends AuthState {}
 
-final class Loginsucess extends LoginState {}
+final class Loginsucess extends AuthState {}
 
-final class Loginfailure extends LoginState {
+final class Loginfailure extends AuthState {
   final String errorMassage;
 
   Loginfailure({required this.errorMassage});

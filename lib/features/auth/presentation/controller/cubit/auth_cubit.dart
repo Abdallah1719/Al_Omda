@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'auth_state.dart';
 
-class AuthCubit extends Cubit<LoginState> {
+class AuthCubit extends Cubit<AuthState> {
   final BaseAuthRepository baseAuthRepository;
   final formKey = GlobalKey<FormState>();
   final TextEditingController mobileController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  AuthCubit(this.baseAuthRepository) : super(LoginInitial());
+  AuthCubit(this.baseAuthRepository) : super(AuthInitial());
 
   login() async {
     emit(Loginlodding());

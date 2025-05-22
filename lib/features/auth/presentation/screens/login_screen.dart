@@ -22,10 +22,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<AuthCubit>(),
-      child: BlocConsumer<AuthCubit, LoginState>(
+      child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {},
         builder: (context, state) {
-          return BlocBuilder<AuthCubit, LoginState>(
+          return BlocBuilder<AuthCubit, AuthState>(
             builder: (context, state) {
               var c = context.read<AuthCubit>();
               return Scaffold(
