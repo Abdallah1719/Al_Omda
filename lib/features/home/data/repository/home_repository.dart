@@ -7,9 +7,9 @@ import 'package:al_omda/features/home/data/models/products_top_rated_model.dart'
 import 'package:al_omda/features/home/domain/repository/base_products_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class ProductsRepository implements BaseProductsRepository {
+class HomeRepository implements BaseHomeRepository {
   final ApiMethods api;
-  ProductsRepository(this.api);
+  HomeRepository(this.api);
   @override
   Future<Either<String, List<CategoriesModel>>> getCategories() async {
     try {
@@ -28,7 +28,6 @@ class ProductsRepository implements BaseProductsRepository {
   Future<Either<String, List<HomeSlidersModel>>> getHomeSliders() async {
     try {
       final response = await api.get(ApiConstances.homeSliderPath);
-      print("Response from API: $response"); // مفيد جداً للتصحيح
 
       if (response is Map<String, dynamic> && response.containsKey('data')) {
         final List<dynamic> dataList = response['data'] as List;
@@ -42,7 +41,6 @@ class ProductsRepository implements BaseProductsRepository {
 
         return Right(homeSliders);
       } else if (response is List) {
-        // إذا كانت البيانات مباشرة قائمة (List)
         final List<HomeSlidersModel> homeSliders =
             response
                 .map(
@@ -56,8 +54,6 @@ class ProductsRepository implements BaseProductsRepository {
       }
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-    } catch (e) {
-      return Left("Unexpected error occurred: $e");
     }
   }
   // Future<Either<String, List<HomeSlidersModel>>> getHomeSliders() async {

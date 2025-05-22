@@ -4,7 +4,7 @@ import 'package:al_omda/core/local_data_source/cache_helper.dart';
 import 'package:al_omda/features/auth/data/repository/auth_repository.dart';
 import 'package:al_omda/features/auth/domain/repository/base_auth_repository.dart';
 import 'package:al_omda/features/auth/presentation/controller/cubit/auth_cubit.dart';
-import 'package:al_omda/features/home/data/repository/products_repository.dart';
+import 'package:al_omda/features/home/data/repository/home_repository.dart';
 import 'package:al_omda/features/home/domain/repository/base_products_repository.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:dio/dio.dart';
@@ -24,7 +24,7 @@ void setupServiceLocator() {
   // Auth Cubit
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt()));
   // Base Home Repository
-  getIt.registerSingleton<BaseProductsRepository>(ProductsRepository(getIt()));
+  getIt.registerSingleton<BaseHomeRepository>(HomeRepository(getIt()));
   // Home Cubit
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
 }

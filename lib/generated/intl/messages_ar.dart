@@ -22,7 +22,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("الحساب"),
+        "addToCart": MessageLookupByLibrary.simpleMessage("إضافة إلى السلة"),
+        "cart": MessageLookupByLibrary.simpleMessage("سلة التسوق"),
+        "categoriess": MessageLookupByLibrary.simpleMessage("التصنيفات"),
         "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
+        "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "loginNow": MessageLookupByLibrary.simpleMessage("تسجيل الدخول الآن"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "onBoardingText1": MessageLookupByLibrary.simpleMessage(
@@ -36,6 +41,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "onBoardingTitle2":
             MessageLookupByLibrary.simpleMessage("الطلب فى الطريق"),
         "onBoardingTitle3": MessageLookupByLibrary.simpleMessage("وصل التوصيل"),
-        "skip": MessageLookupByLibrary.simpleMessage("تخطى")
+        "popularProducts":
+            MessageLookupByLibrary.simpleMessage("المنتجات الشهيرة"),
+        "search_text":
+            MessageLookupByLibrary.simpleMessage("ما الذي تبحث عنه ؟"),
+        "shopNow": MessageLookupByLibrary.simpleMessage("تسوق الآن"),
+        "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
+        "title": MessageLookupByLibrary.simpleMessage("عنوان"),
+        "viewAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+        "working_hours":
+            MessageLookupByLibrary.simpleMessage("ساعات العمل من ١٠ص الى ١١ م")
       };
 }

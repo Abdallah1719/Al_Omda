@@ -22,7 +22,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "addToCart": MessageLookupByLibrary.simpleMessage("Add To Cart"),
+        "cart": MessageLookupByLibrary.simpleMessage("Cart"),
+        "categoriess": MessageLookupByLibrary.simpleMessage("Categories"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get started"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "loginNow": MessageLookupByLibrary.simpleMessage("Login now"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "onBoardingText1": MessageLookupByLibrary.simpleMessage(
@@ -36,6 +41,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delivery on the way"),
         "onBoardingTitle3":
             MessageLookupByLibrary.simpleMessage("Delivery Arrived"),
-        "skip": MessageLookupByLibrary.simpleMessage("Skip")
+        "popularProducts":
+            MessageLookupByLibrary.simpleMessage("Popular Products"),
+        "search_text":
+            MessageLookupByLibrary.simpleMessage("what are you looking for ?"),
+        "shopNow": MessageLookupByLibrary.simpleMessage("Shop Now"),
+        "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "title": MessageLookupByLibrary.simpleMessage("title"),
+        "viewAll": MessageLookupByLibrary.simpleMessage("View All"),
+        "working_hours": MessageLookupByLibrary.simpleMessage(
+            "Working hours from 10 am to 11 pm")
       };
 }
