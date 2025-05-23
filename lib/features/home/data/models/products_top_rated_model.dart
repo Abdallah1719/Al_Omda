@@ -1,6 +1,6 @@
 class ProductsTopRatedModel {
   final String title;
-  final double price;
+  final int price;
   final String image;
   final String weight;
   final String unitName;

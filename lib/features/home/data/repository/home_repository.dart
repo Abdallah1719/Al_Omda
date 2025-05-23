@@ -141,7 +141,7 @@ class HomeRepository implements BaseHomeRepository {
 
       if (response is Map<String, dynamic>) {
         if (response.containsKey('data')) {
-          final data = response['data'];
+          final data = response['data']['data'];
 
           if (data is List) {
             // ✅ إذا كان data قائمة
