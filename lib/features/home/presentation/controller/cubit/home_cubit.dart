@@ -78,6 +78,24 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  // يمكنك إضافة نفس المنطق لبقية الدوال مثل:
-  // getProductsTopRated(), getCategoriesProducts(), ...
+  Future<void> getProductsTopRated() async {
+    emit(state.copyWith(productsTopRatedState: RequestState.loading));
+
+    final result = await baseHomeRepository.getProductsTopRated();
+
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          productsTopRatedState: RequestState.error,
+          productsTopRatedMessage: 'failure.message',
+        ),
+      ),
+      (productsTopRated) => emit(
+        state.copyWith(
+          productsTopRated: productsTopRated,
+          productsTopRatedState: RequestState.loaded,
+        ),
+      ),
+    );
+  }
 }

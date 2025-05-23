@@ -3,6 +3,7 @@ import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:al_omda/features/home/presentation/components/categories_listview.dart';
 import 'package:al_omda/features/home/presentation/components/home_slider.dart';
+import 'package:al_omda/features/home/presentation/components/top_rated_products_gridview.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:al_omda/generated/l10n.dart';
 
@@ -19,7 +20,8 @@ class HomeScreen extends StatelessWidget {
           (context) =>
               getIt<HomeCubit>()
                 ..getHomeSliders()
-                ..getHomeCategories(),
+                ..getHomeCategories()
+                ..getProductsTopRated(),
       child: Scaffold(
         appBar: GlobalAppBar(),
         bottomNavigationBar: BottomNavigationBar(
@@ -71,7 +73,7 @@ class HomeScreen extends StatelessWidget {
             //   text: S.of(context).popularProducts,
             //   buttonText: S.of(context).shopNow,
             // ),
-            // TopRatedProductGridView(),
+            TopRatedProductGridView(),
           ],
         ),
       ),

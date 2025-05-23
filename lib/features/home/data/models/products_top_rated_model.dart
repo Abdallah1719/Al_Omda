@@ -15,7 +15,7 @@ class ProductsTopRatedModel {
 
   factory ProductsTopRatedModel.fromJson(Map<String, dynamic> json) =>
       ProductsTopRatedModel(
-        title: json["title"],
+        title: json["title"]? '',
         image: json["image"] ?? '',
         price: json['price'] ?? 0.0,
         unitName: json["unit_name"] ?? 'Unknown',

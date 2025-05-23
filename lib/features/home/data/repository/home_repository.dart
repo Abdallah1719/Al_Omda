@@ -104,21 +104,80 @@ class HomeRepository implements BaseHomeRepository {
   // }
 
   @override
+  // Future<Either<String, List<ProductsTopRatedModel>>>
+  // getProductsTopRated() async {
+  //   try {
+  //     final response = await api.get(ApiConstances.productsTopRatedPath);
+  //     if (response is Map<String, dynamic> && response.containsKey('data')) {
+  //       final List<dynamic> dataList = response['data'] as List;
+  //       final List<ProductsTopRatedModel> productsTopRated =
+  //           dataList
+  //               .map(
+  //                 (e) =>
+  //                     ProductsTopRatedModel.fromJson(e as Map<String, dynamic>),
+  //               )
+  //               .toList();
+  //       return Right(productsTopRated);
+  //     } else if (response is List) {
+  //       final List<ProductsTopRatedModel> productsTopRated =
+  //           response
+  //               .map(
+  //                 (e) =>
+  //                     ProductsTopRatedModel.fromJson(e as Map<String, dynamic>),
+  //               )
+  //               .toList();
+  //       return Right(productsTopRated);
+  //     } else {
+  //       return Left("Invalid response format");
+  //     }
+  //   } on ServerException catch (e) {
+  //     return left(e.errorModel.errorMessage);
+  //   }
+  // }
   Future<Either<String, List<ProductsTopRatedModel>>>
   getProductsTopRated() async {
     try {
       final response = await api.get(ApiConstances.productsTopRatedPath);
-      print("Response from repository: $response");
 
-      final List<ProductsTopRatedModel> productsTopRated =
-          List<ProductsTopRatedModel>.from(
-            (response.data["data"] as List).map(
-              (e) => ProductsTopRatedModel.fromJson(e),
-            ),
-          );
-      return Right(productsTopRated);
+      if (response is Map<String, dynamic>) {
+        if (response.containsKey('data')) {
+          final data = response['data'];
+
+          if (data is List) {
+            // ✅ إذا كان data قائمة
+            final List<ProductsTopRatedModel> productsTopRated =
+                data
+                    .map(
+                      (e) => ProductsTopRatedModel.fromJson(
+                        e as Map<String, dynamic>,
+                      ),
+                    )
+                    .toList();
+
+            return Right(productsTopRated);
+          } else if (data is Map<String, dynamic>) {
+            // ❗ إذا كان data كائن واحد فقط
+            return Right([ProductsTopRatedModel.fromJson(data)]);
+          }
+        }
+
+        return Left("Invalid response structure");
+      } else if (response is List) {
+        // ✅ إذا كان الرد مباشرة قائمة
+        final List<ProductsTopRatedModel> productsTopRated =
+            response
+                .map(
+                  (e) =>
+                      ProductsTopRatedModel.fromJson(e as Map<String, dynamic>),
+                )
+                .toList();
+
+        return Right(productsTopRated);
+      } else {
+        return Left("Unexpected response format");
+      }
     } on ServerException catch (e) {
-      return left(e.errorModel.errorMessage);
+      return Left(e.errorModel.errorMessage);
     }
   }
 }
