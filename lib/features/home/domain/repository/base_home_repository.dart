@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 
 abstract class BaseHomeRepository {
   Future<Either<String, List<HomeSlidersModel>>> getHomeSliders();
-  Future<Either<String, List<CategoriesModel>>> getCategories();
+  Future<Either<String, List<HomeCategoriesModel>>> getHomeCategories();
   Future<Either<String, List<ProductsTopRatedModel>>> getProductsTopRated();
   // Future<Either<Failure, List<CategoriesProducts>>> getCategoriesProducts();
 }

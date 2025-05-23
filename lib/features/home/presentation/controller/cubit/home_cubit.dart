@@ -1,23 +1,83 @@
-import 'package:al_omda/features/home/data/models/home_sliders_model.dart';
+import 'package:al_omda/core/utils/enum.dart';
 import 'package:al_omda/features/home/domain/repository/base_home_repository.dart';
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:al_omda/features/home/presentation/controller/cubit/home_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'home_state.dart';
+// part 'home_state.dart';
+
+// class HomeCubit extends Cubit<HomeState> {
+//   final BaseHomeRepository basehomeRepository;
+//   HomeCubit(this.basehomeRepository) : super(HomeInitial());
+
+//   getHomeSliders() async {
+//     emit(HomeSildersLodding());
+//     final response = await basehomeRepository.getHomeSliders();
+
+//     response.fold(
+//       (errorMessage) => emit(HomeSildersFailure(errorMassage: errorMessage)),
+
+//       (homeSlidersModel) =>
+//           emit(HomeSildersSucsess(homeSliders: homeSlidersModel)),
+//     );
+//   }
+
+//   getHomeCategories() async {
+//     final response = await basehomeRepository.getHomeCategories();
+//     response.fold(
+//       (errorMessage) => emit(HomeCategoriesFailure(errorMassage: errorMessage)),
+//       (homeCategoriesModel) =>
+//           emit(HomeCategoriesSucsess(homeCategories: homeCategoriesModel)),
+//     );
+//   }
+// }
 
 class HomeCubit extends Cubit<HomeState> {
-  final BaseHomeRepository baseProductsRepository;
-  HomeCubit(this.baseProductsRepository) : super(HomeInitial());
+  final BaseHomeRepository baseHomeRepository;
 
-  getHomeSliders() async {
-    emit(HomeSildersLodding());
-    final response = await baseProductsRepository.getHomeSliders();
+  HomeCubit(this.baseHomeRepository) : super(HomeState());
 
-    response.fold(
-      (errorMessage) => emit(HomeSildersFailure(errorMassage: errorMessage)),
+  Future<void> getHomeSliders() async {
+    emit(state.copyWith(homeSlidersState: RequestState.loading));
 
-      (homeSlidersModel) =>
-          emit(HomeSildersSucsess(homeSliders: homeSlidersModel)),
+    final result = await baseHomeRepository.getHomeSliders();
+
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          homeSlidersState: RequestState.error,
+          homeSlidersMessage: 'failure.message',
+        ),
+      ),
+      (sliders) => emit(
+        state.copyWith(
+          homeSliders: sliders,
+          homeSlidersState: RequestState.loaded,
+        ),
+      ),
     );
   }
+
+  Future<void> getHomeCategories() async {
+    emit(state.copyWith(categoriesState: RequestState.loading));
+
+    final result = await baseHomeRepository.getHomeCategories();
+
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          categoriesState: RequestState.error,
+          categoriesMessage: 'failure.message',
+        ),
+      ),
+      (categories) => emit(
+        state.copyWith(
+          categories: categories,
+          categoriesState: RequestState.loaded,
+        ),
+      ),
+    );
+  }
+
+  // يمكنك إضافة نفس المنطق لبقية الدوال مثل:
+  // getProductsTopRated(), getCategoriesProducts(), ...
 }

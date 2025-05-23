@@ -5,7 +5,7 @@ import 'package:al_omda/features/auth/data/repository/auth_repository.dart';
 import 'package:al_omda/features/auth/domain/repository/base_auth_repository.dart';
 import 'package:al_omda/features/auth/presentation/controller/cubit/auth_cubit.dart';
 import 'package:al_omda/features/home/data/repository/home_repository.dart';
-import 'package:al_omda/features/home/domain/repository/base_products_repository.dart';
+import 'package:al_omda/features/home/domain/repository/base_home_repository.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';

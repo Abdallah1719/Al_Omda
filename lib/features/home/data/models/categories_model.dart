@@ -1,8 +1,8 @@
-class CategoriesModel {
+class HomeCategoriesModel {
   final String icon;
   final String name;
 
-  CategoriesModel({required this.icon, required this.name});
-  factory CategoriesModel.fromJson(Map<String, dynamic> json) =>
-      CategoriesModel(icon: json["icon"], name: json["name"]);
+  HomeCategoriesModel({required this.icon, required this.name});
+  factory HomeCategoriesModel.fromJson(Map<String, dynamic> json) =>
+      HomeCategoriesModel(icon: json["icon"], name: json["name"]);
 }
