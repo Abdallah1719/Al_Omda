@@ -1,5 +1,6 @@
 import 'package:al_omda/core/utils/enum.dart';
 import 'package:al_omda/features/home/data/models/categories_model.dart';
+import 'package:al_omda/features/home/data/models/categories_products_model.dart';
 import 'package:al_omda/features/home/data/models/home_sliders_model.dart';
 import 'package:al_omda/features/home/data/models/products_top_rated_model.dart';
 import 'package:equatable/equatable.dart';
@@ -14,6 +15,9 @@ class HomeState extends Equatable {
   final List<ProductsTopRatedModel> productsTopRated;
   final RequestState productsTopRatedState;
   final String productsTopRatedMessage;
+  final RequestState productsByCategoryState;
+  final String productsByCategoryMessage;
+  final List<CategoriesProductsModel> productsByCategory;
   // final List<CategoriesProducts> categoriesProducts;
   // final RequestState categoriesProductsState;
   // final String categoriesProductsMessage;
@@ -29,6 +33,10 @@ class HomeState extends Equatable {
     this.productsTopRated = const [],
     this.productsTopRatedState = RequestState.loading,
     this.productsTopRatedMessage = '',
+
+    this.productsByCategoryState = RequestState.initial,
+    this.productsByCategoryMessage = '',
+    this.productsByCategory = const [],
     // this.categoriesProducts = const [],
     // this.categoriesProductsState = RequestState.loading,
     // this.categoriesProductsMessage = '',
@@ -44,6 +52,9 @@ class HomeState extends Equatable {
     List<ProductsTopRatedModel>? productsTopRated,
     RequestState? productsTopRatedState,
     String? productsTopRatedMessage,
+    RequestState? productsByCategoryState,
+    String? productsByCategoryMessage,
+    List<CategoriesProductsModel>? productsByCategory,
     // List<CategoriesProducts>? categoriesProducts,
     // RequestState? categoriesProductsState,
     // String? categoriesProductsMessage,
@@ -60,6 +71,12 @@ class HomeState extends Equatable {
           productsTopRatedState ?? this.productsTopRatedState,
       productsTopRatedMessage:
           productsTopRatedMessage ?? this.productsTopRatedMessage,
+
+      productsByCategoryState:
+          productsByCategoryState ?? this.productsByCategoryState,
+      productsByCategoryMessage:
+          productsByCategoryMessage ?? this.productsByCategoryMessage,
+      productsByCategory: productsByCategory ?? this.productsByCategory,
       //   categoriesProducts: categoriesProducts ?? this.categoriesProducts,
       //   categoriesProductsState:
       //       categoriesProductsState ?? this.categoriesProductsState,
@@ -79,6 +96,9 @@ class HomeState extends Equatable {
     productsTopRated,
     productsTopRatedState,
     productsTopRatedMessage,
+    productsByCategoryState,
+    productsByCategoryMessage,
+    productsByCategory,
     //   categoriesProducts,
     //   categoriesProductsState,
     //   categoriesMessage,

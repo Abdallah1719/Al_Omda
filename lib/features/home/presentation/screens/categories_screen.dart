@@ -1,6 +1,7 @@
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/enum.dart';
 import 'package:al_omda/features/home/presentation/components/categories_item.dart';
+import 'package:al_omda/features/home/presentation/screens/categories_products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
@@ -37,8 +38,36 @@ class CategoriesScreen extends StatelessWidget {
                 ),
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
+                  final category = state.categories[index];
+                  final homeCubit = BlocProvider.of<HomeCubit>(context);
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      // إذا كان لديك get() في Cubit
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => BlocProvider.value(
+                                value:
+                                    homeCubit, // ⬅️ نعطي النسخة الموجودة مسبقًا
+                                child: ProductsByCategoryScreen(
+                                  categoryName: category.name,
+                                ),
+                              ),
+                        ),
+                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder:
+                      //         (context) => ProductsByCategoryScreen(
+                      //           categoryName: category.name,
+                      //         ),
+                      //     settings: RouteSettings(arguments: category.name),
+                      //   ),
+                      // );
+                    },
                     child: CategoryItem(category: categories[index]),
                   );
                 },

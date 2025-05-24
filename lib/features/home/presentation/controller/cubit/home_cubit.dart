@@ -98,4 +98,29 @@ class HomeCubit extends Cubit<HomeState> {
       ),
     );
   }
+
+  Future<void> getProductsByCategory(String categoryName) async {
+    emit(state.copyWith(productsByCategoryState: RequestState.loading));
+
+    final result = await baseHomeRepository.getProductsByCategory(categoryName);
+
+    result.fold(
+      (failure) {
+        emit(
+          state.copyWith(
+            productsByCategoryState: RequestState.error,
+            productsByCategoryMessage: failure,
+          ),
+        );
+      },
+      (products) {
+        emit(
+          state.copyWith(
+            productsByCategoryState: RequestState.loaded,
+            productsByCategory: products,
+          ),
+        );
+      },
+    );
+  }
 }

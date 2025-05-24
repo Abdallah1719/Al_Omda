@@ -7,7 +7,6 @@ import 'package:al_omda/features/home/presentation/components/home_slider.dart';
 import 'package:al_omda/features/home/presentation/components/home_titles.dart';
 import 'package:al_omda/features/home/presentation/components/top_rated_products_gridview.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
-import 'package:al_omda/features/home/presentation/screens/categories_screen.dart';
 import 'package:al_omda/generated/l10n.dart';
 
 import 'package:flutter/material.dart';
@@ -26,60 +25,55 @@ class HomeScreen extends StatelessWidget {
                 ..getHomeCategories()
                 ..getProductsTopRated(),
 
-      child: Builder(
-        builder: (context) {
-          final homeCubit = BlocProvider.of<HomeCubit>(context);
-          return Scaffold(
-            appBar: GlobalAppBar(),
-            bottomNavigationBar: BottomNavigationBar(
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: S.of(context).home,
-                ),
-
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: S.of(context).account,
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart),
-                  label: S.of(context).cart,
-                ),
-              ],
+      child: Scaffold(
+        appBar: GlobalAppBar(),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: S.of(context).home,
             ),
 
-            body: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Center(
-                    child: Text(
-                      S.of(context).working_hours,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ),
-                ),
-                HomeSlider(),
-                VerticalSpace(2),
-                HomeTitles(
-                  text: S.of(context).categoriess,
-                  buttonText: S.of(context).viewAll,
-                  onTap: () {
-                    RoutesMethods.customPushNavigate(context, '/categories');
-                  },
-                ),
-                VerticalSpace(2),
-                CategoriesListView(),
-                HomeTitles(
-                  text: S.of(context).popularProducts,
-                  buttonText: S.of(context).shopNow,
-                ),
-                TopRatedProductGridView(),
-              ],
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: S.of(context).account,
             ),
-          );
-        },
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: S.of(context).cart,
+            ),
+          ],
+        ),
+
+        body: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Center(
+                child: Text(
+                  S.of(context).working_hours,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+            ),
+            HomeSlider(),
+            VerticalSpace(2),
+            HomeTitles(
+              text: S.of(context).categoriess,
+              buttonText: S.of(context).viewAll,
+              onTap: () {
+                RoutesMethods.customPushNavigate(context, '/categories');
+              },
+            ),
+            VerticalSpace(2),
+            CategoriesListView(),
+            HomeTitles(
+              text: S.of(context).popularProducts,
+              buttonText: S.of(context).shopNow,
+            ),
+            TopRatedProductGridView(),
+          ],
+        ),
       ),
     );
   }

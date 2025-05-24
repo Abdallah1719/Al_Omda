@@ -3,6 +3,6 @@ class ApiConstances {
   static const homeSliderPath = '/homeSliders';
   static const categoriesPath = '/categories?show_sub=1';
   static const productsTopRatedPath = '/products/topRated';
-  static const categoriesProductsPath = '/products?category=dried-fruit';
+  static const productsByCategoryPath = '/products?';
   static const loginPath = '/auth/login';
 }
