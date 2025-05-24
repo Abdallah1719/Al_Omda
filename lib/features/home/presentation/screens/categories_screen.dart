@@ -1,71 +1,66 @@
-// import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:ecommerce_app/core/utils/enums.dart';
-// import 'package:ecommerce_app/features/products/presentation/controller/bloc/home_bloc.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:al_omda/core/services/service_locator.dart';
+import 'package:al_omda/core/utils/enum.dart';
+import 'package:al_omda/features/home/presentation/components/categories_item.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
+import 'package:al_omda/features/home/presentation/controller/cubit/home_state.dart';
+import 'package:al_omda/features/home/data/models/categories_model.dart';
 
-// class CategoriesScreen extends StatelessWidget {
-//   const CategoriesScreen({super.key});
+class CategoriesScreen extends StatelessWidget {
+  const CategoriesScreen({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Categories')),
-//       body: BlocBuilder<HomeBloc, HomeState>(
-//         buildWhen:
-//             (previous, current) =>
-//                 previous.categoriesState != current.categoriesState,
-//         builder: (context, state) {
-//           switch (state.categoriesState) {
-//             case RequestState.loading:
-//               return SizedBox(
-//                 height: 200,
-//                 child: Center(child: CircularProgressIndicator()),
-//               );
-//             case RequestState.loaded:
-//               return GridView.builder(
-//                 itemCount: state.categories.length,
-//                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//                   crossAxisCount: 2,
-//                   mainAxisSpacing: 10,
-//                   crossAxisSpacing: 10,
-//                   childAspectRatio: 1.2,
-//                 ),
-//                 itemBuilder: (context, index) {
-//                   final category = state.categories[index];
-//                   return Column(
-//                     mainAxisSize: MainAxisSize.min,
-//                     children: [
-//                       ClipOval(
-//                         child: CachedNetworkImage(
-//                           imageUrl: category.icon,
-//                           width: 100,
-//                           height: 100,
-//                           // ApiConstance.imageUrl(item.backdropPath!),
-//                           fit: BoxFit.cover,
-//                         ),
-//                       ),
-//                       SizedBox(height: 8),
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<HomeCubit>()..getHomeCategories(),
+      child: Scaffold(
+        appBar: AppBar(title: Text('التصنيفات'), centerTitle: true),
+        body: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            // 👇 حالة التحميل
+            if (state.categoriesState == RequestState.loading) {
+              return Center(child: CircularProgressIndicator());
+            }
 
-//                       Text(
-//                         category.name,
+            // 👇 حالة النجاح
+            if (state.categoriesState == RequestState.loaded) {
+              final List<HomeCategoriesModel> categories = state.categories;
 
-//                         style: Theme.of(context).textTheme.bodyLarge,
-//                         textAlign: TextAlign.center,
-//                       ),
-//                     ],
-//                   );
-//                 },
-//               );
+              return GridView.builder(
+                padding: EdgeInsets.all(16),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 1.2,
+                ),
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {},
+                    child: CategoryItem(category: categories[index]),
+                  );
+                },
+              );
+            }
 
-//             case RequestState.error:
-//               return SizedBox(
-//                 height: 200,
-//                 child: Center(child: Text(state.categoriesMessage)),
-//               );
-//           }
-//         },
-//       ),
-//     );
-//   }
-// }
+            // 👇 حالة الخطأ
+            if (state.categoriesState == RequestState.error) {
+              return Center(
+                child: Text(
+                  state.categoriesMessage,
+                  style: TextStyle(color: Colors.red),
+                  textAlign: TextAlign.center,
+                ),
+              );
+            }
+
+            // 👇 الحالة الافتراضية
+            return Center(child: Text("لا توجد بيانات"));
+          },
+        ),
+      ),
+    );
+  }
+}
