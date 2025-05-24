@@ -1,54 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-
-// class CategoriesProductGridView extends StatelessWidget {
-//   const CategoriesProductGridView({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<HomeBloc, HomeState>(
-//       buildWhen:
-//           (previous, current) =>
-//               previous.categoriesProductsState !=
-//               current.categoriesProductsState,
-//       builder: (context, state) {
-//         switch (state.categoriesProductsState) {
-//           case RequestState.loading:
-//             return SizedBox(
-//               height: 200,
-//               child: Center(child: CircularProgressIndicator()),
-//             );
-//           case RequestState.loaded:
-//             return Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: GridView.builder(
-//                 shrinkWrap: true,
-//                 physics: NeverScrollableScrollPhysics(),
-//                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//                   crossAxisCount: 2,
-//                   childAspectRatio: 0.65,
-//                   mainAxisSpacing: 8,
-//                   crossAxisSpacing: 8,
-//                 ),
-//                 itemCount: state.categoriesProducts.length,
-//                 itemBuilder: (context, index) {
-//                   return ProductCard<CategoriesProducts>(
-//                     state.categoriesProducts[index],
-//                   );
-//                 },
-//               ),
-//             );
-//           case RequestState.error:
-//             return SizedBox(
-//               height: 200,
-//               child: Center(child: Text(state.categoriesProductsMessage)),
-//             );
-//         }
-//       },
-//     );
-//   }
-// }
-
 import 'package:al_omda/core/global_widgets/product_card.dart';
 import 'package:al_omda/core/utils/enum.dart';
 import 'package:al_omda/features/home/data/models/categories_products_model.dart';
@@ -65,7 +14,6 @@ class CategoryProductsGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        // 👇 حالة التحميل
         if (state.productsByCategoryState == RequestState.loading) {
           return SizedBox(
             height: 200,
@@ -73,7 +21,6 @@ class CategoryProductsGridView extends StatelessWidget {
           );
         }
 
-        // 👇 حالة النجاح
         if (state.productsByCategoryState == RequestState.loaded) {
           final List<CategoriesProductsModel> products =
               state.productsByCategory;
@@ -97,7 +44,6 @@ class CategoryProductsGridView extends StatelessWidget {
           );
         }
 
-        // 👇 حالة الخطأ
         if (state.productsByCategoryState == RequestState.error) {
           return SizedBox(
             height: 200,
@@ -105,7 +51,6 @@ class CategoryProductsGridView extends StatelessWidget {
           );
         }
 
-        // 👇 حالة افتراضية
         return SizedBox.shrink();
       },
     );

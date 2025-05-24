@@ -3,7 +3,6 @@ import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/index.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
-
 import 'package:al_omda/features/on_boarding/presentation/widgets/get_onboarding_buttons.dart';
 import 'package:al_omda/features/on_boarding/presentation/widgets/on_boarding_body.dart';
 import 'package:al_omda/generated/l10n.dart';

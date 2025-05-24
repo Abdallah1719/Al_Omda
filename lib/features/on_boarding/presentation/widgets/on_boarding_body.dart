@@ -1,7 +1,6 @@
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:al_omda/features/on_boarding/data/on_boarding_model.dart';
 import 'package:al_omda/features/on_boarding/presentation/widgets/custom_smoothpage_indicator.dart';
-
 import 'package:flutter/material.dart';
 
 class OnBoardingBody extends StatelessWidget {

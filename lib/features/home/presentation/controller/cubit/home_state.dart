@@ -18,9 +18,6 @@ class HomeState extends Equatable {
   final RequestState productsByCategoryState;
   final String productsByCategoryMessage;
   final List<CategoriesProductsModel> productsByCategory;
-  // final List<CategoriesProducts> categoriesProducts;
-  // final RequestState categoriesProductsState;
-  // final String categoriesProductsMessage;
 
   const HomeState({
     this.homeSliders = const [],
@@ -37,9 +34,6 @@ class HomeState extends Equatable {
     this.productsByCategoryState = RequestState.initial,
     this.productsByCategoryMessage = '',
     this.productsByCategory = const [],
-    // this.categoriesProducts = const [],
-    // this.categoriesProductsState = RequestState.loading,
-    // this.categoriesProductsMessage = '',
   });
 
   HomeState copyWith({
@@ -55,9 +49,6 @@ class HomeState extends Equatable {
     RequestState? productsByCategoryState,
     String? productsByCategoryMessage,
     List<CategoriesProductsModel>? productsByCategory,
-    // List<CategoriesProducts>? categoriesProducts,
-    // RequestState? categoriesProductsState,
-    // String? categoriesProductsMessage,
   }) {
     return HomeState(
       homeSliders: homeSliders ?? this.homeSliders,
@@ -77,11 +68,6 @@ class HomeState extends Equatable {
       productsByCategoryMessage:
           productsByCategoryMessage ?? this.productsByCategoryMessage,
       productsByCategory: productsByCategory ?? this.productsByCategory,
-      //   categoriesProducts: categoriesProducts ?? this.categoriesProducts,
-      //   categoriesProductsState:
-      //       categoriesProductsState ?? this.categoriesProductsState,
-      //   categoriesProductsMessage:
-      //       categoriesProductsMessage ?? this.categoriesProductsMessage,
     );
   }
 
@@ -99,8 +85,5 @@ class HomeState extends Equatable {
     productsByCategoryState,
     productsByCategoryMessage,
     productsByCategory,
-    //   categoriesProducts,
-    //   categoriesProductsState,
-    //   categoriesMessage,
   ];
 }

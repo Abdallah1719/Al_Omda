@@ -8,7 +8,6 @@ import 'package:al_omda/features/home/presentation/components/home_titles.dart';
 import 'package:al_omda/features/home/presentation/components/top_rated_products_gridview.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:al_omda/generated/l10n.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               getIt<HomeCubit>()
                 ..getHomeSliders()
                 ..getHomeCategories()
-                ..getProductsTopRated(),
+                ..getHomeProductsTopRated(),
 
       child: Scaffold(
         appBar: GlobalAppBar(),

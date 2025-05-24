@@ -19,12 +19,9 @@ class CategoriesScreen extends StatelessWidget {
         appBar: AppBar(title: Text('التصنيفات'), centerTitle: true),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            // 👇 حالة التحميل
             if (state.categoriesState == RequestState.loading) {
               return Center(child: CircularProgressIndicator());
             }
-
-            // 👇 حالة النجاح
             if (state.categoriesState == RequestState.loaded) {
               final List<HomeCategoriesModel> categories = state.categories;
 
@@ -42,31 +39,18 @@ class CategoriesScreen extends StatelessWidget {
                   final homeCubit = BlocProvider.of<HomeCubit>(context);
                   return GestureDetector(
                     onTap: () {
-                      // إذا كان لديك get() في Cubit
-
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder:
                               (context) => BlocProvider.value(
-                                value:
-                                    homeCubit, // ⬅️ نعطي النسخة الموجودة مسبقًا
+                                value: homeCubit,
                                 child: ProductsByCategoryScreen(
                                   categoryName: category.name,
                                 ),
                               ),
                         ),
                       );
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder:
-                      //         (context) => ProductsByCategoryScreen(
-                      //           categoryName: category.name,
-                      //         ),
-                      //     settings: RouteSettings(arguments: category.name),
-                      //   ),
-                      // );
                     },
                     child: CategoryItem(category: categories[index]),
                   );
@@ -74,7 +58,6 @@ class CategoriesScreen extends StatelessWidget {
               );
             }
 
-            // 👇 حالة الخطأ
             if (state.categoriesState == RequestState.error) {
               return Center(
                 child: Text(
@@ -84,8 +67,6 @@ class CategoriesScreen extends StatelessWidget {
                 ),
               );
             }
-
-            // 👇 الحالة الافتراضية
             return Center(child: Text("لا توجد بيانات"));
           },
         ),

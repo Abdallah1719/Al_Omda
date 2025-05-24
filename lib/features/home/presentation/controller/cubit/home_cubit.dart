@@ -3,34 +3,6 @@ import 'package:al_omda/features/home/domain/repository/base_home_repository.dar
 import 'package:al_omda/features/home/presentation/controller/cubit/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-// part 'home_state.dart';
-
-// class HomeCubit extends Cubit<HomeState> {
-//   final BaseHomeRepository basehomeRepository;
-//   HomeCubit(this.basehomeRepository) : super(HomeInitial());
-
-//   getHomeSliders() async {
-//     emit(HomeSildersLodding());
-//     final response = await basehomeRepository.getHomeSliders();
-
-//     response.fold(
-//       (errorMessage) => emit(HomeSildersFailure(errorMassage: errorMessage)),
-
-//       (homeSlidersModel) =>
-//           emit(HomeSildersSucsess(homeSliders: homeSlidersModel)),
-//     );
-//   }
-
-//   getHomeCategories() async {
-//     final response = await basehomeRepository.getHomeCategories();
-//     response.fold(
-//       (errorMessage) => emit(HomeCategoriesFailure(errorMassage: errorMessage)),
-//       (homeCategoriesModel) =>
-//           emit(HomeCategoriesSucsess(homeCategories: homeCategoriesModel)),
-//     );
-//   }
-// }
-
 class HomeCubit extends Cubit<HomeState> {
   final BaseHomeRepository baseHomeRepository;
 
@@ -78,10 +50,10 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  Future<void> getProductsTopRated() async {
+  Future<void> getHomeProductsTopRated() async {
     emit(state.copyWith(productsTopRatedState: RequestState.loading));
 
-    final result = await baseHomeRepository.getProductsTopRated();
+    final result = await baseHomeRepository.getHomeProductsTopRated();
 
     result.fold(
       (failure) => emit(
@@ -99,10 +71,12 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  Future<void> getProductsByCategory(String categoryName) async {
+  Future<void> getProductsByCategories(String categoryName) async {
     emit(state.copyWith(productsByCategoryState: RequestState.loading));
 
-    final result = await baseHomeRepository.getProductsByCategory(categoryName);
+    final result = await baseHomeRepository.getProductsByCategories(
+      categoryName,
+    );
 
     result.fold(
       (failure) {
