@@ -29,26 +29,26 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  Future<void> getHomeCategories() async {
-    emit(state.copyWith(categoriesState: RequestState.loading));
+  // Future<void> getHomeCategories() async {
+  //   emit(state.copyWith(categoriesState: RequestState.loading));
 
-    final result = await baseHomeRepository.getHomeCategories();
+  //   final result = await baseHomeRepository.getHomeCategories();
 
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          categoriesState: RequestState.error,
-          categoriesMessage: 'failure.message',
-        ),
-      ),
-      (categories) => emit(
-        state.copyWith(
-          categories: categories,
-          categoriesState: RequestState.loaded,
-        ),
-      ),
-    );
-  }
+  //   result.fold(
+  //     (failure) => emit(
+  //       state.copyWith(
+  //         categoriesState: RequestState.error,
+  //         categoriesMessage: 'failure.message',
+  //       ),
+  //     ),
+  //     (categories) => emit(
+  //       state.copyWith(
+  //         categories: categories,
+  //         categoriesState: RequestState.loaded,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Future<void> getHomeProductsTopRated() async {
     emit(state.copyWith(productsTopRatedState: RequestState.loading));
@@ -71,30 +71,30 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  Future<void> getProductsByCategories(String categoryName) async {
-    emit(state.copyWith(productsByCategoryState: RequestState.loading));
+  // Future<void> getProductsByCategories(String categoryName) async {
+  //   emit(state.copyWith(productsByCategoryState: RequestState.loading));
 
-    final result = await baseHomeRepository.getProductsByCategories(
-      categoryName,
-    );
+  //   final result = await baseHomeRepository.getProductsByCategories(
+  //     categoryName,
+  //   );
 
-    result.fold(
-      (failure) {
-        emit(
-          state.copyWith(
-            productsByCategoryState: RequestState.error,
-            productsByCategoryMessage: failure,
-          ),
-        );
-      },
-      (products) {
-        emit(
-          state.copyWith(
-            productsByCategoryState: RequestState.loaded,
-            productsByCategory: products,
-          ),
-        );
-      },
-    );
-  }
+  //   result.fold(
+  //     (failure) {
+  //       emit(
+  //         state.copyWith(
+  //           productsByCategoryState: RequestState.error,
+  //           productsByCategoryMessage: failure,
+  //         ),
+  //       );
+  //     },
+  //     (products) {
+  //       emit(
+  //         state.copyWith(
+  //           productsByCategoryState: RequestState.loaded,
+  //           productsByCategory: products,
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }

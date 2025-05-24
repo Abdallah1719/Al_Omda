@@ -1,5 +1,5 @@
 import 'package:al_omda/core/utils/size_config.dart';
-import 'package:al_omda/features/home/data/models/categories_products_model.dart';
+import 'package:al_omda/features/categories/data/models/products_by_categories_model.dart';
 import 'package:al_omda/features/home/data/models/products_top_rated_model.dart';
 import 'package:al_omda/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -32,7 +32,7 @@ ProductData getProductData(dynamic item) {
       weight: item.weight,
       unitName: item.unitName,
     );
-  } else if (item is CategoriesProductsModel) {
+  } else if (item is ProductsByCategoriesModel) {
     return ProductData(
       title: item.title,
       price: item.price.toString(),

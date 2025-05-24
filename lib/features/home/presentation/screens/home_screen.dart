@@ -2,6 +2,8 @@ import 'package:al_omda/core/global_widgets/global_appbar.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
+import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
+import 'package:al_omda/features/categories/presentation/widgets/categories_listview.dart';
 import 'package:al_omda/features/home/presentation/components/categories_listview.dart';
 import 'package:al_omda/features/home/presentation/components/home_slider.dart';
 import 'package:al_omda/features/home/presentation/components/home_titles.dart';
@@ -16,14 +18,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create:
-          (context) =>
-              getIt<HomeCubit>()
-                ..getHomeSliders()
-                ..getHomeCategories()
-                ..getHomeProductsTopRated(),
-
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create:
+              (context) =>
+                  getIt<HomeCubit>()
+                    ..getHomeSliders()
+                    ..getHomeProductsTopRated(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<CategoriesCubit>()..getCategories(),
+        ),
+      ],
       child: Scaffold(
         appBar: GlobalAppBar(),
         bottomNavigationBar: BottomNavigationBar(
