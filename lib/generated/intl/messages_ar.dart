@@ -22,13 +22,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about_us_terms": MessageLookupByLibrary.simpleMessage(
+            "عن التطبيق ، الشروط والأحكام ، الخصوصية"),
         "account": MessageLookupByLibrary.simpleMessage("الحساب"),
+        "account_info": MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
         "addToCart": MessageLookupByLibrary.simpleMessage("إضافة إلى السلة"),
         "cart": MessageLookupByLibrary.simpleMessage("سلة التسوق"),
         "categoriess": MessageLookupByLibrary.simpleMessage("التصنيفات"),
+        "contact_us": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
+        "country": MessageLookupByLibrary.simpleMessage("الدولة"),
         "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+        "language": MessageLookupByLibrary.simpleMessage("اللغة"),
+        "log_in": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "loginNow": MessageLookupByLibrary.simpleMessage("تسجيل الدخول الآن"),
+        "my_addresess": MessageLookupByLibrary.simpleMessage("عناويني"),
+        "myorders": MessageLookupByLibrary.simpleMessage("طلباتي"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "onBoardingText1": MessageLookupByLibrary.simpleMessage(
             "استكشف أفضل الفواكه العضوية واحصل عليها"),
@@ -48,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shopNow": MessageLookupByLibrary.simpleMessage("تسوق الآن"),
         "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
         "title": MessageLookupByLibrary.simpleMessage("عنوان"),
+        "verion": MessageLookupByLibrary.simpleMessage("الإصدار"),
         "viewAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
         "working_hours":
             MessageLookupByLibrary.simpleMessage("ساعات العمل من ١٠ص الى ١١ م")

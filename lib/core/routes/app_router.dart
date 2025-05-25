@@ -1,3 +1,4 @@
+import 'package:al_omda/features/account/presentation/screens/account_info_screen.dart';
 import 'package:al_omda/features/auth/presentation/screens/forget_password_screen.dart';
 import 'package:al_omda/features/auth/presentation/screens/login_screen.dart';
 import 'package:al_omda/features/auth/presentation/screens/register_screen.dart';
@@ -27,6 +28,10 @@ final GoRouter router = GoRouter(
       builder: (context, state) => CategoriesScreen(),
     ),
     GoRoute(path: "/products", builder: (context, state) => ProductsScreen()),
+    GoRoute(
+      path: "/accountInfoScreen",
+      builder: (context, state) => AccountInfoScreen(),
+    ),
   ],
 );
 

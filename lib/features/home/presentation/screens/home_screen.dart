@@ -4,6 +4,9 @@ import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
 import 'package:al_omda/features/categories/presentation/widgets/categories_listview.dart';
+import 'package:al_omda/features/account/presentation/screens/account_screen.dart';
+import 'package:al_omda/features/home/presentation/components/cart_body.dart';
+import 'package:al_omda/features/home/presentation/components/home_body.dart';
 import 'package:al_omda/features/home/presentation/components/home_slider.dart';
 import 'package:al_omda/features/home/presentation/components/home_titles.dart';
 import 'package:al_omda/features/home/presentation/components/top_rated_products_gridview.dart';
@@ -14,8 +17,23 @@ import 'package:al_omda/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  final List<Widget> _screens = [HomeBody(), Accountscreen(), CartBody()];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +53,8 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: GlobalAppBar(),
         bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: _onItemTapped,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -52,50 +72,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
 
-        body: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Center(
-                child: Text(
-                  S.of(context).working_hours,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ),
-            ),
-            HomeSlider(),
-            VerticalSpace(2),
-            HomeTitles(
-              text: S.of(context).categoriess,
-              buttonText: S.of(context).viewAll,
-              onTap: () {
-                RoutesMethods.customPushNavigate(context, '/categories');
-              },
-            ),
-            VerticalSpace(2),
-            CategoriesListView(),
-            HomeTitles(
-              text: S.of(context).popularProducts,
-              buttonText: S.of(context).shopNow,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => BlocProvider(
-                          create:
-                              (context) =>
-                                  getIt<ProductsCubit>()
-                                    ..getMostRecentProducts(),
-                          child: const ProductsScreen(),
-                        ),
-                  ),
-                );
-              },
-            ),
-            TopRatedProductGridView(),
-          ],
-        ),
+        body: _screens[_currentIndex],
       ),
     );
   }

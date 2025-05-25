@@ -19,5 +19,16 @@
     "addToCart": "Add To Cart",
     "account": "Account",
     "home": "Home",
-    "cart": "Cart"
+    "cart": "Cart",
+    "account_info":"Account Info",
+    "my_addresess":"My Addresess",
+    "myorders":"My Orders",
+    "language":"Language",
+    "country":"Country",
+    "contact_us":"Contact Us",
+    "about_us_terms":"About Us , Terms & Conditions , Privacy",
+    "log_in":"Log In",
+    "verion":"verion"
+
+    
 }

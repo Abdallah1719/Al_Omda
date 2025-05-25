@@ -259,6 +259,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Account Info`
+  String get account_info {
+    return Intl.message(
+      'Account Info',
+      name: 'account_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Addresess`
+  String get my_addresess {
+    return Intl.message(
+      'My Addresess',
+      name: 'my_addresess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Orders`
+  String get myorders {
+    return Intl.message(
+      'My Orders',
+      name: 'myorders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Country`
+  String get country {
+    return Intl.message(
+      'Country',
+      name: 'country',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact Us`
+  String get contact_us {
+    return Intl.message(
+      'Contact Us',
+      name: 'contact_us',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About Us , Terms & Conditions , Privacy`
+  String get about_us_terms {
+    return Intl.message(
+      'About Us , Terms & Conditions , Privacy',
+      name: 'about_us_terms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log In`
+  String get log_in {
+    return Intl.message(
+      'Log In',
+      name: 'log_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `verion`
+  String get verion {
+    return Intl.message(
+      'verion',
+      name: 'verion',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

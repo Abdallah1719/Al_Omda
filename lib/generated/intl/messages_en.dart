@@ -22,13 +22,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about_us_terms": MessageLookupByLibrary.simpleMessage(
+            "About Us , Terms & Conditions , Privacy"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "account_info": MessageLookupByLibrary.simpleMessage("Account Info"),
         "addToCart": MessageLookupByLibrary.simpleMessage("Add To Cart"),
         "cart": MessageLookupByLibrary.simpleMessage("Cart"),
         "categoriess": MessageLookupByLibrary.simpleMessage("Categories"),
+        "contact_us": MessageLookupByLibrary.simpleMessage("Contact Us"),
+        "country": MessageLookupByLibrary.simpleMessage("Country"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get started"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "log_in": MessageLookupByLibrary.simpleMessage("Log In"),
         "loginNow": MessageLookupByLibrary.simpleMessage("Login now"),
+        "my_addresess": MessageLookupByLibrary.simpleMessage("My Addresess"),
+        "myorders": MessageLookupByLibrary.simpleMessage("My Orders"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "onBoardingText1": MessageLookupByLibrary.simpleMessage(
             "Explore top organic fruits & grab them"),
@@ -48,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shopNow": MessageLookupByLibrary.simpleMessage("Shop Now"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "title": MessageLookupByLibrary.simpleMessage("title"),
+        "verion": MessageLookupByLibrary.simpleMessage("verion"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View All"),
         "working_hours": MessageLookupByLibrary.simpleMessage(
             "Working hours from 10 am to 11 pm")
