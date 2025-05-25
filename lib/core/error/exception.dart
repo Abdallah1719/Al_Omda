@@ -8,51 +8,39 @@ class ServerException implements Exception {
 }
 
 void handleDioExceptions(DioException e) {
+  final ErrorModel defaultError = ErrorModel(
+    errorMessage: e.message ?? 'There is something wrong',
+  );
   switch (e.type) {
     case DioExceptionType.connectionTimeout:
-      throw ServerException(errorModel: ErrorModel.fromJson(e.response?.data));
     case DioExceptionType.sendTimeout:
-      throw ServerException(errorModel: ErrorModel.fromJson(e.response?.data));
     case DioExceptionType.receiveTimeout:
-      throw ServerException(errorModel: ErrorModel.fromJson(e.response?.data));
     case DioExceptionType.badCertificate:
-      throw ServerException(errorModel: ErrorModel.fromJson(e.response?.data));
     case DioExceptionType.cancel:
-      throw ServerException(errorModel: ErrorModel.fromJson(e.response?.data));
     case DioExceptionType.connectionError:
-      throw ServerException(errorModel: ErrorModel.fromJson(e.response?.data));
     case DioExceptionType.unknown:
-      throw ServerException(errorModel: ErrorModel.fromJson(e.response?.data));
+      final data = e.response?.data;
+      final errorModel = _getErrorModel(data, defaultError);
+      throw ServerException(errorModel: errorModel);
+
     case DioExceptionType.badResponse:
-      switch (e.response?.statusCode) {
-        case 400: // Bad request
-          throw ServerException(
-            errorModel: ErrorModel.fromJson(e.response?.data),
-          );
-        case 401: //unauthorized
-          throw ServerException(
-            errorModel: ErrorModel.fromJson(e.response?.data),
-          );
-        case 403: //forbidden
-          throw ServerException(
-            errorModel: ErrorModel.fromJson(e.response?.data),
-          );
-        case 404: //not found
-          throw ServerException(
-            errorModel: ErrorModel.fromJson(e.response?.data),
-          );
-        case 409: //cofficient
-          throw ServerException(
-            errorModel: ErrorModel.fromJson(e.response?.data),
-          );
-        case 422: //  Unprocessable Entity
-          throw ServerException(
-            errorModel: ErrorModel.fromJson(e.response?.data),
-          );
-        case 504: // Server exception
-          throw ServerException(
-            errorModel: ErrorModel.fromJson(e.response?.data),
-          );
+      if (e.response != null) {
+        final data = e.response!.data;
+        final errorModel = _getErrorModel(data, defaultError);
+        throw ServerException(errorModel: errorModel);
+      } else {
+        throw ServerException(errorModel: defaultError);
       }
+
+    default:
+      throw ServerException(errorModel: defaultError);
   }
+}
+
+// 🔐 دالة خاصة لتحويل البيانات إلى ErrorModel بأمان
+ErrorModel _getErrorModel(dynamic data, ErrorModel fallback) {
+  if (data is Map<String, dynamic>) {
+    return ErrorModel.fromJson(data);
+  }
+  return fallback;
 }

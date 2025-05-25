@@ -4,7 +4,6 @@ import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
 import 'package:al_omda/features/categories/presentation/widgets/categories_listview.dart';
-import 'package:al_omda/features/home/presentation/components/categories_listview.dart';
 import 'package:al_omda/features/home/presentation/components/home_slider.dart';
 import 'package:al_omda/features/home/presentation/components/home_titles.dart';
 import 'package:al_omda/features/home/presentation/components/top_rated_products_gridview.dart';
