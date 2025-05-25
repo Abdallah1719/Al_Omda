@@ -4,6 +4,7 @@ import 'package:al_omda/features/auth/presentation/screens/register_screen.dart'
 import 'package:al_omda/features/categories/presentation/screens/categories_screen.dart';
 import 'package:al_omda/features/home/presentation/screens/home_screen.dart';
 import 'package:al_omda/features/on_boarding/presentation/screens/on_boarding_screen.dart';
+import 'package:al_omda/features/products/presentation/screens/products_screen.dart';
 import 'package:al_omda/features/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,6 +26,7 @@ final GoRouter router = GoRouter(
       path: "/categories",
       builder: (context, state) => CategoriesScreen(),
     ),
+    GoRoute(path: "/products", builder: (context, state) => ProductsScreen()),
   ],
 );
 

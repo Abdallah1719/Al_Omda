@@ -10,6 +10,9 @@ import 'package:al_omda/features/categories/presentation/controller/cubit/catego
 import 'package:al_omda/features/home/data/repository/home_repository.dart';
 import 'package:al_omda/features/home/domain/repository/base_home_repository.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
+import 'package:al_omda/features/products/data/reposetory/products_repository.dart';
+import 'package:al_omda/features/products/domain/repository/base_products_repository.dart';
+import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -35,4 +38,7 @@ void setupServiceLocator() {
     CategoriesRepository(getIt()),
   );
   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
+  //Produsts
+  getIt.registerSingleton<BaseProductsRepository>(ProductsRepository(getIt()));
+  getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt()));
 }

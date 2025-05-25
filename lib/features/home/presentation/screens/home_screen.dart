@@ -8,6 +8,8 @@ import 'package:al_omda/features/home/presentation/components/home_slider.dart';
 import 'package:al_omda/features/home/presentation/components/home_titles.dart';
 import 'package:al_omda/features/home/presentation/components/top_rated_products_gridview.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
+import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
+import 'package:al_omda/features/products/presentation/screens/products_screen.dart';
 import 'package:al_omda/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,6 +77,21 @@ class HomeScreen extends StatelessWidget {
             HomeTitles(
               text: S.of(context).popularProducts,
               buttonText: S.of(context).shopNow,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => BlocProvider(
+                          create:
+                              (context) =>
+                                  getIt<ProductsCubit>()
+                                    ..getMostRecentProducts(),
+                          child: const ProductsScreen(),
+                        ),
+                  ),
+                );
+              },
             ),
             TopRatedProductGridView(),
           ],

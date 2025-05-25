@@ -5,4 +5,5 @@ class ApiConstances {
   static const productsTopRatedPath = '/products/topRated';
   static const productsByCategoryPath = '/products?';
   static const loginPath = '/auth/login';
+  static const mostRecentProductsPath = '/products/mostRecent';
 }

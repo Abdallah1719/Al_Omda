@@ -1,6 +1,7 @@
 import 'package:al_omda/core/utils/size_config.dart';
 import 'package:al_omda/features/categories/data/models/products_by_categories_model.dart';
 import 'package:al_omda/features/home/data/models/products_top_rated_model.dart';
+import 'package:al_omda/features/products/data/models/most_resent_products_model.dart';
 import 'package:al_omda/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,6 @@ class ProductData {
   });
 }
 
-// دالة لتحويل أي نوع إلى ProductData
 ProductData getProductData(dynamic item) {
   if (item is ProductsTopRatedModel) {
     return ProductData(
@@ -33,6 +33,14 @@ ProductData getProductData(dynamic item) {
       unitName: item.unitName,
     );
   } else if (item is ProductsByCategoriesModel) {
+    return ProductData(
+      title: item.title,
+      price: item.price.toString(),
+      image: item.image,
+      weight: item.weight,
+      unitName: item.unitName,
+    );
+  } else if (item is MostRecentProductsModel) {
     return ProductData(
       title: item.title,
       price: item.price.toString(),
