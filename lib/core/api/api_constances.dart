@@ -7,4 +7,5 @@ class ApiConstances {
   static const String loginPath = '/auth/login';
   static const String mostRecentProductsPath = '/products/mostRecent';
   static const String accountInfoPath = '/auth/me';
+  static const String updateProfilePath = '/auth/updateProfile';
 }

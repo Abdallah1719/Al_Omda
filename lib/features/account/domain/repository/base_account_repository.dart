@@ -3,4 +3,7 @@ import 'package:dartz/dartz.dart';
 
 abstract class BaseAccountRepository {
   Future<Either<String, AccountInfoModel>> getAccountInfo();
+  Future<Either<String, AccountInfoModel>> updateAccountInfo(
+    Map<String, dynamic> data,
+  );
 }

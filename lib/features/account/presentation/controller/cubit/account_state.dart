@@ -17,3 +17,17 @@ class AccountError extends AccountState {
 
   AccountError(this.message);
 }
+
+class AccountEditing extends AccountState {
+  final AccountInfoModel account;
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
+  final TextEditingController emailController;
+
+  AccountEditing({
+    required this.account,
+    required this.firstNameController,
+    required this.lastNameController,
+    required this.emailController,
+  });
+}
