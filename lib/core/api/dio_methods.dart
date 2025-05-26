@@ -1,4 +1,5 @@
 import 'package:al_omda/core/api/api_constances.dart';
+import 'package:al_omda/core/api/api_interceptors.dart';
 import 'package:al_omda/core/api/api_methods.dart';
 import 'package:al_omda/core/error/exception.dart';
 import 'package:dio/dio.dart';
@@ -8,7 +9,7 @@ class DioMethods extends ApiMethods {
 
   DioMethods(this.dio) {
     dio.options.baseUrl = ApiConstances.baseUrl;
-    dio.interceptors.add(Interceptor());
+    dio.interceptors.add(ApiInterceptor());
     dio.interceptors.add(
       LogInterceptor(
         request: true,

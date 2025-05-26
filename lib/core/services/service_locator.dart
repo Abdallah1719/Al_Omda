@@ -1,6 +1,9 @@
 import 'package:al_omda/core/api/api_methods.dart';
 import 'package:al_omda/core/api/dio_methods.dart';
 import 'package:al_omda/core/local_data_source/cache_helper.dart';
+import 'package:al_omda/features/account/data/repository/account_repository.dart';
+import 'package:al_omda/features/account/domain/repository/base_account_repository.dart';
+import 'package:al_omda/features/account/presentation/controller/cubit/account_cubit.dart';
 import 'package:al_omda/features/auth/data/repository/auth_repository.dart';
 import 'package:al_omda/features/auth/domain/repository/base_auth_repository.dart';
 import 'package:al_omda/features/auth/presentation/controller/cubit/auth_cubit.dart';
@@ -41,4 +44,7 @@ void setupServiceLocator() {
   //Produsts
   getIt.registerSingleton<BaseProductsRepository>(ProductsRepository(getIt()));
   getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt()));
+  //Account
+  getIt.registerSingleton<BaseAccountRepository>(AccountRepository(getIt()));
+  getIt.registerFactory<AccountCubit>(() => AccountCubit(getIt()));
 }
