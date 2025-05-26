@@ -43,9 +43,10 @@ class CategoriesRepository implements BaseCategoriesRepository {
   Future<Either<String, List<ProductsByCategoriesModel>>>
   getProductsByCategories(String categoryName) async {
     try {
-      final String url =
-          "${ApiConstances.productsByCategoryPath}category=$categoryName";
-      final response = await api.get(url);
+      final response = await api.get(
+        ApiConstances.productsByCategoryPath,
+        queryParameters: {'category': categoryName},
+      );
 
       if (response is Map<String, dynamic> && response.containsKey('data')) {
         final List<dynamic> dataList = response['data']['data'] as List;

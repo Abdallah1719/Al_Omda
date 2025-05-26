@@ -1,4 +1,3 @@
-import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/features/categories/data/models/categories_model.dart';
 import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';

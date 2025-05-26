@@ -1,8 +1,6 @@
 import 'package:al_omda/core/api/api_constances.dart';
 import 'package:al_omda/core/api/api_methods.dart';
 import 'package:al_omda/core/error/exception.dart';
-import 'package:al_omda/features/home/data/models/categories_model.dart';
-import 'package:al_omda/features/home/data/models/categories_products_model.dart';
 import 'package:al_omda/features/home/data/models/home_sliders_model.dart';
 import 'package:al_omda/features/home/data/models/products_top_rated_model.dart';
 import 'package:al_omda/features/home/domain/repository/base_home_repository.dart';

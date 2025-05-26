@@ -1,9 +1,9 @@
 class ApiConstances {
-  static const baseUrl = 'https://ecommerce-api.edgesgate.com';
-  static const homeSliderPath = '/homeSliders';
-  static const categoriesPath = '/categories?show_sub=1';
-  static const productsTopRatedPath = '/products/topRated';
-  static const productsByCategoryPath = '/products?';
-  static const loginPath = '/auth/login';
-  static const mostRecentProductsPath = '/products/mostRecent';
+  static const String baseUrl = 'https://ecommerce-api.edgesgate.com';
+  static const String homeSliderPath = '/homeSliders';
+  static const String categoriesPath = '/categories?show_sub=1';
+  static const String productsTopRatedPath = '/products/topRated';
+  static const String productsByCategoryPath = '/products';
+  static const String loginPath = '/auth/login';
+  static const String mostRecentProductsPath = '/products/mostRecent';
 }

@@ -4,19 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class RoutesMethods {
-  static void pushWithCubit({
-    required BuildContext context,
-    required String path,
-    required HomeCubit cubit,
-    required Widget screen,
-  }) {
-    GoRouter.of(
-      context,
-    ).push(path, extra: BlocProvider.value(value: cubit, child: screen));
-  }
-
   // push Navigate
   static void customPushNavigate(context, String path) {
+    print("جارٍ التنقل إلى: $path");
     GoRouter.of(context).push(path);
   }
 
@@ -39,6 +29,16 @@ class RoutesMethods {
   }) => context.pushReplacement(route, extra: arguments as T);
 
   static void popNamed(BuildContext context) => context.pop();
+  static void pushWithCubit({
+    required BuildContext context,
+    required String path,
+    required HomeCubit cubit,
+    required Widget screen,
+  }) {
+    GoRouter.of(
+      context,
+    ).push(path, extra: BlocProvider.value(value: cubit, child: screen));
+  }
 }
 //pop nmaed and remove until method
 /*

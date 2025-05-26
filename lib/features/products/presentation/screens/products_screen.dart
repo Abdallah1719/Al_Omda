@@ -1,5 +1,3 @@
-import 'package:al_omda/features/categories/data/models/products_by_categories_model.dart';
-import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
 import 'package:al_omda/features/products/data/models/most_resent_products_model.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';

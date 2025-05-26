@@ -1,6 +1,4 @@
 import 'package:al_omda/core/utils/enum.dart';
-import 'package:al_omda/features/home/data/models/categories_model.dart';
-import 'package:al_omda/features/home/data/models/categories_products_model.dart';
 import 'package:al_omda/features/home/data/models/home_sliders_model.dart';
 import 'package:al_omda/features/home/data/models/products_top_rated_model.dart';
 import 'package:equatable/equatable.dart';
