@@ -1,3 +1,4 @@
+import 'package:al_omda/core/utils/index.dart';
 import 'package:al_omda/core/utils/size_config.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:flutter/material.dart';
@@ -21,12 +22,11 @@ class CustomGeneralButton extends StatelessWidget {
         child: Center(
           child: Text(
             text!,
-            style: TextStyle(
-              fontSize: 14,
-              color: const Color(0xffffffff),
-              fontWeight: FontWeight.w500,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: R.colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
             ),
-            // textAlign: TextAlign.left,
           ),
         ),
       ),
@@ -74,6 +74,37 @@ class CustomButtonWithIcon extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class SecondaryButton extends StatelessWidget {
+  const SecondaryButton({super.key, this.text, this.onTap, this.color});
+  final String? text;
+  final VoidCallback? onTap;
+  final Color? color;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 60,
+        width: SizeConfig.screenWidth,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Center(
+          child: Text(
+            text!,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: R.colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
         ),
       ),
     );

@@ -30,22 +30,21 @@ class GetOnboardingButtons extends StatelessWidget {
                 key: "isOnBoardingVisited",
                 value: true,
               );
+              RoutesMethods.replacementNavigate(context, "/login");
               RoutesMethods.customReplacementNavigate(context, "/home");
             },
           ),
           VerticalSpace(2),
-          GestureDetector(
+          SecondaryButton(
+            color: R.colors.darkgreen,
             onTap: () {
               getIt<CacheHelper>().saveData(
                 key: "isOnBoardingVisited",
                 value: true,
               );
-              RoutesMethods.customReplacementNavigate(context, "/login");
+              RoutesMethods.replacementNavigate(context, "/login");
             },
-            child: Text(
-              S.of(context).loginNow,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+            text: S.of(context).loginNow,
           ),
         ],
       );

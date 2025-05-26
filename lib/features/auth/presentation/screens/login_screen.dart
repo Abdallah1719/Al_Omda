@@ -7,18 +7,18 @@ import 'package:al_omda/features/auth/presentation/components/custom_text_field.
 import 'package:al_omda/features/auth/presentation/components/primary_button.dart';
 import 'package:al_omda/features/auth/presentation/components/secondary_button.dart';
 import 'package:al_omda/features/auth/presentation/controller/cubit/auth_cubit.dart';
-import 'package:al_omda/l10n/cubit/local_cubit.dart';
+import 'package:al_omda/l10n/cubit/locale_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -60,10 +60,10 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(height: 32),
 
                           Align(
-                            alignment:
-                                LocaleCubit.isArabic()
-                                    ? Alignment.centerRight
-                                    : Alignment.centerLeft,
+                            // alignment:
+                            // LocaleCubit.isArabic()
+                            //     ? Alignment.centerRight
+                            //     : Alignment.centerLeft,
                             child: Text(
                               'Login',
                               style: Theme.of(context).textTheme.headlineLarge,

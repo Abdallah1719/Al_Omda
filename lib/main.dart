@@ -8,5 +8,4 @@ void main() async {
   setupServiceLocator();
   await getIt<CacheHelper>().init();
   runApp(const AlOmda());
-  // print('Token from cache: ${getIt<CacheHelper>().getData(key: "token")}');
 }

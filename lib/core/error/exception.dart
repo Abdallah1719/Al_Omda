@@ -31,13 +31,9 @@ void handleDioExceptions(DioException e) {
       } else {
         throw ServerException(errorModel: defaultError);
       }
-
-    default:
-      throw ServerException(errorModel: defaultError);
   }
 }
 
-// 🔐 دالة خاصة لتحويل البيانات إلى ErrorModel بأمان
 ErrorModel _getErrorModel(dynamic data, ErrorModel fallback) {
   if (data is Map<String, dynamic>) {
     return ErrorModel.fromJson(data);
