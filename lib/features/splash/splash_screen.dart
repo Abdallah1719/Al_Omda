@@ -1,4 +1,5 @@
 import 'package:al_omda/core/local_data_source/cache_helper.dart';
+import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/app_assets.dart';
@@ -45,9 +46,9 @@ class _SplashScreenBodyState extends State<SplashScreenBody>
     bool isOnBoardingVisited =
         getIt<CacheHelper>().getData(key: "isOnBoardingVisited") ?? false;
     if (isOnBoardingVisited == true) {
-      goToNextView(context, "/home");
+      goToNextView(context, RoutesConstances.homePath);
     } else {
-      goToNextView(context, "/onBoarding");
+      goToNextView(context, RoutesConstances.onBoardingPath);
     }
   }
 

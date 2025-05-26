@@ -5,6 +5,8 @@ class RoutesConstances {
   static const String registerPath = '/register';
   static const String forgetPasswordPath = '/forgetPassword';
   static const String homePath = '/home';
+  static const String categoriesPath = '/categories';
   static const String productsPath = '/products';
-  static const String accountscreenPath = '/account';
+  static const String accountPath = '/account';
+  static const String accountInfoPath = '/accountInfoPath';
 }

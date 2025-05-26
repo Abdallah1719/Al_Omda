@@ -1,5 +1,6 @@
 import 'package:al_omda/core/global_widgets/custom_buttons.dart';
 import 'package:al_omda/core/local_data_source/cache_helper.dart';
+import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/index.dart';
@@ -30,8 +31,10 @@ class GetOnboardingButtons extends StatelessWidget {
                 key: "isOnBoardingVisited",
                 value: true,
               );
-              RoutesMethods.replacementNavigate(context, "/login");
-              RoutesMethods.customReplacementNavigate(context, "/home");
+              RoutesMethods.replacementNavigate(
+                context,
+                RoutesConstances.homePath,
+              );
             },
           ),
           VerticalSpace(2),
@@ -42,7 +45,10 @@ class GetOnboardingButtons extends StatelessWidget {
                 key: "isOnBoardingVisited",
                 value: true,
               );
-              RoutesMethods.replacementNavigate(context, "/login");
+              RoutesMethods.replacementNavigate(
+                context,
+                RoutesConstances.loginPath,
+              );
             },
             text: S.of(context).loginNow,
           ),

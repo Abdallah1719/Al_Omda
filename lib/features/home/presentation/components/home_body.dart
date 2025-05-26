@@ -1,3 +1,4 @@
+import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
@@ -33,7 +34,10 @@ class HomeBody extends StatelessWidget {
           text: S.of(context).categoriess,
           buttonText: S.of(context).viewAll,
           onTap: () {
-            RoutesMethods.customPushNavigate(context, '/categories');
+            RoutesMethods.pushNavigate(
+              context,
+              RoutesConstances.categoriesPath,
+            );
           },
         ),
         VerticalSpace(2),

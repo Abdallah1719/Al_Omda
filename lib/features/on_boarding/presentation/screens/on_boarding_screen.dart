@@ -1,4 +1,5 @@
 import 'package:al_omda/core/local_data_source/cache_helper.dart';
+import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/index.dart';
@@ -37,7 +38,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       key: "isOnBoardingVisited",
                       value: true,
                     );
-                    RoutesMethods.customReplacementNavigate(context, "/home");
+                    RoutesMethods.replacementNavigate(
+                      context,
+                      RoutesConstances.homePath,
+                    );
                   },
                   child: Text(
                     S.of(context).skip,

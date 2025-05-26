@@ -1,3 +1,4 @@
+import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/features/account/presentation/widgets/custom_list_tile.dart';
 import 'package:al_omda/generated/l10n.dart';
@@ -14,7 +15,10 @@ class Accountscreen extends StatelessWidget {
           title: S.of(context).account_info,
           icon: Icons.person,
           onTap: () {
-            RoutesMethods.customPushNavigate(context, "/accountInfoScreen");
+            RoutesMethods.pushNavigate(
+              context,
+              RoutesConstances.accountInfoPath,
+            );
           },
         ),
         CustomAccountTile(

@@ -1,3 +1,4 @@
+import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/app_assets.dart';
@@ -27,7 +28,10 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           // 👇 هنا نضع المنطق الذي يتعامل مع الـ Navigation
           if (state is Loginsucess) {
-            RoutesMethods.customReplacementNavigate(context, '/home');
+            RoutesMethods.replacementNavigate(
+              context,
+              RoutesConstances.homePath,
+            );
             // أو اسم الروت بتاع الصفحة الرئيسية
           } else if (state is Loginfailure) {
             // 👇 عرض رسالة خطأ للمستخدم
