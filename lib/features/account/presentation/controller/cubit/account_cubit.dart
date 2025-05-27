@@ -1,5 +1,6 @@
 import 'package:al_omda/features/account/data/models/account_info_model.dart';
 import 'package:al_omda/features/account/data/models/my_addresess_model.dart';
+import 'package:al_omda/features/account/data/models/my_orders_model.dart';
 import 'package:al_omda/features/account/domain/repository/base_account_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -110,6 +111,24 @@ class AccountCubit extends Cubit<AccountState> {
           addresses: addresses,
         ); // ← هنا نستخدم اللست مباشرة
         emit(MyAddresessSuccess(myAddresessList));
+      });
+    } catch (e) {
+      emit(AccountError('حدث خطأ غير متوقع'));
+    }
+  }
+
+  Future<void> getOrders() async {
+    emit(AccountLoading());
+
+    try {
+      final result = await baseAccountRepository.getMyOrders();
+      result.fold((error) => emit(AccountError(error)), (
+        List<MyOrdersModel> orders,
+      ) {
+        final myOrdersList = MyOrdersList(
+          orders: orders,
+        ); // ← هنا نستخدم اللست مباشرة
+        emit(MyOrdersSuccess(myOrdersList));
       });
     } catch (e) {
       emit(AccountError('حدث خطأ غير متوقع'));

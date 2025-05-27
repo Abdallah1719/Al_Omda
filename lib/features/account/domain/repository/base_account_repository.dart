@@ -1,5 +1,6 @@
 import 'package:al_omda/features/account/data/models/account_info_model.dart';
 import 'package:al_omda/features/account/data/models/my_addresess_model.dart';
+import 'package:al_omda/features/account/data/models/my_orders_model.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class BaseAccountRepository {
@@ -8,4 +9,5 @@ abstract class BaseAccountRepository {
     Map<String, dynamic> data,
   );
   Future<Either<String, List<MyAddresessModel>>> getMyAddresess();
+  Future<Either<String, List<MyOrdersModel>>> getMyOrders();
 }

@@ -37,7 +37,7 @@ class Accountscreen extends StatelessWidget {
           title: S.of(context).myorders,
           icon: Icons.shopping_bag,
           onTap: () {
-            // navigate to my orders
+            RoutesMethods.pushNavigate(context, RoutesConstances.myOrdersPath);
           },
         ),
         CustomAccountTile(

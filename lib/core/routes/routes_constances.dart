@@ -10,4 +10,5 @@ class RoutesConstances {
   static const String accountPath = '/account';
   static const String accountInfoPath = '/accountInfo';
   static const String myAddresessPath = '/myAddresess';
+  static const String myOrdersPath = '/myOrders';
 }

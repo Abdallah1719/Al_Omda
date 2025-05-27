@@ -1,5 +1,6 @@
 import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/features/account/presentation/screens/my_addresess_screen.dart';
+import 'package:al_omda/features/account/presentation/screens/my_orders_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:al_omda/features/splash/splash_screen.dart';
 import 'package:al_omda/features/on_boarding/presentation/screens/on_boarding_screen.dart';
@@ -46,6 +47,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const AccountInfoScreen());
       case RoutesConstances.myAddresessPath:
         return MaterialPageRoute(builder: (_) => const MyAddresessScreen());
+      case RoutesConstances.myOrdersPath:
+        return MaterialPageRoute(builder: (_) => const MyOrdersScreen());
 
       default:
         return MaterialPageRoute(

@@ -9,4 +9,5 @@ class ApiConstances {
   static const String accountInfoPath = '/auth/me';
   static const String updateProfilePath = '/auth/updateProfile';
   static const String myAddressesPath = '/myAddresses';
+  static const String myOrdersPath = '/orderHistory';
 }
