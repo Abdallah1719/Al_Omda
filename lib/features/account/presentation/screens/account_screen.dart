@@ -1,5 +1,6 @@
 import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
+import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:al_omda/features/account/presentation/widgets/custom_list_tile.dart';
 import 'package:al_omda/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class Accountscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        VerticalSpace(3),
         CustomAccountTile(
           title: S.of(context).account_info,
           icon: Icons.person,
@@ -24,7 +26,12 @@ class Accountscreen extends StatelessWidget {
         CustomAccountTile(
           title: S.of(context).my_addresess,
           icon: Icons.location_on,
-          onTap: () {},
+          onTap: () {
+            RoutesMethods.pushNavigate(
+              context,
+              RoutesConstances.myAddresessPath,
+            );
+          },
         ),
         CustomAccountTile(
           title: S.of(context).myorders,

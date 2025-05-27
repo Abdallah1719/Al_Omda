@@ -1,4 +1,5 @@
 import 'package:al_omda/features/account/data/models/account_info_model.dart';
+import 'package:al_omda/features/account/data/models/my_addresess_model.dart';
 import 'package:al_omda/features/account/domain/repository/base_account_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,6 +95,24 @@ class AccountCubit extends Cubit<AccountState> {
       );
     } catch (e) {
       emit(AccountError('فشل في تحديث البيانات'));
+    }
+  }
+
+  Future<void> getMyAddresess() async {
+    emit(AccountLoading());
+
+    try {
+      final result = await baseAccountRepository.getMyAddresess();
+      result.fold((error) => emit(AccountError(error)), (
+        List<MyAddresessModel> addresses,
+      ) {
+        final myAddresessList = MyAddresessList(
+          addresses: addresses,
+        ); // ← هنا نستخدم اللست مباشرة
+        emit(MyAddresessSuccess(myAddresessList));
+      });
+    } catch (e) {
+      emit(AccountError('حدث خطأ غير متوقع'));
     }
   }
 }

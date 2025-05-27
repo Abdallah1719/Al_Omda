@@ -12,6 +12,11 @@ class AccountSuccess extends AccountState {
   AccountSuccess(this.account);
 }
 
+class MyAddresessSuccess extends AccountState {
+  final MyAddresessList myAddresessList;
+  MyAddresessSuccess(this.myAddresessList);
+}
+
 class AccountError extends AccountState {
   final String message;
 

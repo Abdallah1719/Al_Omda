@@ -8,5 +8,6 @@ class RoutesConstances {
   static const String categoriesPath = '/categories';
   static const String productsPath = '/products';
   static const String accountPath = '/account';
-  static const String accountInfoPath = '/accountInfoPath';
+  static const String accountInfoPath = '/accountInfo';
+  static const String myAddresessPath = '/myAddresess';
 }

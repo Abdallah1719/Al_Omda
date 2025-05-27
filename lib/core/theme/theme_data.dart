@@ -12,9 +12,12 @@ class AppTheme {
     ),
     //main colors
     textTheme: TextTheme(
-      titleLarge: TextStyle(fontSize: R.fontSize.s24),
-      titleMedium: TextStyle(fontSize: R.fontSize.s22),
-      titleSmall: TextStyle(fontSize: R.fontSize.s20),
+      titleLarge: TextStyle(fontSize: R.fontSize.s20),
+      titleMedium: TextStyle(
+        fontSize: R.fontSize.s18,
+        color: R.colors.darkgrey,
+      ),
+      titleSmall: TextStyle(fontSize: R.fontSize.s16),
       headlineLarge: TextStyle(
         fontSize: R.fontSize.s24,
         fontWeight: FontWeight.w600,
@@ -27,7 +30,7 @@ class AppTheme {
       ),
       headlineSmall: TextStyle(
         fontSize: R.fontSize.s18,
-        color: R.colors.black,
+        color: R.colors.darkgrey,
         fontWeight: FontWeight.w600,
       ),
       bodyLarge: TextStyle(
