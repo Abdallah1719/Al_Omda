@@ -62,6 +62,20 @@ class AppTheme {
       selectionHandleColor: Colors.blue,
       selectionColor: Colors.green.withOpacity(0.3),
     ),
+    // Button Theme
+    buttonTheme: ButtonThemeData(
+      buttonColor: R.colors.primaryColor,
+      textTheme: ButtonTextTheme.primary,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: R.colors.primaryColor,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        minimumSize: Size(double.infinity, 60),
+      ),
+    ),
   );
 
   // Dark Theme
@@ -79,6 +93,10 @@ class AppTheme {
         borderRadius: BorderRadius.circular(8),
       ),
       focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: R.colors.lightgreen, width: 1.5),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      disabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: R.colors.lightgreen, width: 1.5),
         borderRadius: BorderRadius.circular(8),
       ),

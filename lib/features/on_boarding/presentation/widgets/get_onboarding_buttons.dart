@@ -23,10 +23,10 @@ class GetOnboardingButtons extends StatelessWidget {
     if (currentIndex == onBoardingList.length - 1) {
       return Column(
         children: [
-          CustomGeneralButton(
-            color: R.colors.primaryColor,
+          PrimaryButton(
+            // color: R.colors.primaryColor,
             text: S.of(context).getStarted,
-            onTap: () {
+            onPressed: () {
               getIt<CacheHelper>().saveData(
                 key: "isOnBoardingVisited",
                 value: true,
@@ -55,10 +55,10 @@ class GetOnboardingButtons extends StatelessWidget {
         ],
       );
     } else {
-      return CustomGeneralButton(
-        color: R.colors.primaryColor,
+      return PrimaryButton(
+        // color: R.colors.primaryColor,
         text: S.of(context).next,
-        onTap: () {
+        onPressed: () {
           controller.nextPage(
             duration: Duration(milliseconds: 200),
             curve: Curves.bounceIn,

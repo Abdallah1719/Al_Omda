@@ -3,34 +3,50 @@ import 'package:al_omda/core/utils/size_config.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:flutter/material.dart';
 
-class CustomGeneralButton extends StatelessWidget {
-  const CustomGeneralButton({super.key, this.text, this.onTap, this.color});
+class PrimaryButton extends StatelessWidget {
+  const PrimaryButton({super.key, this.text, this.onPressed});
   final String? text;
-  final VoidCallback? onTap;
-  final Color? color;
+  // final VoidCallback? onTap;
+  // final Color? color;
+  final void Function()? onPressed;
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 60,
-        width: SizeConfig.screenWidth,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Center(
-          child: Text(
-            text!,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: R.colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-          ),
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(
+        text!,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color:
+              R
+                  .colors
+                  .white, // لون النص (قد يتم تجاهله إذا كان هناك foregroundColor)
         ),
       ),
     );
+    //  GestureDetector(
+    //   onTap: onTap,
+    //   child: Container(
+    //     height: 60,
+    //     width: SizeConfig.screenWidth,
+    //     decoration: BoxDecoration(
+    //       color: color,
+    //       borderRadius: BorderRadius.circular(8),
+    //     ),
+    //     child: Center(
+    //       child: Text(
+    //         text!,
+    //         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+    //           color: R.colors.white,
+    //           fontWeight: FontWeight.bold,
+    //           fontSize: 18,
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
 

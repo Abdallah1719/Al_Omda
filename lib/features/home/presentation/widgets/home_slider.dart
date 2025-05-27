@@ -2,7 +2,6 @@ import 'package:al_omda/core/utils/enum.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:al_omda/features/home/data/models/home_sliders_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -27,7 +26,9 @@ class HomeSlider extends StatelessWidget {
           return CarouselSlider(
             options: CarouselOptions(
               height: 175.0,
-              viewportFraction: 0.6,
+              viewportFraction: 0.8,
+              autoPlay: true,
+              enlargeCenterPage: false,
               onPageChanged: (index, reason) {},
             ),
             items:
@@ -38,7 +39,7 @@ class HomeSlider extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20.0),
                       child: Image.network(
                         item.image,
-                        width: 300,
+                        width: double.infinity,
                         height: 174.0,
                         fit: BoxFit.cover,
                       ),

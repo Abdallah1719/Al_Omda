@@ -49,6 +49,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                 ),
               ),
+              VerticalSpace(4),
               OnBoardingBody(
                 controller: controller,
                 onPageChanged: (index) {
@@ -56,7 +57,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   currentIndex = index;
                 },
               ),
-              VerticalSpace(5),
+              VerticalSpace(6),
               GetOnboardingButtons(
                 controller: controller,
                 currentIndex: currentIndex,

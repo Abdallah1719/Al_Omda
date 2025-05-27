@@ -1,12 +1,11 @@
+import 'package:al_omda/core/global_widgets/custom_buttons.dart';
+import 'package:al_omda/core/global_widgets/custom_text_form_field.dart';
 import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/app_assets.dart';
 import 'package:al_omda/core/utils/index.dart';
-import 'package:al_omda/features/auth/presentation/components/custom_app_bar.dart';
-import 'package:al_omda/features/auth/presentation/components/custom_text_field.dart';
-import 'package:al_omda/features/auth/presentation/components/primary_button.dart';
-import 'package:al_omda/features/auth/presentation/components/secondary_button.dart';
+import 'package:al_omda/features/auth/presentation/widgets/custom_app_bar.dart';
 import 'package:al_omda/features/auth/presentation/controller/cubit/auth_cubit.dart';
 import 'package:al_omda/l10n/cubit/locale_cubit.dart';
 import 'package:flutter/material.dart';
@@ -64,10 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 32),
 
                           Align(
-                            // alignment:
-                            // LocaleCubit.isArabic()
-                            //     ? Alignment.centerRight
-                            //     : Alignment.centerLeft,
+                            alignment:
+                                LocaleCubit.isArabic()
+                                    ? Alignment.centerRight
+                                    : Alignment.centerLeft,
                             child: Text(
                               'Login',
                               style: Theme.of(context).textTheme.headlineLarge,
@@ -111,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           SecondaryButton(
                             text: "Don't have an account? Register",
-                            onPressed: () {},
+                            onTap: () {},
                           ),
                         ],
                       ),

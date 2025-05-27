@@ -34,7 +34,7 @@ class OnBoardingBody extends StatelessWidget {
                   ),
                 ),
               ),
-              VerticalSpace(3),
+              VerticalSpace(5),
 
               Text(
                 onBoardingList[index].onBoadingTitle,
@@ -43,7 +43,7 @@ class OnBoardingBody extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              VerticalSpace(2),
+              VerticalSpace(3),
               Text(
                 onBoardingList[index].onBoardingText,
                 style: Theme.of(context).textTheme.bodyMedium,
@@ -51,7 +51,7 @@ class OnBoardingBody extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              VerticalSpace(6),
+              VerticalSpace(5),
               Center(child: CustomSmoothPageIndicator(controller: controller)),
             ],
           );

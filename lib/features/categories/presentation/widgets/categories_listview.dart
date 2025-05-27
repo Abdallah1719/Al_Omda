@@ -26,8 +26,11 @@ class CategoriesListView extends StatelessWidget {
           return CarouselSlider(
             options: CarouselOptions(
               height: 200.0,
-              viewportFraction: 0.3,
+              viewportFraction: 0.4,
               enableInfiniteScroll: false,
+              padEnds: false,
+              initialPage: 0,
+
               onPageChanged: (index, reason) {},
             ),
             items:

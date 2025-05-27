@@ -1,7 +1,7 @@
+import 'package:al_omda/core/global_widgets/custom_buttons.dart';
+import 'package:al_omda/core/global_widgets/custom_text_form_field.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
-import 'package:al_omda/features/auth/presentation/components/custom_app_bar.dart';
-import 'package:al_omda/features/auth/presentation/components/custom_text_field.dart';
-import 'package:al_omda/features/auth/presentation/components/primary_button.dart';
+import 'package:al_omda/features/auth/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
