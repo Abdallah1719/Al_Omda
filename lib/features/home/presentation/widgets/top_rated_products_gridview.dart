@@ -1,4 +1,4 @@
-import 'package:al_omda/core/global_widgets/product_card%20copy.dart';
+import 'package:al_omda/core/global_widgets/product_card.dart';
 import 'package:al_omda/features/home/data/models/products_top_rated_model.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_state.dart';
 import 'package:flutter/material.dart';

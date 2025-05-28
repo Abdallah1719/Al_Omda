@@ -30,5 +30,8 @@
     "log_in": "تسجيل الدخول",
     "verion": "الإصدار",
     "change_language":" تغيير اللغة",
+    "change_country":"تغيير الدولة",
+    "only_avilble_in_egypt":"متاح فقط فى مصر",
+    "cancel":"الغاء",
     "lang":"Engilsh"
 }

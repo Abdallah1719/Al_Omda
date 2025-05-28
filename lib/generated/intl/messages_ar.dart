@@ -27,8 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "account": MessageLookupByLibrary.simpleMessage("الحساب"),
         "account_info": MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
         "addToCart": MessageLookupByLibrary.simpleMessage("إضافة إلى السلة"),
+        "cancel": MessageLookupByLibrary.simpleMessage("الغاء"),
         "cart": MessageLookupByLibrary.simpleMessage("سلة التسوق"),
         "categoriess": MessageLookupByLibrary.simpleMessage("التصنيفات"),
+        "change_country": MessageLookupByLibrary.simpleMessage("تغيير الدولة"),
         "change_language": MessageLookupByLibrary.simpleMessage(" تغيير اللغة"),
         "contact_us": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
         "country": MessageLookupByLibrary.simpleMessage("الدولة"),
@@ -52,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "onBoardingTitle2":
             MessageLookupByLibrary.simpleMessage("الطلب فى الطريق"),
         "onBoardingTitle3": MessageLookupByLibrary.simpleMessage("وصل التوصيل"),
+        "only_avilble_in_egypt":
+            MessageLookupByLibrary.simpleMessage("متاح فقط فى مصر"),
         "popularProducts":
             MessageLookupByLibrary.simpleMessage("المنتجات الشهيرة"),
         "search_text":

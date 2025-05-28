@@ -360,6 +360,36 @@ class S {
     );
   }
 
+  /// `Change Country`
+  String get change_country {
+    return Intl.message(
+      'Change Country',
+      name: 'change_country',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Only Avilble In Egypt`
+  String get only_avilble_in_egypt {
+    return Intl.message(
+      'Only Avilble In Egypt',
+      name: 'only_avilble_in_egypt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `cancel`
+  String get cancel {
+    return Intl.message(
+      'cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `العربية`
   String get lang {
     return Intl.message(

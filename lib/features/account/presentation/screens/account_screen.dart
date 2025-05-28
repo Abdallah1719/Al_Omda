@@ -1,6 +1,7 @@
 import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
+import 'package:al_omda/features/account/presentation/widgets/country_dialog.dart';
 import 'package:al_omda/features/account/presentation/widgets/custom_list_tile.dart';
 import 'package:al_omda/features/account/presentation/widgets/language_dialog.dart';
 import 'package:al_omda/generated/l10n.dart';
@@ -55,7 +56,7 @@ class Accountscreen extends StatelessWidget {
           title: S.of(context).country,
           icon: Icons.flag,
           onTap: () {
-            // navigate to country selection
+            showDialog(context: context, builder: (context) => CountryDialog());
           },
         ),
         CustomAccountTile(

@@ -27,8 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "account_info": MessageLookupByLibrary.simpleMessage("Account Info"),
         "addToCart": MessageLookupByLibrary.simpleMessage("Add To Cart"),
+        "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
         "cart": MessageLookupByLibrary.simpleMessage("Cart"),
         "categoriess": MessageLookupByLibrary.simpleMessage("Categories"),
+        "change_country":
+            MessageLookupByLibrary.simpleMessage("Change Country"),
         "change_language":
             MessageLookupByLibrary.simpleMessage("Change Language"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact Us"),
@@ -53,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delivery on the way"),
         "onBoardingTitle3":
             MessageLookupByLibrary.simpleMessage("Delivery Arrived"),
+        "only_avilble_in_egypt":
+            MessageLookupByLibrary.simpleMessage("Only Avilble In Egypt"),
         "popularProducts":
             MessageLookupByLibrary.simpleMessage("Popular Products"),
         "search_text":
