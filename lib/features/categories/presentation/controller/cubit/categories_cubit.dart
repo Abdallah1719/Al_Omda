@@ -40,53 +40,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
       },
     );
   }
-  // Future<void> getCategories() async {
-  //   emit(state.copyWith(categoriesState: RequestState.loading));
 
-  //   final result = await baseCategoriesRepository.getCategories();
-
-  //   result.fold(
-  //     (failure) => emit(
-  //       state.copyWith(
-  //         categoriesState: RequestState.error,
-  //         categoriesMessage: 'failure.message',
-  //       ),
-  //     ),
-  //     (categories) => emit(
-  //       state.copyWith(
-  //         categories: categories,
-  //         categoriesState: RequestState.loaded,
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Future<void> getProductsByCategories(String categoryName) async {
-  //   emit(state.copyWith(productsByCategoryState: RequestState.loading));
-
-  //   final result = await baseCategoriesRepository.getProductsByCategories(
-  //     categoryName,
-  //   );
-
-  //   result.fold(
-  //     (failure) {
-  //       emit(
-  //         state.copyWith(
-  //           productsByCategoryState: RequestState.error,
-  //           productsByCategoryMessage: failure,
-  //         ),
-  //       );
-  //     },
-  //     (products) {
-  //       emit(
-  //         state.copyWith(
-  //           productsByCategoryState: RequestState.loaded,
-  //           productsByCategory: products,
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
   Future<void> getProductsByCategories(String categoryName) async {
     if (isClosed) return; // ✅ التحقق الأولي
 

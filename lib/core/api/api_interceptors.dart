@@ -4,8 +4,18 @@ import 'package:dio/dio.dart';
 
 class ApiInterceptor extends Interceptor {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers['lang'] = 'en';
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    final locale = await getIt<CacheHelper>().getData(key: "locale") ?? 'en';
+
+    // ← تعديل هنا: نضيف اللغة في الـ Query Parameter
+    options.queryParameters['lang'] = locale;
+    // final locale = await getIt<CacheHelper>().getData(key: "locale") ?? 'en';
+    // if (locale != null) {
+    //   options.headers['lang'] = locale;
+    // }
     final token = getIt<CacheHelper>().getData(key: "token");
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';

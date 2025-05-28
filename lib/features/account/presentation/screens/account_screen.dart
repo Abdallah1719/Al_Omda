@@ -2,6 +2,7 @@ import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:al_omda/features/account/presentation/widgets/custom_list_tile.dart';
+import 'package:al_omda/features/account/presentation/widgets/language_dialog.dart';
 import 'package:al_omda/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,10 @@ class Accountscreen extends StatelessWidget {
           title: S.of(context).language,
           icon: Icons.language,
           onTap: () {
-            // navigate to language settings
+            showDialog(
+              context: context,
+              builder: (context) => ChangeLanguageDialog(),
+            );
           },
         ),
         CustomAccountTile(

@@ -44,7 +44,7 @@ class CategoriesRepository implements BaseCategoriesRepository {
   getProductsByCategories(String categoryName) async {
     try {
       final response = await api.get(
-        ApiConstances.productsByCategoryPath,
+        ApiConstances.productsPath,
         queryParameters: {'category': categoryName},
       );
 

@@ -12,7 +12,7 @@ class ProductsRepository implements BaseProductsRepository {
   Future<Either<String, List<MostRecentProductsModel>>>
   getMostRecentProducts() async {
     try {
-      final response = await api.get(ApiConstances.mostRecentProductsPath);
+      final response = await api.get(ApiConstances.productsPath);
       if (response is Map<String, dynamic> && response.containsKey('data')) {
         final List<dynamic> dataList = response['data']['data'] as List;
         final List<MostRecentProductsModel> products =

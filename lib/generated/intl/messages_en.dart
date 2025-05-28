@@ -29,10 +29,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addToCart": MessageLookupByLibrary.simpleMessage("Add To Cart"),
         "cart": MessageLookupByLibrary.simpleMessage("Cart"),
         "categoriess": MessageLookupByLibrary.simpleMessage("Categories"),
+        "change_language":
+            MessageLookupByLibrary.simpleMessage("Change Language"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get started"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "lang": MessageLookupByLibrary.simpleMessage("العربية"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "log_in": MessageLookupByLibrary.simpleMessage("Log In"),
         "loginNow": MessageLookupByLibrary.simpleMessage("Login now"),
