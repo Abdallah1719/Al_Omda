@@ -3,14 +3,14 @@ part of 'products_cubit.dart';
 class ProductsState extends Equatable {
   final RequestState productsState;
   final String productsMessage;
-  final List<MostRecentProductsModel> products;
-  final List<ProductsTopRatedModel> productsTopRated;
+  final List<ProductsModel> products;
+  final List<ProductsModel> productsTopRated;
   final RequestState productsTopRatedState;
   final String productsTopRatedMessage;
 
   final RequestState productsByCategoryState;
   final String productsByCategoryMessage;
-  final List<ProductsByCategoriesModel> productsByCategory;
+  final List<ProductsModel> productsByCategory;
 
   const ProductsState({
     this.productsState = RequestState.loading,
@@ -27,13 +27,13 @@ class ProductsState extends Equatable {
   ProductsState copyWith({
     RequestState? productsState,
     String? productsMessage,
-    List<MostRecentProductsModel>? products,
-    List<ProductsTopRatedModel>? productsTopRated,
+    List<ProductsModel>? products,
+    List<ProductsModel>? productsTopRated,
     RequestState? productsTopRatedState,
     String? productsTopRatedMessage,
     RequestState? productsByCategoryState,
     String? productsByCategoryMessage,
-    List<ProductsByCategoriesModel>? productsByCategory,
+    List<ProductsModel>? productsByCategory,
   }) {
     return ProductsState(
       productsState: productsState ?? this.productsState,

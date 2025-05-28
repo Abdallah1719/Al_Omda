@@ -1,4 +1,5 @@
 import 'package:al_omda/features/products/data/models/products_by_categories_model.dart';
+import 'package:al_omda/features/products/data/models/products_model.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ class ProductsByCategoryScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
           if (state.productsByCategoryState == RequestState.loaded) {
-            final List<ProductsByCategoriesModel> products =
+            final List<ProductsModel> products =
                 state.productsByCategory;
 
             return Padding(
@@ -34,9 +35,7 @@ class ProductsByCategoryScreen extends StatelessWidget {
                 ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
-                  return ProductCard<ProductsByCategoriesModel>(
-                    products[index],
-                  );
+                   return ProductCard(product: products[index]);
                 },
               ),
             );

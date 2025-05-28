@@ -1,3 +1,4 @@
+import 'package:al_omda/features/products/data/models/products_model.dart';
 import 'package:al_omda/features/products/presentation/widgets/product_card.dart';
 import 'package:al_omda/features/products/data/models/products_top_rated_model.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
@@ -20,7 +21,7 @@ class TopRatedProductGridView extends StatelessWidget {
         }
 
         if (state.productsTopRatedState == RequestState.loaded) {
-          final List<ProductsTopRatedModel> products = state.productsTopRated;
+          final List<ProductsModel> products = state.productsTopRated;
 
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -35,7 +36,7 @@ class TopRatedProductGridView extends StatelessWidget {
               ),
               itemCount: products.length,
               itemBuilder: (context, index) {
-                return ProductCard<ProductsTopRatedModel>(products[index]);
+                return ProductCard(product: products[index]);
               },
             ),
           );

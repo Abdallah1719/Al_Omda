@@ -1,7 +1,7 @@
 import 'package:al_omda/core/api/api_constances.dart';
 import 'package:al_omda/core/api/api_methods.dart';
 import 'package:al_omda/core/error/exception.dart';
-import 'package:al_omda/features/products/data/models/most_resent_products_model.dart';
+import 'package:al_omda/features/products/data/models/products_model.dart';
 import 'package:al_omda/features/products/data/models/products_by_categories_model.dart';
 import 'package:al_omda/features/products/data/models/products_top_rated_model.dart';
 import 'package:al_omda/features/products/domain/repository/base_products_repository.dart';
@@ -11,29 +11,20 @@ class ProductsRepository implements BaseProductsRepository {
   final ApiMethods api;
   ProductsRepository(this.api);
   @override
-  Future<Either<String, List<MostRecentProductsModel>>>
-  getMostRecentProducts() async {
+  Future<Either<String, List<ProductsModel>>> getMostRecentProducts() async {
     try {
       final response = await api.get(ApiConstances.productsPath);
       if (response is Map<String, dynamic> && response.containsKey('data')) {
         final List<dynamic> dataList = response['data']['data'] as List;
-        final List<MostRecentProductsModel> products =
+        final List<ProductsModel> products =
             dataList
-                .map(
-                  (e) => MostRecentProductsModel.fromJson(
-                    e as Map<String, dynamic>,
-                  ),
-                )
+                .map((e) => ProductsModel.fromJson(e as Map<String, dynamic>))
                 .toList();
         return Right(products);
       } else if (response is List) {
-        final List<MostRecentProductsModel> products =
+        final List<ProductsModel> products =
             response
-                .map(
-                  (e) => MostRecentProductsModel.fromJson(
-                    e as Map<String, dynamic>,
-                  ),
-                )
+                .map((e) => ProductsModel.fromJson(e as Map<String, dynamic>))
                 .toList();
         return Right(products);
       } else {
@@ -45,7 +36,7 @@ class ProductsRepository implements BaseProductsRepository {
   }
 
   @override
-  Future<Either<String, List<ProductsTopRatedModel>>>
+  Future<Either<String, List<ProductsModel>>>
   getHomeProductsTopRated() async {
     try {
       final response = await api.get(ApiConstances.productsTopRatedPath);
@@ -55,10 +46,10 @@ class ProductsRepository implements BaseProductsRepository {
           final data = response['data']['data'];
 
           if (data is List) {
-            final List<ProductsTopRatedModel> productsTopRated =
+            final List<ProductsModel> productsTopRated =
                 data
                     .map(
-                      (e) => ProductsTopRatedModel.fromJson(
+                      (e) => ProductsModel.fromJson(
                         e as Map<String, dynamic>,
                       ),
                     )
@@ -66,17 +57,17 @@ class ProductsRepository implements BaseProductsRepository {
 
             return Right(productsTopRated);
           } else if (data is Map<String, dynamic>) {
-            return Right([ProductsTopRatedModel.fromJson(data)]);
+            return Right([ProductsModel.fromJson(data)]);
           }
         }
 
         return Left("Invalid response structure");
       } else if (response is List) {
-        final List<ProductsTopRatedModel> productsTopRated =
+        final List<ProductsModel> productsTopRated =
             response
                 .map(
                   (e) =>
-                      ProductsTopRatedModel.fromJson(e as Map<String, dynamic>),
+                      ProductsModel.fromJson(e as Map<String, dynamic>),
                 )
                 .toList();
 
@@ -90,7 +81,7 @@ class ProductsRepository implements BaseProductsRepository {
   }
 
   @override
-  Future<Either<String, List<ProductsByCategoriesModel>>>
+  Future<Either<String, List<ProductsModel>>>
   getProductsByCategories(String categoryName) async {
     try {
       final response = await api.get(
@@ -100,20 +91,20 @@ class ProductsRepository implements BaseProductsRepository {
 
       if (response is Map<String, dynamic> && response.containsKey('data')) {
         final List<dynamic> dataList = response['data']['data'] as List;
-        final List<ProductsByCategoriesModel> products =
+        final List<ProductsModel> products =
             dataList
                 .map(
-                  (e) => ProductsByCategoriesModel.fromJson(
+                  (e) => ProductsModel.fromJson(
                     e as Map<String, dynamic>,
                   ),
                 )
                 .toList();
         return Right(products);
       } else if (response is List) {
-        final List<ProductsByCategoriesModel> products =
+        final List<ProductsModel> products =
             response
                 .map(
-                  (e) => ProductsByCategoriesModel.fromJson(
+                  (e) => ProductsModel.fromJson(
                     e as Map<String, dynamic>,
                   ),
                 )

@@ -10,4 +10,7 @@ class ApiConstances {
   static const String updateProfilePath = '/auth/updateProfile';
   static const String myAddressesPath = '/myAddresses';
   static const String myOrdersPath = '/orderHistory';
+  static const String addToCart = '/cart/add';
+  static const String cart = '/cart';
+  static const String removeFromCart = '/removeFromCart';
 }

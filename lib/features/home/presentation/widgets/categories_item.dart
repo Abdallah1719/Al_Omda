@@ -1,6 +1,5 @@
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/features/home/data/models/home_categories_model.dart';
-import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:al_omda/features/products/presentation/screens/products-by_categories_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';

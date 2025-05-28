@@ -40,3 +40,12 @@ ErrorModel _getErrorModel(dynamic data, ErrorModel fallback) {
   }
   return fallback;
 }
+
+extension ListExtensions on List {
+  T? firstWhereOrNull<T>(bool Function(T element) test) {
+    for (var element in this) {
+      if (test(element)) return element as T;
+    }
+    return null;
+  }
+}

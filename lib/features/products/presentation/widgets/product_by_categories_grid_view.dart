@@ -1,3 +1,4 @@
+import 'package:al_omda/features/products/data/models/products_model.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:al_omda/features/products/presentation/widgets/product_card.dart';
 import 'package:al_omda/core/utils/enum.dart';
@@ -20,7 +21,7 @@ class ProductsByCategoriesGridView extends StatelessWidget {
         }
 
         if (state.productsByCategoryState == RequestState.loaded) {
-          final List<ProductsByCategoriesModel> products =
+          final List<ProductsModel> products =
               state.productsByCategory;
 
           return Padding(
@@ -36,7 +37,7 @@ class ProductsByCategoriesGridView extends StatelessWidget {
               ),
               itemCount: products.length,
               itemBuilder: (context, index) {
-                return ProductCard<ProductsByCategoriesModel>(products[index]);
+               return ProductCard(product: products[index]);
               },
             ),
           );

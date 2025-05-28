@@ -7,9 +7,10 @@ import 'package:al_omda/features/account/presentation/controller/cubit/account_c
 import 'package:al_omda/features/auth/data/repository/auth_repository.dart';
 import 'package:al_omda/features/auth/domain/repository/base_auth_repository.dart';
 import 'package:al_omda/features/auth/presentation/controller/cubit/auth_cubit.dart';
-import 'package:al_omda/features/categories/data/reposetory/categories_repository.dart';
-import 'package:al_omda/features/categories/domain/repository/base_categories_repository.dart';
-import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
+import 'package:al_omda/features/cart/data/cart_remote_data_source.dart';
+import 'package:al_omda/features/cart/data/repository/cart_repository.dart';
+import 'package:al_omda/features/cart/domain/repository/base_cart_repository.dart';
+import 'package:al_omda/features/cart/presentation/controller/cubit/cart_cubit.dart';
 import 'package:al_omda/features/home/data/repository/home_repository.dart';
 import 'package:al_omda/features/home/domain/repository/base_home_repository.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
@@ -36,15 +37,16 @@ void setupServiceLocator() {
   getIt.registerSingleton<BaseHomeRepository>(HomeRepository(getIt()));
   // Home Cubit
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
-  //Categories
-  // getIt.registerSingleton<BaseCategoriesRepository>(
-  //   CategoriesRepository(getIt()),
-  // );
-  // getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
   //Produsts
   getIt.registerSingleton<BaseProductsRepository>(ProductsRepository(getIt()));
   getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt()));
   //Account
   getIt.registerSingleton<BaseAccountRepository>(AccountRepository(getIt()));
   getIt.registerFactory<AccountCubit>(() => AccountCubit(getIt()));
+  //cart
+  getIt.registerSingleton<CartRemoteDataSource>(
+    CartRemoteDataSource(api: getIt()),
+  );
+  getIt.registerSingleton<BaseCartRepository>(CartRepository(getIt()));
+  getIt.registerFactory<CartCubit>(() => CartCubit(getIt()));
 }

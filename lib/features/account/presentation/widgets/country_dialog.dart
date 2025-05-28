@@ -1,7 +1,5 @@
 import 'package:al_omda/generated/l10n.dart';
-import 'package:al_omda/l10n/cubit/locale_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CountryDialog extends StatelessWidget {
   const CountryDialog({super.key});
