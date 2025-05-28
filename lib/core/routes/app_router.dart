@@ -8,7 +8,7 @@ import 'package:al_omda/features/auth/presentation/screens/login_screen.dart';
 import 'package:al_omda/features/auth/presentation/screens/register_screen.dart';
 import 'package:al_omda/features/auth/presentation/screens/forget_password_screen.dart';
 import 'package:al_omda/features/home/presentation/screens/home_screen.dart';
-import 'package:al_omda/features/categories/presentation/screens/categories_screen.dart';
+import 'package:al_omda/features/home/presentation/screens/categories_screen.dart';
 import 'package:al_omda/features/products/presentation/screens/products_screen.dart';
 import 'package:al_omda/features/account/presentation/screens/account_screen.dart';
 import 'package:al_omda/features/account/presentation/screens/account_info_screen.dart';

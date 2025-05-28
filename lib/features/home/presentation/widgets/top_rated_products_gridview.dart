@@ -1,11 +1,8 @@
-import 'package:al_omda/core/global_widgets/product_card.dart';
-import 'package:al_omda/features/home/data/models/products_top_rated_model.dart';
-import 'package:al_omda/features/home/presentation/controller/cubit/home_state.dart';
+import 'package:al_omda/features/products/presentation/widgets/product_card.dart';
+import 'package:al_omda/features/products/data/models/products_top_rated_model.dart';
+import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
-
 import 'package:al_omda/core/utils/enum.dart';
 
 class TopRatedProductGridView extends StatelessWidget {
@@ -13,7 +10,7 @@ class TopRatedProductGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state.productsTopRatedState == RequestState.loading) {
           return SizedBox(

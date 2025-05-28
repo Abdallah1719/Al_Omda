@@ -37,10 +37,10 @@ void setupServiceLocator() {
   // Home Cubit
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
   //Categories
-  getIt.registerSingleton<BaseCategoriesRepository>(
-    CategoriesRepository(getIt()),
-  );
-  getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
+  // getIt.registerSingleton<BaseCategoriesRepository>(
+  //   CategoriesRepository(getIt()),
+  // );
+  // getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
   //Produsts
   getIt.registerSingleton<BaseProductsRepository>(ProductsRepository(getIt()));
   getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt()));

@@ -29,24 +29,34 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  Future<void> getHomeProductsTopRated() async {
-    emit(state.copyWith(productsTopRatedState: RequestState.loading));
+  Future<void> getHomeCategories() async {
+    if (isClosed) return; // ✅ التحقق الأولي
 
-    final result = await baseHomeRepository.getHomeProductsTopRated();
+    emit(state.copyWith(categoriesState: RequestState.loading));
+
+    final result = await baseHomeRepository.getHomeCategories();
+
+    if (isClosed) return; // ✅ التحقق بعد الانتهاء من الطلبية
 
     result.fold(
-      (failure) => emit(
-        state.copyWith(
-          productsTopRatedState: RequestState.error,
-          productsTopRatedMessage: 'failure.message',
-        ),
-      ),
-      (productsTopRated) => emit(
-        state.copyWith(
-          productsTopRated: productsTopRated,
-          productsTopRatedState: RequestState.loaded,
-        ),
-      ),
+      (failure) {
+        if (isClosed) return; // ✅ التحقق قبل emit
+        emit(
+          state.copyWith(
+            categoriesState: RequestState.error,
+            categoriesMessage: failure,
+          ),
+        );
+      },
+      (categories) {
+        if (isClosed) return; // ✅ التحقق قبل emit
+        emit(
+          state.copyWith(
+            categoriesState: RequestState.loaded,
+            categories: categories,
+          ),
+        );
+      },
     );
   }
 }

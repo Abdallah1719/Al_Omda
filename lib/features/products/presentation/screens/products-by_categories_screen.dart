@@ -1,24 +1,18 @@
-import 'package:al_omda/features/categories/data/models/products_by_categories_model.dart';
-import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
+import 'package:al_omda/features/products/data/models/products_by_categories_model.dart';
+import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:al_omda/core/global_widgets/product_card.dart';
+import 'package:al_omda/features/products/presentation/widgets/product_card.dart';
 import 'package:al_omda/core/utils/enum.dart';
 
 class ProductsByCategoryScreen extends StatelessWidget {
   final String categoryName;
-
   const ProductsByCategoryScreen({super.key, required this.categoryName});
-
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<CategoriesCubit>(
-      context,
-    ).getProductsByCategories(categoryName);
-
     return Scaffold(
       appBar: AppBar(title: Text(categoryName), centerTitle: true),
-      body: BlocBuilder<CategoriesCubit, CategoriesState>(
+      body: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (context, state) {
           if (state.productsByCategoryState == RequestState.loading) {
             return const Center(child: CircularProgressIndicator());

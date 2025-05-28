@@ -1,7 +1,8 @@
 import 'package:al_omda/core/utils/enum.dart';
-import 'package:al_omda/features/categories/data/models/categories_model.dart';
-import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
-import 'package:al_omda/features/categories/presentation/widgets/categories_item.dart';
+import 'package:al_omda/features/home/data/models/home_categories_model.dart';
+import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
+import 'package:al_omda/features/home/presentation/controller/cubit/home_state.dart';
+import 'package:al_omda/features/home/presentation/widgets/categories_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -11,7 +12,7 @@ class CategoriesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CategoriesCubit, CategoriesState>(
+    return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state.categoriesState == RequestState.loading) {
           return SizedBox(
@@ -21,7 +22,7 @@ class CategoriesListView extends StatelessWidget {
         }
 
         if (state.categoriesState == RequestState.loaded) {
-          final List<CategoriesModel> categories = state.categories;
+          final List<HomeCategoriesModel> categories = state.categories;
 
           return CarouselSlider(
             options: CarouselOptions(

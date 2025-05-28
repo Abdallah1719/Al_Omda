@@ -2,7 +2,7 @@ import 'package:al_omda/features/products/data/models/most_resent_products_model
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:al_omda/core/global_widgets/product_card.dart';
+import 'package:al_omda/features/products/presentation/widgets/product_card.dart';
 import 'package:al_omda/core/utils/enum.dart';
 
 class ProductsScreen extends StatelessWidget {

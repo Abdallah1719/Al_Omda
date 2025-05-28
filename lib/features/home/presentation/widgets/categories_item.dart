@@ -1,13 +1,14 @@
 import 'package:al_omda/core/services/service_locator.dart';
-import 'package:al_omda/features/categories/data/models/categories_model.dart';
-import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
-import 'package:al_omda/features/categories/presentation/screens/categories_products_screen.dart';
+import 'package:al_omda/features/home/data/models/home_categories_model.dart';
+import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
+import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
+import 'package:al_omda/features/products/presentation/screens/products-by_categories_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryItem extends StatelessWidget {
-  final CategoriesModel category;
+  final HomeCategoriesModel category;
 
   const CategoryItem({super.key, required this.category});
 
@@ -21,7 +22,9 @@ class CategoryItem extends StatelessWidget {
             builder:
                 (context) => BlocProvider(
                   create:
-                      (context) => getIt<CategoriesCubit>()..getCategories(),
+                      (context) =>
+                          getIt<ProductsCubit>()
+                            ..getProductsByCategories(category.slug),
                   child: ProductsByCategoryScreen(categoryName: category.slug),
                 ),
           ),

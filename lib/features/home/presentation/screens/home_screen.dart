@@ -1,10 +1,10 @@
 import 'package:al_omda/core/global_widgets/global_appbar.dart';
 import 'package:al_omda/core/services/service_locator.dart';
-import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
 import 'package:al_omda/features/account/presentation/screens/account_screen.dart';
 import 'package:al_omda/features/home/presentation/widgets/cart_body.dart';
 import 'package:al_omda/features/home/presentation/widgets/home_body.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
+import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:al_omda/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,10 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
               (context) =>
                   getIt<HomeCubit>()
                     ..getHomeSliders()
-                    ..getHomeProductsTopRated(),
+                    ..getHomeCategories(),
         ),
         BlocProvider(
-          create: (context) => getIt<CategoriesCubit>()..getCategories(),
+          create:
+              (context) => getIt<ProductsCubit>()..getHomeProductsTopRated(),
         ),
       ],
       child: Scaffold(

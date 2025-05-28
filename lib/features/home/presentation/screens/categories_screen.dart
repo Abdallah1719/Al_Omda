@@ -1,9 +1,10 @@
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/enum.dart';
-import 'package:al_omda/features/categories/data/models/categories_model.dart';
-import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
-import 'package:al_omda/features/categories/presentation/screens/categories_products_screen.dart';
-import 'package:al_omda/features/categories/presentation/widgets/categories_item.dart';
+import 'package:al_omda/features/home/data/models/home_categories_model.dart';
+import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
+import 'package:al_omda/features/home/presentation/controller/cubit/home_state.dart';
+import 'package:al_omda/features/products/presentation/screens/products-by_categories_screen.dart';
+import 'package:al_omda/features/home/presentation/widgets/categories_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,16 +14,16 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<CategoriesCubit>()..getCategories(),
+      create: (context) => getIt<HomeCubit>()..getHomeCategories(),
       child: Scaffold(
         appBar: AppBar(title: Text('التصنيفات'), centerTitle: true),
-        body: BlocBuilder<CategoriesCubit, CategoriesState>(
+        body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             if (state.categoriesState == RequestState.loading) {
               return Center(child: CircularProgressIndicator());
             }
             if (state.categoriesState == RequestState.loaded) {
-              final List<CategoriesModel> categories = state.categories;
+              final List<HomeCategoriesModel> categories = state.categories;
 
               return GridView.builder(
                 padding: EdgeInsets.all(16),
@@ -35,9 +36,7 @@ class CategoriesScreen extends StatelessWidget {
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
                   final category = state.categories[index];
-                  final categoriesCubit = BlocProvider.of<CategoriesCubit>(
-                    context,
-                  );
+                  final categoriesCubit = BlocProvider.of<HomeCubit>(context);
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(

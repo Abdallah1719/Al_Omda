@@ -1,16 +1,16 @@
-import 'package:al_omda/core/global_widgets/product_card.dart';
+import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
+import 'package:al_omda/features/products/presentation/widgets/product_card.dart';
 import 'package:al_omda/core/utils/enum.dart';
-import 'package:al_omda/features/categories/data/models/products_by_categories_model.dart';
-import 'package:al_omda/features/categories/presentation/controller/cubit/categories_cubit.dart';
+import 'package:al_omda/features/products/data/models/products_by_categories_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CategoryProductsGridView extends StatelessWidget {
-  const CategoryProductsGridView({super.key});
+class ProductsByCategoriesGridView extends StatelessWidget {
+  const ProductsByCategoriesGridView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CategoriesCubit, CategoriesState>(
+    return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state.productsByCategoryState == RequestState.loading) {
           return SizedBox(
