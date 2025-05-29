@@ -45,7 +45,7 @@ void setupServiceLocator() {
   getIt.registerFactory<AccountCubit>(() => AccountCubit(getIt()));
   //cart
   getIt.registerSingleton<CartRemoteDataSource>(
-    CartRemoteDataSource(api: getIt()),
+    CartRemoteDataSourceImpl(getIt()),
   );
   getIt.registerSingleton<BaseCartRepository>(CartRepository(getIt()));
   getIt.registerFactory<CartCubit>(() => CartCubit(getIt()));

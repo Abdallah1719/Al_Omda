@@ -2,7 +2,6 @@ import 'package:al_omda/core/utils/enum.dart';
 import 'package:al_omda/features/home/data/models/home_categories_model.dart';
 import 'package:al_omda/features/home/data/models/home_sliders_model.dart';
 import 'package:al_omda/features/products/data/models/products_model.dart';
-import 'package:al_omda/features/products/data/models/products_top_rated_model.dart';
 import 'package:equatable/equatable.dart';
 
 class HomeState extends Equatable {

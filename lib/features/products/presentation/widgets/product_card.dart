@@ -1217,8 +1217,6 @@
 //   }
 // }
 
-import 'package:al_omda/core/error/exception.dart';
-import 'package:al_omda/features/cart/domain/entities/cart.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_cubit.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_state.dart';
 import 'package:flutter/material.dart';
@@ -1228,7 +1226,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:al_omda/core/utils/size_config.dart';
 import 'package:al_omda/features/products/data/models/products_model.dart';
 
-import 'package:al_omda/generated/l10n.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductsModel product;

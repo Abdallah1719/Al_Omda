@@ -2,8 +2,6 @@ import 'package:al_omda/core/api/api_constances.dart';
 import 'package:al_omda/core/api/api_methods.dart';
 import 'package:al_omda/core/error/exception.dart';
 import 'package:al_omda/features/products/data/models/products_model.dart';
-import 'package:al_omda/features/products/data/models/products_by_categories_model.dart';
-import 'package:al_omda/features/products/data/models/products_top_rated_model.dart';
 import 'package:al_omda/features/products/domain/repository/base_products_repository.dart';
 import 'package:dartz/dartz.dart';
 

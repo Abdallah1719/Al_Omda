@@ -2,7 +2,6 @@ import 'package:al_omda/features/products/data/models/products_model.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:al_omda/features/products/presentation/widgets/product_card.dart';
 import 'package:al_omda/core/utils/enum.dart';
-import 'package:al_omda/features/products/data/models/products_by_categories_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
