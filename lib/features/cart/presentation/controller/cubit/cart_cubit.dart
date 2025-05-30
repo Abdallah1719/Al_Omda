@@ -112,17 +112,18 @@ class CartCubit extends Cubit<CartState> {
               .where((item) => item.productId != productId)
               .toList();
 
-      emit(CartLoaded(updatedItems)); // 👉 تحديث الواجهة فورًا
+      emit(CartLoaded(updatedItems));
 
       final result = await baseCartRepository.removeFromCart(productId);
 
       result.fold(
         (failure) {
-          emit(currentState); // ❌ العودة للحالة السابقة
-          emit(CartError(failure));
+          emit(currentState); // ← العودة للحالة القديمة
+          emit(CartError(failure)); // ← عرض رسالة الخطأ
         },
         (items) {
-          // ✅ optional: emit(CartLoaded(items));
+          // ✅ هنا يجب تحديث الشاشة بالبيانات الجديدة
+          emit(CartLoaded(items)); // ← تعديل مهم
         },
       );
     }

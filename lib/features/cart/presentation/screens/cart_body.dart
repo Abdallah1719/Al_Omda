@@ -177,25 +177,6 @@ class CartScreen extends StatelessWidget {
                         );
                       },
                     );
-                  } else if (state is CartError) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(state.message),
-                          SizedBox(height: 10),
-                          ElevatedButton.icon(
-                            onPressed:
-                                () =>
-                                    BlocProvider.of<CartCubit>(
-                                      context,
-                                    ).getCartItems(),
-                            icon: Icon(Icons.refresh),
-                            label: Text("إعادة المحاولة"),
-                          ),
-                        ],
-                      ),
-                    );
                   }
                   return Center(child: Text("لا توجد بيانات"));
                 },
