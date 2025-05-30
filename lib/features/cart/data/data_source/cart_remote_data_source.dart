@@ -147,18 +147,24 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
     print("Remove Response: $response");
 
+    // إذا كانت الاستجابة تحتوي على رسالة فقط
     if (response is Map && response.containsKey("data")) {
       final dynamic data = response["data"];
 
-      // حل المشكلة: تحليل هيكل الاستجابة بشكل صحيح
-      if (data is Map && data.containsKey("cart") && data["cart"] is Map) {
+      // الحالة 1: استجابة ناجحة بدون بيانات سلة
+      if (data is Map && data.containsKey("msg")) {
+        // نحتاج إلى إعادة جلب السلة يدويًا
+        return await getCartItemsFromApi();
+      }
+      // الحالة 2: استجابة تحتوي على بيانات سلة مباشرة
+      else if (data is Map && data.containsKey("cart") && data["cart"] is Map) {
         final cart = data["cart"] as Map;
         if (cart.containsKey("items") && cart["items"] is List) {
           final items = cart["items"] as List;
           return items.map((item) => CartItemModel.fromJson(item)).toList();
         }
       }
-      // بعض APIs ترجع العناصر مباشرة
+      // الحالة 3: استجابة تحتوي على العناصر مباشرة
       else if (data is Map &&
           data.containsKey("items") &&
           data["items"] is List) {
@@ -167,6 +173,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
       }
     }
 
-    throw Exception("Invalid response structure");
+    // إذا لم نتمكن من الحصول على البيانات، نعيد جلب السلة يدويًا
+    return await getCartItemsFromApi();
   }
 }

@@ -124,7 +124,15 @@ class CartScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(state.message),
-                      backgroundColor: Colors.red,
+                      duration: Duration(seconds: 3),
+                      action: SnackBarAction(
+                        label: 'إعادة المحاولة',
+                        onPressed: () {
+                          if (state is CartLoaded) {
+                            context.read<CartCubit>().getCartItems();
+                          }
+                        },
+                      ),
                     ),
                   );
                 }

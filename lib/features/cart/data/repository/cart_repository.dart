@@ -100,15 +100,12 @@ class CartRepository implements BaseCartRepository {
   }
 
   @override
-  Future<Either<String, List<CartItemModel>>> removeFromCart(
-    int productId,
-  ) async {
+  Future<List<CartItemModel>> removeFromCart(int productId) async {
     try {
-      final List<CartItemModel> updatedCart = await cartRemoteDataSource
-          .removeFromCart(productId);
-      return Right(updatedCart);
+      final items = await cartRemoteDataSource.removeFromCart(productId);
+      return items;
     } catch (e) {
-      return Left("فشل في حذف المنتج من السلة");
+      throw Exception("فشل في حذف المنتج من السلة");
     }
   }
 }
