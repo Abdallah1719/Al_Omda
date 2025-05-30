@@ -145,13 +145,28 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
       data: {"product_id": productId},
     );
 
-    print("Remove Response: $response"); // 👈 طباعة الرد للتأكد من هيكله
+    print("Remove Response: $response");
 
     if (response is Map && response.containsKey("data")) {
-      final items = response["data"]["cart"]["items"] as List;
-      return items.map((item) => CartItemModel.fromJson(item)).toList();
+      final dynamic data = response["data"];
+
+      // حل المشكلة: تحليل هيكل الاستجابة بشكل صحيح
+      if (data is Map && data.containsKey("cart") && data["cart"] is Map) {
+        final cart = data["cart"] as Map;
+        if (cart.containsKey("items") && cart["items"] is List) {
+          final items = cart["items"] as List;
+          return items.map((item) => CartItemModel.fromJson(item)).toList();
+        }
+      }
+      // بعض APIs ترجع العناصر مباشرة
+      else if (data is Map &&
+          data.containsKey("items") &&
+          data["items"] is List) {
+        final items = data["items"] as List;
+        return items.map((item) => CartItemModel.fromJson(item)).toList();
+      }
     }
 
-    return [];
+    throw Exception("Invalid response structure");
   }
 }

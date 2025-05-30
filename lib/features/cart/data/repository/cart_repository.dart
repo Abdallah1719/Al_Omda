@@ -1,10 +1,7 @@
-
-
 // import 'package:al_omda/features/cart/data/data_source/cart_remote_data_source.dart';
 // import 'package:al_omda/features/cart/data/models/cart_model.dart';
 // import 'package:al_omda/features/cart/domain/repository/base_cart_repository.dart';
 // import 'package:dartz/dartz.dart';
-
 
 // class CartRepository implements BaseCartRepository {
 //   final CartRemoteDataSource cartRemoteDataSource;
@@ -69,7 +66,8 @@ class CartRepository implements BaseCartRepository {
   @override
   Future<Either<String, List<CartItemModel>>> getCartItems() async {
     try {
-      final List<CartItemModel> items = await cartRemoteDataSource.getCartItemsFromApi();
+      final List<CartItemModel> items =
+          await cartRemoteDataSource.getCartItemsFromApi();
       return Right(items);
     } catch (e) {
       return Left("فشل في جلب بيانات السلة");
@@ -79,7 +77,8 @@ class CartRepository implements BaseCartRepository {
   @override
   Future<Either<String, List<CartItemModel>>> addToCart(int productId) async {
     try {
-      final List<CartItemModel> updatedCart = await cartRemoteDataSource.addProductToCart(productId);
+      final List<CartItemModel> updatedCart = await cartRemoteDataSource
+          .addProductToCart(productId);
       return Right(updatedCart);
     } catch (e) {
       return Left("فشل في إضافة المنتج للسلة");
@@ -87,9 +86,13 @@ class CartRepository implements BaseCartRepository {
   }
 
   @override
-  Future<Either<String, List<CartItemModel>>> updateQuantity(int productId, int newQuantity) async {
+  Future<Either<String, List<CartItemModel>>> updateQuantity(
+    int productId,
+    int newQuantity,
+  ) async {
     try {
-      final List<CartItemModel> updatedCart = await cartRemoteDataSource.updateQuantity(productId, newQuantity);
+      final List<CartItemModel> updatedCart = await cartRemoteDataSource
+          .updateQuantity(productId, newQuantity);
       return Right(updatedCart);
     } catch (e) {
       return Left("فشل في تحديث الكمية");
@@ -97,9 +100,12 @@ class CartRepository implements BaseCartRepository {
   }
 
   @override
-  Future<Either<String, List<CartItemModel>>> removeFromCart(int productId) async {
+  Future<Either<String, List<CartItemModel>>> removeFromCart(
+    int productId,
+  ) async {
     try {
-      final List<CartItemModel> updatedCart = await cartRemoteDataSource.removeFromCart(productId);
+      final List<CartItemModel> updatedCart = await cartRemoteDataSource
+          .removeFromCart(productId);
       return Right(updatedCart);
     } catch (e) {
       return Left("فشل في حذف المنتج من السلة");

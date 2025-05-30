@@ -1,5 +1,3 @@
-
-
 import 'package:al_omda/features/cart/domain/entities/cart.dart';
 
 class CartItemModel extends CartItem {
@@ -14,13 +12,15 @@ class CartItemModel extends CartItem {
   });
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
+    print("Parsing Cart Item: $json"); // 👈 للمساعدة في التشخيص
+
     return CartItemModel(
-      productId: json['id'],
-      title: json['title'],
+      productId: json['id'] ?? 0, // 👈 القيمة الافتراضية مهمة
+      title: json['title'] ?? 'Unknown Product',
       price: json['price'],
-      image: json['image'],
-      unitName: json['unit_name'] ?? 'Gram',
-      weight: json['weight'] ?? '',
+      image: json['image'] ?? '',
+      unitName: json['unit_name'] ?? 'Unit',
+      weight: json['weight']?.toString() ?? '',
       quantity: json['quantity'] ?? 1,
     );
   }
@@ -37,4 +37,3 @@ class CartItemModel extends CartItem {
     };
   }
 }
-

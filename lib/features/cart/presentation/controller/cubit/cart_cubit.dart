@@ -107,25 +107,23 @@ class CartCubit extends Cubit<CartState> {
     final currentState = state;
 
     if (currentState is CartLoaded) {
-      final List<CartItem> updatedItems =
-          currentState.items
-              .where((item) => item.productId != productId)
-              .toList();
+      final List<CartItem> oldItems = currentState.items;
 
+      // تحديث محلي فوري
+      final updatedItems =
+          oldItems.where((item) => item.productId != productId).toList();
       emit(CartLoaded(updatedItems));
 
-      final result = await baseCartRepository.removeFromCart(productId);
+      try {
+        final serverItems = await baseCartRepository.removeFromCart(productId);
 
-      result.fold(
-        (failure) {
-          emit(currentState); // ← العودة للحالة القديمة
-          emit(CartError(failure)); // ← عرض رسالة الخطأ
-        },
-        (items) {
-          // ✅ هنا يجب تحديث الشاشة بالبيانات الجديدة
-          emit(CartLoaded(items)); // ← تعديل مهم
-        },
-      );
+        // تحويل List<CartItemModel> إلى List<CartItem>
+        emit(CartLoaded(serverItems as List<CartItem>));
+      } catch (e) {
+        // استعادة الحالة الأصلية عند الخطأ
+        emit(CartLoaded(oldItems));
+        emit(CartError("فشل في حذف المنتج: ${e.toString()}"));
+      }
     }
   }
 }

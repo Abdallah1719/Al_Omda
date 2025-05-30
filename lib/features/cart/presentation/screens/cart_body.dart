@@ -120,11 +120,13 @@ class CartScreen extends StatelessWidget {
             appBar: AppBar(title: Text("Cart")),
             body: BlocListener<CartCubit, CartState>(
               listener: (context, state) {
-                // يمكنك هنا التعامل مع رسائل Toast أو SnackBar
                 if (state is CartError) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text(state.message)));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
                 }
               },
               child: BlocBuilder<CartCubit, CartState>(
@@ -135,50 +137,82 @@ class CartScreen extends StatelessWidget {
                     final items = state.items;
 
                     if (items.isEmpty) {
-                      return Center(child: Text("السلة فارغة"));
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.shopping_cart_outlined,
+                              size: 80,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(height: 20),
+                            Text(
+                              "سلة التسوق فارغة",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      );
                     }
 
                     return ListView.builder(
                       itemCount: items.length,
                       itemBuilder: (context, index) {
                         final item = items[index];
-                        return ListTile(
-                          leading: CachedNetworkImage(
-                            imageUrl: item.image,
-                            placeholder:
-                                (context, url) =>
-                                    Center(child: CircularProgressIndicator()),
-                            errorWidget:
-                                (context, url, error) => Icon(
-                                  Icons.broken_image,
-                                  size: 40,
-                                  color: Colors.grey,
-                                ),
-                            fit: BoxFit.cover,
+                        return Card(
+                          margin: EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 16,
                           ),
-                          title: Text(item.title),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${item.price} L.E x ${item.quantity} = ${item.price * item.quantity} L.E",
-                              ),
-                              SizedBox(height: 4),
-                              Text("Weight: ${item.weight} ${item.unitName}"),
-                            ],
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(Icons.remove_circle, color: Colors.red),
-                            onPressed:
-                                () => BlocProvider.of<CartCubit>(
-                                  context,
-                                ).removeFromCart(item.productId),
+                          child: ListTile(
+                            leading: CachedNetworkImage(
+                              imageUrl: item.image,
+                              width: 60,
+                              height: 60,
+                              fit: BoxFit.cover,
+                              placeholder:
+                                  (context, url) => CircularProgressIndicator(),
+                              errorWidget:
+                                  (context, url, error) =>
+                                      Icon(Icons.shopping_bag),
+                            ),
+                            title: Text(item.title),
+                            subtitle: Text(
+                              "${item.price} L.E × ${item.quantity} = ${item.price * item.quantity} L.E",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            trailing: IconButton(
+                              icon: Icon(Icons.delete, color: Colors.red),
+                              onPressed:
+                                  () => context
+                                      .read<CartCubit>()
+                                      .removeFromCart(item.productId),
+                            ),
                           ),
                         );
                       },
                     );
                   }
-                  return Center(child: Text("لا توجد بيانات"));
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.error_outline, size: 60, color: Colors.red),
+                        SizedBox(height: 20),
+                        Text(
+                          "حدث خطأ أثناء تحميل السلة",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(height: 10),
+                        ElevatedButton(
+                          onPressed:
+                              () => context.read<CartCubit>().getCartItems(),
+                          child: Text("إعادة المحاولة"),
+                        ),
+                      ],
+                    ),
+                  );
                 },
               ),
             ),
