@@ -37,3 +37,4 @@ class CartItemModel extends CartItem {
     };
   }
 }
+
