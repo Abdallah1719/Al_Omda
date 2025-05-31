@@ -13,4 +13,5 @@ class ApiConstances {
   static const String addToCart = '/cart/add';
   static const String cart = '/cart';
   static const String removeFromCart = '/removeFromCart';
+  static const String makeOrder = '/makeOrder';
 }
