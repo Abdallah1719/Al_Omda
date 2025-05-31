@@ -9,4 +9,10 @@ abstract class BaseCartRepository {
     int newQuantity,
   );
   Future<List<CartItemModel>> removeFromCart(int productId);
+  Future<Either<String, bool>> makeOrder({
+    required String date,
+    required String time,
+    required int paymentId,
+    required int addressId,
+  });
 }

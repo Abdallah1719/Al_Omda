@@ -1,10 +1,14 @@
 import 'package:al_omda/features/cart/domain/entities/cart.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_state.dart';
 import 'package:al_omda/features/cart/domain/repository/base_cart_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartCubit extends Cubit<CartState> {
   final BaseCartRepository baseCartRepository;
+
+  final dateController = TextEditingController();
+  final timeController = TextEditingController();
 
   CartCubit(this.baseCartRepository) : super(CartInitial());
 
@@ -86,5 +90,52 @@ class CartCubit extends Cubit<CartState> {
         await getCartItems();
       }
     }
+  }
+
+  // --- إضافات جديدة لدعم makeOrder ---
+  void updateDate(String value) {
+    dateController.text = value;
+  }
+
+  void updateTime(String value) {
+    timeController.text = value;
+  }
+
+  bool canMakeOrder() {
+    return dateController.text.isNotEmpty && timeController.text.isNotEmpty;
+  }
+
+  Future<void> placeOrder({
+    required int paymentId,
+    required int addressId,
+  }) async {
+    final date = dateController.text;
+    final time = timeController.text;
+
+    if (date.isEmpty || time.isEmpty) {
+      emit(CartError("الرجاء إدخال التاريخ والوقت"));
+      return;
+    }
+
+    emit(CartLoading());
+
+    final result = await baseCartRepository.makeOrder(
+      date: date,
+      time: time,
+      paymentId: paymentId,
+      addressId: addressId,
+    );
+
+    result.fold((failure) => emit(CartError(failure)), (success) {
+      if (success) {
+        // يمكنك إعادة تحميل السلة أو الانتقال لشاشة نجاح
+        getCartItems();
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: Text("تم إرسال الطلب بنجاح")),
+        // );
+      } else {
+        emit(CartError("فشل في إرسال الطلب"));
+      }
+    });
   }
 }

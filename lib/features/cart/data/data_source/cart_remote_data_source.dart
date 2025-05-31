@@ -7,6 +7,12 @@ abstract class CartRemoteDataSource {
   Future<List<CartItemModel>> addProductToCart(int productId);
   Future<List<CartItemModel>> updateQuantity(int productId, int newQuantity);
   Future<List<CartItemModel>> removeFromCart(int productId);
+  Future<bool> makeOrder({
+    required String date,
+    required String time,
+    required int paymentId,
+    required int addressId,
+  });
 }
 
 class CartRemoteDataSourceImpl implements CartRemoteDataSource {
@@ -96,5 +102,25 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
     // إذا لم نتمكن من الحصول على البيانات، نعيد جلب السلة يدويًا
     return await getCartItemsFromApi();
+  }
+
+  @override
+  Future<bool> makeOrder({
+    required String date,
+    required String time,
+    required int paymentId,
+    required int addressId,
+  }) async {
+    final response = await api.post(
+      ApiConstances.makeOrder,
+      data: {
+        'shipping_day': date,
+        'shipping_time': time,
+        'payment_id': paymentId,
+        'address_id': addressId,
+      },
+    );
+    print("Response from server: $response");
+    return response['status'] == true;
   }
 }

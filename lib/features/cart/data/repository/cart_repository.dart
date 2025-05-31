@@ -53,4 +53,23 @@ class CartRepository implements BaseCartRepository {
       throw Exception("فشل في حذف المنتج من السلة");
     }
   }
+  @override
+   Future<Either<String, bool>> makeOrder({
+    required String date,
+    required String time,
+    required int paymentId,
+    required int addressId,
+  }) async {
+    try {
+      final bool result = await cartRemoteDataSource.makeOrder(
+        date: date,
+        time: time,
+        paymentId: paymentId,
+        addressId: addressId,
+      );
+      return Right(result);
+    } catch (e) {
+      return Left("فشل في إنشاء الطلب");
+    }
+  }
 }
