@@ -21,47 +21,47 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  Future<void> addToCart(int productId) async {
-    final result = await baseCartRepository.addToCart(productId);
+  Future<void> addToCart(int productId ,  int newQuantity) async {
+    final result = await baseCartRepository.addToCart(productId , newQuantity);
     result.fold(
       (failure) => emit(CartError(failure)),
       (updatedItems) => emit(CartLoaded(updatedItems)),
     );
   }
 
-  Future<void> updateQuantity(int productId, int newQuantity) async {
-    final currentState = state;
+  // Future<void> updateQuantity(int productId, int newQuantity) async {
+  //   final currentState = state;
 
-    if (currentState is CartLoaded) {
-      // تعديل الكمية محليًا
-      final List<CartItem> updatedItems =
-          currentState.items.map((item) {
-            if (item.productId == productId) {
-              return item.copyWith(quantity: newQuantity);
-            }
-            return item;
-          }).toList();
+  //   if (currentState is CartLoaded) {
+  //     // تعديل الكمية محليًا
+  //     final List<CartItem> updatedItems =
+  //         currentState.items.map((item) {
+  //           if (item.productId == productId) {
+  //             return item.copyWith(quantity: newQuantity);
+  //           }
+  //           return item;
+  //         }).toList();
 
-      emit(CartLoaded(updatedItems));
+  //     emit(CartLoaded(updatedItems));
 
-      // تحديث الـAPI
-      final result = await baseCartRepository.updateQuantity(
-        productId,
-        newQuantity,
-      );
+  //     // تحديث الـAPI
+  //     final result = await baseCartRepository.updateQuantity(
+  //       productId,
+  //       newQuantity,
+  //     );
 
-      result.fold(
-        (failure) {
-          emit(currentState); // العودة للحالة السابقة في حال الفشل
-          emit(CartError(failure));
-        },
-        (items) {
-          // يمكنك هنا إعادة تحميل البيانات النهائية إذا أردت:
-          // emit(CartLoaded(items));
-        },
-      );
-    }
-  }
+  //     result.fold(
+  //       (failure) {
+  //         emit(currentState); // العودة للحالة السابقة في حال الفشل
+  //         emit(CartError(failure));
+  //       },
+  //       (items) {
+  //         // يمكنك هنا إعادة تحميل البيانات النهائية إذا أردت:
+  //         // emit(CartLoaded(items));
+  //       },
+  //     );
+  //   }
+  // }
 
   Future<void> removeFromCart(int productId) async {
     final currentState = state;

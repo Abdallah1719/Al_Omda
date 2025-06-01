@@ -12,10 +12,8 @@ class CartItemModel extends CartItem {
   });
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
-    print("Parsing Cart Item: $json"); // 👈 للمساعدة في التشخيص
-
     return CartItemModel(
-      productId: json['id'] ?? 0, // 👈 القيمة الافتراضية مهمة
+      productId: json['id'] ?? 0,
       title: json['title'] ?? 'Unknown Product',
       price: json['price'],
       image: json['image'] ?? '',
@@ -24,16 +22,17 @@ class CartItemModel extends CartItem {
       quantity: json['quantity'] ?? 1,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': productId,
-      'title': title,
-      'price': price,
-      'image': image,
-      'unit_name': unitName,
-      'weight': weight,
-      'quantity': quantity,
-    };
-  }
 }
+
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'id': productId,
+//       'title': title,
+//       'price': price,
+//       'image': image,
+//       'unit_name': unitName,
+//       'weight': weight,
+//       'quantity': quantity,
+//     };
+//   }
+// }

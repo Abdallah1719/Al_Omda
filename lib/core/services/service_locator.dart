@@ -29,14 +29,12 @@ void setupServiceLocator() {
   getIt.registerSingleton<Dio>(Dio());
   //Api Methods
   getIt.registerSingleton<ApiMethods>(DioMethods(getIt()));
-  // Base Auth Repository
+  //Auth
   getIt.registerSingleton<BaseAuthRepository>(AuthRepository(getIt()));
-  // Auth Cubit
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt()));
-  // Base Home Repository
-  getIt.registerSingleton<BaseHomeRepository>(HomeRepository(getIt()));
-  // Home Cubit
+  // Home
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
+  getIt.registerSingleton<BaseHomeRepository>(HomeRepository(getIt()));
   //Produsts
   getIt.registerSingleton<BaseProductsRepository>(ProductsRepository(getIt()));
   getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt()));

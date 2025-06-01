@@ -4,8 +4,8 @@ import 'package:al_omda/features/cart/data/models/cart_model.dart';
 
 abstract class CartRemoteDataSource {
   Future<List<CartItemModel>> getCartItemsFromApi();
-  Future<List<CartItemModel>> addProductToCart(int productId);
-  Future<List<CartItemModel>> updateQuantity(int productId, int newQuantity);
+  Future<List<CartItemModel>> addProductToCart(int productId,int newQuantity);
+  // Future<List<CartItemModel>> updateQuantity(int productId, int newQuantity);
   Future<List<CartItemModel>> removeFromCart(int productId);
   Future<bool> makeOrder({
     required String date,
@@ -33,25 +33,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   }
 
   @override
-  Future<List<CartItemModel>> addProductToCart(int productId) async {
-    final response = await api.post(
-      ApiConstances.addToCart,
-      data: {"product_id": productId, "quantity": 1},
-    );
-
-    if (response is Map && response.containsKey("data")) {
-      final items = response["data"]["cart"]["items"] as List;
-      return items.map((item) => CartItemModel.fromJson(item)).toList();
-    }
-
-    return [];
-  }
-
-  @override
-  Future<List<CartItemModel>> updateQuantity(
-    int productId,
-    int newQuantity,
-  ) async {
+  Future<List<CartItemModel>> addProductToCart(int productId ,int newQuantity) async {
     final response = await api.post(
       ApiConstances.addToCart,
       data: {"product_id": productId, "quantity": newQuantity},
@@ -64,6 +46,24 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
     return [];
   }
+
+  // @override
+  // Future<List<CartItemModel>> updateQuantity(
+  //   int productId,
+  //   int newQuantity,
+  // ) async {
+  //   final response = await api.post(
+  //     ApiConstances.addToCart,
+  //     data: {"product_id": productId, "quantity": newQuantity},
+  //   );
+
+  //   if (response is Map && response.containsKey("data")) {
+  //     final items = response["data"]["cart"]["items"] as List;
+  //     return items.map((item) => CartItemModel.fromJson(item)).toList();
+  //   }
+
+  //   return [];
+  // }
 
   @override
   Future<List<CartItemModel>> removeFromCart(int productId) async {
@@ -120,7 +120,6 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
         'address_id': addressId,
       },
     );
-    print("Response from server: $response");
     return response['status'] == true;
   }
 }

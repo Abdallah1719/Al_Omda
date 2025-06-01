@@ -2,7 +2,7 @@ import 'package:al_omda/core/global_widgets/global_appbar.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/features/account/presentation/screens/account_screen.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_cubit.dart';
-import 'package:al_omda/features/cart/presentation/screens/cart_body.dart';
+import 'package:al_omda/features/cart/presentation/screens/cart_screen.dart';
 import 'package:al_omda/features/home/presentation/widgets/home_body.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';

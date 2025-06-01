@@ -73,7 +73,7 @@ class ProductCard extends StatelessWidget {
                             if (quantity > 1) {
                               BlocProvider.of<CartCubit>(
                                 context,
-                              ).updateQuantity(product.id, quantity - 1);
+                              ).addToCart(product.id, quantity - 1);
                             } else {
                               BlocProvider.of<CartCubit>(
                                 context,
@@ -87,7 +87,7 @@ class ProductCard extends StatelessWidget {
                           onPressed:
                               () => BlocProvider.of<CartCubit>(
                                 context,
-                              ).updateQuantity(product.id, quantity + 1),
+                              ).addToCart(product.id, quantity + 1),
                           icon: Icon(Icons.add, color: Colors.green),
                         ),
                       ],
@@ -96,7 +96,7 @@ class ProductCard extends StatelessWidget {
                       onPressed:
                           () => BlocProvider.of<CartCubit>(
                             context,
-                          ).addToCart(product.id),
+                          ).addToCart(product.id, quantity + 1),
                       label: Text("Add to Cart"),
                       icon: Icon(Icons.shopping_cart),
                     );
