@@ -21,47 +21,13 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  Future<void> addToCart(int productId ,  int newQuantity) async {
-    final result = await baseCartRepository.addToCart(productId , newQuantity);
+  Future<void> addToCart(int productId, int newQuantity) async {
+    final result = await baseCartRepository.addToCart(productId, newQuantity);
     result.fold(
       (failure) => emit(CartError(failure)),
       (updatedItems) => emit(CartLoaded(updatedItems)),
     );
   }
-
-  // Future<void> updateQuantity(int productId, int newQuantity) async {
-  //   final currentState = state;
-
-  //   if (currentState is CartLoaded) {
-  //     // تعديل الكمية محليًا
-  //     final List<CartItem> updatedItems =
-  //         currentState.items.map((item) {
-  //           if (item.productId == productId) {
-  //             return item.copyWith(quantity: newQuantity);
-  //           }
-  //           return item;
-  //         }).toList();
-
-  //     emit(CartLoaded(updatedItems));
-
-  //     // تحديث الـAPI
-  //     final result = await baseCartRepository.updateQuantity(
-  //       productId,
-  //       newQuantity,
-  //     );
-
-  //     result.fold(
-  //       (failure) {
-  //         emit(currentState); // العودة للحالة السابقة في حال الفشل
-  //         emit(CartError(failure));
-  //       },
-  //       (items) {
-  //         // يمكنك هنا إعادة تحميل البيانات النهائية إذا أردت:
-  //         // emit(CartLoaded(items));
-  //       },
-  //     );
-  //   }
-  // }
 
   Future<void> removeFromCart(int productId) async {
     final currentState = state;
@@ -90,52 +56,5 @@ class CartCubit extends Cubit<CartState> {
         await getCartItems();
       }
     }
-  }
-
-  // --- إضافات جديدة لدعم makeOrder ---
-  void updateDate(String value) {
-    dateController.text = value;
-  }
-
-  void updateTime(String value) {
-    timeController.text = value;
-  }
-
-  bool canMakeOrder() {
-    return dateController.text.isNotEmpty && timeController.text.isNotEmpty;
-  }
-
-  Future<void> placeOrder({
-    required int paymentId,
-    required int addressId,
-  }) async {
-    final date = dateController.text;
-    final time = timeController.text;
-
-    if (date.isEmpty || time.isEmpty) {
-      emit(CartError("الرجاء إدخال التاريخ والوقت"));
-      return;
-    }
-
-    emit(CartLoading());
-
-    final result = await baseCartRepository.makeOrder(
-      date: date,
-      time: time,
-      paymentId: paymentId,
-      addressId: addressId,
-    );
-
-    result.fold((failure) => emit(CartError(failure)), (success) {
-      if (success) {
-        // يمكنك إعادة تحميل السلة أو الانتقال لشاشة نجاح
-        getCartItems();
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   SnackBar(content: Text("تم إرسال الطلب بنجاح")),
-        // );
-      } else {
-        emit(CartError("فشل في إرسال الطلب"));
-      }
-    });
   }
 }

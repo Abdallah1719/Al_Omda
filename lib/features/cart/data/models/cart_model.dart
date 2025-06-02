@@ -23,16 +23,3 @@ class CartItemModel extends CartItem {
     );
   }
 }
-
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'id': productId,
-//       'title': title,
-//       'price': price,
-//       'image': image,
-//       'unit_name': unitName,
-//       'weight': weight,
-//       'quantity': quantity,
-//     };
-//   }
-// }
