@@ -4,12 +4,11 @@ class AuthState {}
 
 final class AuthInitial extends AuthState {}
 
-final class Loginlodding extends AuthState {}
-
-final class Loginsucess extends AuthState {}
-
-final class Loginfailure extends AuthState {
+final class Authlodding extends AuthState {}
+final class AuthFailure extends AuthState {
   final String errorMassage;
 
-  Loginfailure({required this.errorMassage});
+  AuthFailure({required this.errorMassage});
 }
+final class Loginsucess extends AuthState {}
+

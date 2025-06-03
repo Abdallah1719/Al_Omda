@@ -12,13 +12,13 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this.baseAuthRepository) : super(AuthInitial());
 
   login() async {
-    emit(Loginlodding());
+    emit(Authlodding());
     final response = await baseAuthRepository.loginUser(
       mobile: mobileController.text,
       password: passwordController.text,
     );
     response.fold(
-      (errorMessage) => emit(Loginfailure(errorMassage: errorMessage)),
+      (errorMessage) => emit(AuthFailure(errorMassage: errorMessage)),
       (loginModel) => emit(Loginsucess()),
     );
   }

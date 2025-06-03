@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
               RoutesConstances.homePath,
             );
             // أو اسم الروت بتاع الصفحة الرئيسية
-          } else if (state is Loginfailure) {
+          } else if (state is AuthFailure) {
             // 👇 عرض رسالة خطأ للمستخدم
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
