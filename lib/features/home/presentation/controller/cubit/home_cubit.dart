@@ -17,7 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
       (failure) => emit(
         state.copyWith(
           homeSlidersState: RequestState.error,
-          homeSlidersMessage: 'failure.message',
+          homeSlidersMessage: failure,
         ),
       ),
       (sliders) => emit(
@@ -30,17 +30,17 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> getHomeCategories() async {
-    if (isClosed) return; // ✅ التحقق الأولي
+    if (isClosed) return;
 
     emit(state.copyWith(categoriesState: RequestState.loading));
 
     final result = await baseHomeRepository.getHomeCategories();
 
-    if (isClosed) return; // ✅ التحقق بعد الانتهاء من الطلبية
+    if (isClosed) return;
 
     result.fold(
       (failure) {
-        if (isClosed) return; // ✅ التحقق قبل emit
+        if (isClosed) return;
         emit(
           state.copyWith(
             categoriesState: RequestState.error,
@@ -49,7 +49,7 @@ class HomeCubit extends Cubit<HomeState> {
         );
       },
       (categories) {
-        if (isClosed) return; // ✅ التحقق قبل emit
+        if (isClosed) return;
         emit(
           state.copyWith(
             categoriesState: RequestState.loaded,
