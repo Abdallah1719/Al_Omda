@@ -9,7 +9,7 @@ class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit() : super(ThemeInitial());
 
   bool lightMode = true;
-  toggleTheme() async {
+  Future<void> toggleTheme() async {
     lightMode ? lightMode = false : lightMode = true;
     await getIt<CacheHelper>().saveData(key: 'lightMode', value: lightMode);
     emit(ThemeMode());

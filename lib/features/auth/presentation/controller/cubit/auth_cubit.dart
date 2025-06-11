@@ -11,7 +11,7 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController passwordController = TextEditingController();
   AuthCubit(this.baseAuthRepository) : super(AuthInitial());
 
-  login() async {
+  Future<void> login() async {
     emit(Authlodding());
     final response = await baseAuthRepository.loginUser(
       mobile: mobileController.text,
