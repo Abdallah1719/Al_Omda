@@ -1,7 +1,7 @@
 class ApiConstances {
   static const String baseUrl = 'https://ecommerce-api.edgesgate.com';
   static const String homeSliderPath = '/homeSliders';
-  static const String categoriesPath = '/categories?show_sub=1';
+  static const String categoriesPath = '/categories';
   static const String productsTopRatedPath = '/products/topRated';
   static const String productsPath = '/products';
   static const String loginPath = '/auth/login';

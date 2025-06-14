@@ -30,17 +30,12 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> getHomeCategories() async {
-    // if (isClosed) return;
-
     emit(state.copyWith(categoriesState: RequestState.loading));
 
     final result = await baseHomeRepository.getHomeCategories();
 
-    // if (isClosed) return;
-
     result.fold(
       (failure) {
-        // if (isClosed) return;
         emit(
           state.copyWith(
             categoriesState: RequestState.error,
@@ -48,12 +43,11 @@ class HomeCubit extends Cubit<HomeState> {
           ),
         );
       },
-      (categories) {
-        // if (isClosed) return;
+      (categoriesList) {
         emit(
           state.copyWith(
             categoriesState: RequestState.loaded,
-            categories: categories,
+            categoriesList: categoriesList,
           ),
         );
       },

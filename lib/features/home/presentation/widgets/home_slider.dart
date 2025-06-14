@@ -4,7 +4,7 @@ import 'package:al_omda/features/home/presentation/widgets/homeSlider_shimmer_lo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
-import 'package:al_omda/features/home/data/models/home_sliders_model.dart';
+import 'package:al_omda/features/home/data/models/home_slider_items_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class HomeSlider extends StatelessWidget {

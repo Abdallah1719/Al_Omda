@@ -1,14 +1,13 @@
 import 'package:al_omda/core/utils/enum.dart';
 import 'package:al_omda/features/home/data/models/home_categories_model.dart';
-import 'package:al_omda/features/home/data/models/home_sliders_model.dart';
-import 'package:al_omda/features/products/data/models/products_model.dart';
+import 'package:al_omda/features/home/data/models/home_slider_items_model.dart';
 import 'package:equatable/equatable.dart';
 
 class HomeState extends Equatable {
   final List<HomeSliderItemsModel> homeSliderItems;
   final RequestState homeSliderItemsState;
   final String homeSliderItemsMessage;
-  final List<HomeCategoriesModel> categories;
+  final List<HomeCategoriesModel> categoriesList;
   final RequestState categoriesState;
   final String categoriesMessage;
 
@@ -16,8 +15,7 @@ class HomeState extends Equatable {
     this.homeSliderItems = const [],
     this.homeSliderItemsState = RequestState.loading,
     this.homeSliderItemsMessage = '',
-
-    this.categories = const [],
+    this.categoriesList = const [],
     this.categoriesState = RequestState.loading,
     this.categoriesMessage = '',
   });
@@ -26,18 +24,16 @@ class HomeState extends Equatable {
     List<HomeSliderItemsModel>? homeSliderItems,
     RequestState? homeSliderItemsState,
     String? homeSliderItemsMessage,
-    List<HomeCategoriesModel>? categories,
+    List<HomeCategoriesModel>? categoriesList,
     RequestState? categoriesState,
     String? categoriesMessage,
-    List<ProductsModel>? productsTopRated,
-    RequestState? productsTopRatedState,
-    String? productsTopRatedMessage,
   }) {
     return HomeState(
       homeSliderItems: homeSliderItems ?? this.homeSliderItems,
       homeSliderItemsState: homeSliderItemsState ?? this.homeSliderItemsState,
-      homeSliderItemsMessage: homeSliderItemsMessage ?? this.homeSliderItemsMessage,
-      categories: categories ?? this.categories,
+      homeSliderItemsMessage:
+          homeSliderItemsMessage ?? this.homeSliderItemsMessage,
+      categoriesList: categoriesList ?? this.categoriesList,
       categoriesState: categoriesState ?? this.categoriesState,
       categoriesMessage: categoriesMessage ?? this.categoriesMessage,
     );
@@ -48,7 +44,7 @@ class HomeState extends Equatable {
     homeSliderItems,
     homeSliderItemsState,
     homeSliderItemsMessage,
-    categories,
+    categoriesList,
     categoriesState,
     categoriesMessage,
   ];

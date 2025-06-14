@@ -24,7 +24,7 @@ class CategoriesScreen extends StatelessWidget {
               return const CategoriesGridShimmerLoading();
             }
             if (state.categoriesState == RequestState.loaded) {
-              final List<HomeCategoriesModel> categories = state.categories;
+              final List<HomeCategoriesModel> categories = state.categoriesList;
 
               return GridView.builder(
                 padding: EdgeInsets.all(16),
@@ -36,7 +36,7 @@ class CategoriesScreen extends StatelessWidget {
                 ),
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
-                  final category = state.categories[index];
+                  final category = state.categoriesList[index];
                   final categoriesCubit = BlocProvider.of<HomeCubit>(context);
                   return GestureDetector(
                     onTap: () {
