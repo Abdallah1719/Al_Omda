@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
           create:
               (context) =>
                   getIt<HomeCubit>()
-                    ..getHomeSliders()
+                    ..getHomeSliderItems()
                     ..getHomeCategories(),
         ),
         BlocProvider(

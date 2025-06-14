@@ -1,7 +1,7 @@
-class HomeSlidersModel {
+class HomeSliderItemsModel {
   final String image;
-  HomeSlidersModel({required this.image});
+  HomeSliderItemsModel({required this.image});
 
-  factory HomeSlidersModel.fromJson(Map<String, dynamic> json) =>
-      HomeSlidersModel(image: json["image"]);
+  factory HomeSliderItemsModel.fromJson(Map<String, dynamic> json) =>
+      HomeSliderItemsModel(image: json["image"]);
 }

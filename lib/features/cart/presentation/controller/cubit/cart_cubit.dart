@@ -1,15 +1,10 @@
 import 'package:al_omda/features/cart/domain/entities/cart.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_state.dart';
 import 'package:al_omda/features/cart/domain/repository/base_cart_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartCubit extends Cubit<CartState> {
   final BaseCartRepository baseCartRepository;
-
-  final dateController = TextEditingController();
-  final timeController = TextEditingController();
-
   CartCubit(this.baseCartRepository) : super(CartInitial());
 
   Future<void> getCartItems() async {

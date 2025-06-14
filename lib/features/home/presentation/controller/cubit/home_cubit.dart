@@ -8,22 +8,22 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit(this.baseHomeRepository) : super(HomeState());
 
-  Future<void> getHomeSliders() async {
-    emit(state.copyWith(homeSlidersState: RequestState.loading));
+  Future<void> getHomeSliderItems() async {
+    emit(state.copyWith(homeSliderItemsState: RequestState.loading));
 
-    final result = await baseHomeRepository.getHomeSliders();
+    final result = await baseHomeRepository.getHomeSliderItems();
 
     result.fold(
       (failure) => emit(
         state.copyWith(
-          homeSlidersState: RequestState.error,
-          homeSlidersMessage: failure,
+          homeSliderItemsState: RequestState.error,
+          homeSliderItemsMessage: failure,
         ),
       ),
-      (sliders) => emit(
+      (sliderItems) => emit(
         state.copyWith(
-          homeSliders: sliders,
-          homeSlidersState: RequestState.loaded,
+          homeSliderItems: sliderItems,
+          homeSliderItemsState: RequestState.loaded,
         ),
       ),
     );

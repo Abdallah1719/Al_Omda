@@ -1,5 +1,6 @@
 import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
+import 'package:al_omda/features/order/presentation/screens/make_order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -87,10 +88,22 @@ class CartScreen extends StatelessWidget {
                       SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
-                          RoutesMethods.pushNavigate(
+                          final cubit =
+                              context.read<CartCubit>(); // ← نقل القراءة هنا
+                          Navigator.push(
                             context,
-                            RoutesConstances.makeOrderPath,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => BlocProvider.value(
+                                    value: cubit,
+                                    child: const MakeOrderScreen(),
+                                  ),
+                            ),
                           );
+                          // RoutesMethods.pushNavigate(
+                          //   context,
+                          //   RoutesConstances.makeOrderPath,
+                          // );
                         },
                         child: Text("Make Order"),
                       ),
@@ -124,72 +137,3 @@ class CartScreen extends StatelessWidget {
     );
   }
 }
-//   Widget _buildOrderForm(BuildContext context, CartCubit cubit) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         TextFormField(
-//           controller: cubit.dateController,
-//           readOnly: true,
-//           onTap: () => _selectDate(context),
-//           decoration: InputDecoration(labelText: "اختر التاريخ"),
-//           onChanged: (_) {
-//             cubit.canMakeOrder();
-//           },
-//         ),
-//         SizedBox(height: 15),
-//         TextFormField(
-//           controller: cubit.timeController,
-//           readOnly: true,
-//           onTap: () => _selectTime(context),
-//           decoration: InputDecoration(labelText: "اختر الوقت"),
-//           onChanged: (_) {
-//             cubit.canMakeOrder();
-//           },
-//         ),
-//         SizedBox(height: 20),
-//         SizedBox(
-//           width: double.infinity,
-//           child: ElevatedButton.icon(
-//             onPressed:
-//                 cubit.canMakeOrder()
-//                     ? () {
-//                       cubit.placeOrder(paymentId: 1, addressId: 1);
-//                     }
-//                     : null,
-//             icon: Icon(Icons.check_circle),
-//             label: Text("تأكيد الطلب"),
-//             style: ElevatedButton.styleFrom(
-//               padding: EdgeInsets.symmetric(vertical: 14),
-//               textStyle: TextStyle(fontSize: 16),
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-
-//   Future<void> _selectDate(BuildContext context) async {
-//     final DateTime? picked = await showDatePicker(
-//       context: context,
-//       initialDate: DateTime.now(),
-//       firstDate: DateTime(2024),
-//       lastDate: DateTime(2026),
-//     );
-//     if (picked != null) {
-//       final cubit = context.read<CartCubit>();
-//       cubit.updateDate("${picked.toLocal()}".split(' ')[0]);
-//     }
-//   }
-
-//   Future<void> _selectTime(BuildContext context) async {
-//     final TimeOfDay? picked = await showTimePicker(
-//       context: context,
-//       initialTime: TimeOfDay.now(),
-//     );
-//     if (picked != null) {
-//       final cubit = context.read<CartCubit>();
-//       cubit.updateTime(picked.format(context));
-//     }
-//   }
-// }

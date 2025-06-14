@@ -26,4 +26,10 @@ class OrderRepository extends BaseOrderRepository {
     );
     return response;
   }
+
+  //   Future<void> clearCartAfterOrder() async {
+  //   // Call cart repository to clear items
+  //   await _cartRepository.clearCart();
+  // }
+  // }}
 }

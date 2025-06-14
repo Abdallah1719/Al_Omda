@@ -10,15 +10,16 @@ class HomeRepository implements BaseHomeRepository {
   final ApiMethods api;
   HomeRepository(this.api);
   @override
-  Future<Either<String, List<HomeSlidersModel>>> getHomeSliders() async {
+  Future<Either<String, List<HomeSliderItemsModel>>>
+  getHomeSliderItems() async {
     try {
       final response = await api.get(ApiConstances.homeSliderPath);
       final List<dynamic> dataList = response['data'] as List;
-      final List<HomeSlidersModel> homeSliders =
+      final List<HomeSliderItemsModel> homeSliders =
           dataList
               .map(
                 (item) =>
-                    HomeSlidersModel.fromJson(item as Map<String, dynamic>),
+                    HomeSliderItemsModel.fromJson(item as Map<String, dynamic>),
               )
               .toList();
       return Right(homeSliders);
