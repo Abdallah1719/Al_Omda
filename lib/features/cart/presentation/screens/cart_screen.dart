@@ -1,5 +1,3 @@
-import 'package:al_omda/core/routes/routes_constances.dart';
-import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/features/order/presentation/screens/make_order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,5 +1,3 @@
-import 'package:al_omda/core/routes/routes_constances.dart';
-import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
@@ -8,7 +6,6 @@ import 'package:al_omda/features/home/presentation/widgets/categories_listview.d
 import 'package:al_omda/features/home/presentation/widgets/home_slider.dart';
 import 'package:al_omda/features/home/presentation/widgets/home_titles.dart';
 import 'package:al_omda/features/home/presentation/widgets/top_rated_products_gridview.dart';
-import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:al_omda/features/products/presentation/screens/products_screen.dart';
 import 'package:al_omda/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -57,19 +54,11 @@ class HomeBody extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder:
-                    (context) => BlocProvider(
-                      create:
-                          (context) =>
-                              getIt<ProductsCubit>()..getMostRecentProducts(),
-                      child: const ProductsScreen(),
-                    ),
-              ),
+              MaterialPageRoute(builder: (context) => const ProductsScreen()),
             );
           },
         ),
-        TopRatedProductGridView(),
+        TopRatedProductsGridView(),
       ],
     );
   }

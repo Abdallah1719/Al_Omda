@@ -44,7 +44,13 @@ class CategoriesListView extends StatelessWidget {
         if (state.categoriesState == RequestState.error) {
           return SizedBox(
             height: 200,
-            child: Center(child: Text(state.categoriesMessage)),
+            child: Center(
+              child: Text(
+                (state.categoriesMessage.isEmpty)
+                    ? "Something went wrong"
+                    : state.categoriesMessage,
+              ),
+            ),
           );
         } else {
           return SizedBox.shrink();

@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:al_omda/core/utils/enum.dart';
 
-class TopRatedProductGridView extends StatelessWidget {
-  const TopRatedProductGridView({super.key});
-
+class TopRatedProductsGridView extends StatelessWidget {
+  const TopRatedProductsGridView({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsCubit, ProductsState>(
@@ -16,10 +15,8 @@ class TopRatedProductGridView extends StatelessWidget {
         if (state.productsTopRatedState == RequestState.loading) {
           return const ProductsShimmerLoading();
         }
-
         if (state.productsTopRatedState == RequestState.loaded) {
           final List<ProductsModel> products = state.productsTopRated;
-
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: GridView.builder(
@@ -38,15 +35,14 @@ class TopRatedProductGridView extends StatelessWidget {
             ),
           );
         }
-
         if (state.productsTopRatedState == RequestState.error) {
           return SizedBox(
             height: 200,
             child: Center(child: Text(state.productsTopRatedMessage)),
           );
+        } else {
+          return SizedBox.shrink();
         }
-
-        return SizedBox.shrink();
       },
     );
   }
