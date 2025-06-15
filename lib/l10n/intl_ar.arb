@@ -20,7 +20,6 @@
     "account": "الحساب",
     "home": "الرئيسية",
     "cart": "سلة التسوق",
-    "account_info": "معلومات الحساب",
     "my_addresess": "عناويني",
     "myorders": "طلباتي",
     "language": "اللغة",
@@ -33,5 +32,10 @@
     "change_country":"تغيير الدولة",
     "only_avilble_in_egypt":"متاح فقط فى مصر",
     "cancel":"الغاء",
+    "account_info": "معلومات الحساب",
+    "first_name" : "الاسم الاول ",
+    "last_name" : " الاسم الثانى ",
+    "email" : "البريد الالكترونى",
+    "edit_info" : " تعديل المعلومات",
     "lang":"Engilsh"
 }

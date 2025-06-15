@@ -1,5 +1,5 @@
 import 'package:al_omda/core/services/service_locator.dart';
-import 'package:al_omda/core/global_widgets/products_shimmer_loading.dart';
+import 'package:al_omda/features/products/presentation/widgets/products_shimmer_loading.dart';
 import 'package:al_omda/features/products/data/models/products_model.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';

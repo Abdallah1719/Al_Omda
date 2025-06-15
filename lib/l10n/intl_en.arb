@@ -20,7 +20,6 @@
     "account": "Account",
     "home": "Home",
     "cart": "Cart",
-    "account_info":"Account Info",
     "my_addresess":"My Addresess",
     "myorders":"My Orders",
     "language":"Language",
@@ -33,7 +32,13 @@
     "change_country":"Change Country",
     "only_avilble_in_egypt":"Only Avilble In Egypt",
     "cancel":"cancel",
+    "account_info":"Account Info",
+    "first_name" : " First Name",
+    "last_name" : " Last Name",
+    "email" : "Email",
+    "edit_info" : "Edit Information",
     "lang":"العربية"
+    
 
     
 }

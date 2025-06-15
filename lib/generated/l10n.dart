@@ -260,16 +260,6 @@ class S {
     );
   }
 
-  /// `Account Info`
-  String get account_info {
-    return Intl.message(
-      'Account Info',
-      name: 'account_info',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `My Addresess`
   String get my_addresess {
     return Intl.message(
@@ -385,6 +375,56 @@ class S {
     return Intl.message(
       'cancel',
       name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Info`
+  String get account_info {
+    return Intl.message(
+      'Account Info',
+      name: 'account_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` First Name`
+  String get first_name {
+    return Intl.message(
+      ' First Name',
+      name: 'first_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Last Name`
+  String get last_name {
+    return Intl.message(
+      ' Last Name',
+      name: 'last_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Information`
+  String get edit_info {
+    return Intl.message(
+      'Edit Information',
+      name: 'edit_info',
       desc: '',
       args: [],
     );

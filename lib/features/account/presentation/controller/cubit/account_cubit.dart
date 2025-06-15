@@ -9,21 +9,18 @@ part 'account_state.dart';
 
 class AccountCubit extends Cubit<AccountState> {
   final BaseAccountRepository baseAccountRepository;
-
   AccountCubit(this.baseAccountRepository) : super(AccountInitial());
-
   Future<void> getAccountInfo() async {
     emit(AccountLoading());
-
-    try {
-      final result = await baseAccountRepository.getAccountInfo();
-      result.fold(
-        (error) => emit(AccountError(error)),
-        (account) => emit(AccountSuccess(account)),
-      );
-    } catch (e) {
-      emit(AccountError('حدث خطأ غير متوقع'));
-    }
+    // try {
+    final result = await baseAccountRepository.getAccountInfo();
+    result.fold(
+      (error) => emit(AccountError(error)),
+      (accountInfo) => emit(AccountSuccess(accountInfo)),
+    );
+    // } catch (e) {
+    //   emit(AccountError('حدث خطأ غير متوقع'));
+    // }
   }
 
   void navigateToEditScreen() {
@@ -33,7 +30,7 @@ class AccountCubit extends Cubit<AccountState> {
     if (state is AccountSuccess) {
       print('navigateToEditScreen: state is AccountSuccess'); // ✅ تم التحقق
 
-      final account = state.account;
+      final account = state.accountInfo;
 
       final firstNameCtrl = TextEditingController(text: account.firstName);
       final lastNameCtrl = TextEditingController(text: account.lastName);

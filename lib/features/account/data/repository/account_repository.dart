@@ -9,15 +9,13 @@ import 'package:dartz/dartz.dart';
 
 class AccountRepository implements BaseAccountRepository {
   final ApiMethods api;
-
   AccountRepository(this.api);
-
   @override
   Future<Either<String, AccountInfoModel>> getAccountInfo() async {
     try {
       final response = await api.post(ApiConstances.accountInfoPath);
-      final account = AccountInfoModel.fromJson(response);
-      return Right(account);
+      final accountInfo = AccountInfoModel.fromJson(response);
+      return Right(accountInfo);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
