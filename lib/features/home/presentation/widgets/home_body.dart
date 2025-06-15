@@ -2,6 +2,8 @@ import 'package:al_omda/core/routes/routes_constances.dart';
 import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/core/utils/space_widget.dart';
+import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
+import 'package:al_omda/features/home/presentation/screens/categories_screen.dart';
 import 'package:al_omda/features/home/presentation/widgets/categories_listview.dart';
 import 'package:al_omda/features/home/presentation/widgets/home_slider.dart';
 import 'package:al_omda/features/home/presentation/widgets/home_titles.dart';
@@ -31,12 +33,19 @@ class HomeBody extends StatelessWidget {
         HomeSlider(),
         VerticalSpace(2),
         HomeTitles(
-          text: S.of(context).categoriess,
+          text: S.of(context).categories,
           buttonText: S.of(context).viewAll,
           onTap: () {
-            RoutesMethods.pushNavigate(
+            Navigator.push(
               context,
-              RoutesConstances.categoriesPath,
+              MaterialPageRoute(
+                builder:
+                    (context) => BlocProvider(
+                      create:
+                          (context) => getIt<HomeCubit>()..getHomeCategories(),
+                      child: const CategoriesScreen(),
+                    ),
+              ),
             );
           },
         ),

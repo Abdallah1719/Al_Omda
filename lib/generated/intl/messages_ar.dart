@@ -29,7 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addToCart": MessageLookupByLibrary.simpleMessage("إضافة إلى السلة"),
         "cancel": MessageLookupByLibrary.simpleMessage("الغاء"),
         "cart": MessageLookupByLibrary.simpleMessage("سلة التسوق"),
-        "categoriess": MessageLookupByLibrary.simpleMessage("التصنيفات"),
+        "categories": MessageLookupByLibrary.simpleMessage("التصنيفات"),
         "change_country": MessageLookupByLibrary.simpleMessage("تغيير الدولة"),
         "change_language": MessageLookupByLibrary.simpleMessage(" تغيير اللغة"),
         "contact_us": MessageLookupByLibrary.simpleMessage("تواصل معنا"),

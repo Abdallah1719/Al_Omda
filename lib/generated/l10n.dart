@@ -191,10 +191,10 @@ class S {
   }
 
   /// `Categories`
-  String get categoriess {
+  String get categories {
     return Intl.message(
       'Categories',
-      name: 'categoriess',
+      name: 'categories',
       desc: '',
       args: [],
     );
