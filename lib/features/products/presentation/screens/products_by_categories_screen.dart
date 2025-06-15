@@ -1,6 +1,5 @@
 import 'package:al_omda/core/global_widgets/products_shimmer_loading.dart';
 import 'package:al_omda/core/services/service_locator.dart';
-import 'package:al_omda/features/cart/presentation/controller/cubit/cart_cubit.dart';
 import 'package:al_omda/features/products/data/models/products_model.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
@@ -21,17 +20,16 @@ class ProductsByCategoryScreen extends StatelessWidget {
               (context) =>
                   getIt<ProductsCubit>()..getProductsByCategories(categoryName),
         ),
-        BlocProvider(create: (context) => getIt<CartCubit>()),
       ],
       child: Scaffold(
-        appBar: AppBar(title: Text(categoryName), centerTitle: true),
+        appBar: AppBar(title: Text(categoryName)),
         body: BlocBuilder<ProductsCubit, ProductsState>(
           builder: (context, state) {
-            if (state.productsByCategoryState == RequestState.loading) {
+            if (state.productsByCategoryNameState == RequestState.loading) {
               return const ProductsShimmerLoading();
             }
-            if (state.productsByCategoryState == RequestState.loaded) {
-              final List<ProductsModel> products = state.productsByCategory;
+            if (state.productsByCategoryNameState == RequestState.loaded) {
+              final List<ProductModel> products = state.productsByCategoryName;
 
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -51,10 +49,11 @@ class ProductsByCategoryScreen extends StatelessWidget {
                 ),
               );
             }
-            if (state.productsByCategoryState == RequestState.error) {
-              return Center(child: Text(state.productsByCategoryMessage));
+            if (state.productsByCategoryNameState == RequestState.error) {
+              return Center(child: Text(state.productsByCategoryNameMessage));
+            } else {
+              return SizedBox.shrink();
             }
-            return const Center(child: Text('حدث خطأ غير متوقع'));
           },
         ),
       ),

@@ -1,67 +1,66 @@
 part of 'products_cubit.dart';
 
 class ProductsState extends Equatable {
-  final RequestState productsState;
-  final String productsMessage;
-  final List<ProductsModel> products;
-  final List<ProductsModel> productsTopRated;
+  final RequestState allProductsState;
+  final String allProductsMessage;
+  final List<ProductModel> allProducts;
+  final List<ProductModel> productsTopRated;
   final RequestState productsTopRatedState;
   final String productsTopRatedMessage;
-
-  final RequestState productsByCategoryState;
-  final String productsByCategoryMessage;
-  final List<ProductsModel> productsByCategory;
+  final RequestState productsByCategoryNameState;
+  final String productsByCategoryNameMessage;
+  final List<ProductModel> productsByCategoryName;
 
   const ProductsState({
-    this.productsState = RequestState.loading,
-    this.productsMessage = '',
-    this.products = const [],
+    this.allProductsState = RequestState.loading,
+    this.allProductsMessage = '',
+    this.allProducts = const [],
     this.productsTopRated = const [],
     this.productsTopRatedState = RequestState.loading,
     this.productsTopRatedMessage = '',
-    this.productsByCategoryState = RequestState.loading,
-    this.productsByCategoryMessage = '',
-    this.productsByCategory = const [],
+    this.productsByCategoryNameState = RequestState.loading,
+    this.productsByCategoryNameMessage = '',
+    this.productsByCategoryName = const [],
   });
 
   ProductsState copyWith({
-    RequestState? productsState,
-    String? productsMessage,
-    List<ProductsModel>? products,
-    List<ProductsModel>? productsTopRated,
+    RequestState? allProductsState,
+    String? allProductsMessage,
+    List<ProductModel>? allProducts,
+    List<ProductModel>? productsTopRated,
     RequestState? productsTopRatedState,
     String? productsTopRatedMessage,
-    RequestState? productsByCategoryState,
-    String? productsByCategoryMessage,
-    List<ProductsModel>? productsByCategory,
+    RequestState? productsByCategoryNameState,
+    String? productsByCategoryNameMessage,
+    List<ProductModel>? productsByCategoryName,
   }) {
     return ProductsState(
-      productsState: productsState ?? this.productsState,
-      productsMessage: productsMessage ?? this.productsMessage,
-      products: products ?? this.products,
+      allProductsState: allProductsState ?? this.allProductsState,
+      allProductsMessage: allProductsMessage ?? this.allProductsMessage,
+      allProducts: allProducts ?? this.allProducts,
       productsTopRated: productsTopRated ?? this.productsTopRated,
       productsTopRatedState:
           productsTopRatedState ?? this.productsTopRatedState,
       productsTopRatedMessage:
           productsTopRatedMessage ?? this.productsTopRatedMessage,
-      productsByCategoryState:
-          productsByCategoryState ?? this.productsByCategoryState,
-      productsByCategoryMessage:
-          productsByCategoryMessage ?? this.productsByCategoryMessage,
-      productsByCategory: productsByCategory ?? this.productsByCategory,
+      productsByCategoryNameState:
+          productsByCategoryNameState ?? this.productsByCategoryNameState,
+      productsByCategoryNameMessage:
+          productsByCategoryNameMessage ?? this.productsByCategoryNameMessage,
+      productsByCategoryName: productsByCategoryName ?? this.productsByCategoryName,
     );
   }
 
   @override
   List<Object?> get props => [
-    productsState,
-    productsMessage,
-    products,
+    allProductsState,
+    allProductsMessage,
+    allProducts,
     productsTopRated,
     productsTopRatedState,
     productsTopRatedMessage,
-    productsByCategoryState,
-    productsByCategoryMessage,
-    productsByCategory,
+    productsByCategoryNameState,
+    productsByCategoryNameMessage,
+    productsByCategoryName,
   ];
 }

@@ -1,3 +1,4 @@
+import 'package:al_omda/core/global_widgets/products_shimmer_loading.dart';
 import 'package:al_omda/features/products/data/models/products_model.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:al_omda/features/products/presentation/widgets/product_card.dart';
@@ -5,23 +6,19 @@ import 'package:al_omda/core/utils/enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductsByCategoriesGridView extends StatelessWidget {
-  const ProductsByCategoriesGridView({super.key});
+class ProductsByCategoryNameGridView extends StatelessWidget {
+  const ProductsByCategoryNameGridView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
-        if (state.productsByCategoryState == RequestState.loading) {
-          return SizedBox(
-            height: 200,
-            child: Center(child: CircularProgressIndicator()),
-          );
+        if (state.productsByCategoryNameState == RequestState.loading) {
+          return const ProductsShimmerLoading();
         }
 
-        if (state.productsByCategoryState == RequestState.loaded) {
-          final List<ProductsModel> products =
-              state.productsByCategory;
+        if (state.productsByCategoryNameState == RequestState.loaded) {
+          final List<ProductModel> products = state.productsByCategoryName;
 
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -36,16 +33,16 @@ class ProductsByCategoriesGridView extends StatelessWidget {
               ),
               itemCount: products.length,
               itemBuilder: (context, index) {
-               return ProductCard(product: products[index]);
+                return ProductCard(product: products[index]);
               },
             ),
           );
         }
 
-        if (state.productsByCategoryState == RequestState.error) {
+        if (state.productsByCategoryNameState == RequestState.error) {
           return SizedBox(
             height: 200,
-            child: Center(child: Text(state.productsByCategoryMessage)),
+            child: Center(child: Text(state.productsByCategoryNameMessage)),
           );
         }
 

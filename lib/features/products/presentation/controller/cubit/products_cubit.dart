@@ -8,31 +8,23 @@ part 'products_state.dart';
 class ProductsCubit extends Cubit<ProductsState> {
   final BaseProductsRepository baseProductsRepository;
   ProductsCubit(this.baseProductsRepository) : super(ProductsState());
-  Future<void> getMostRecentProducts() async {
-    if (isClosed) return;
-
-    emit(state.copyWith(productsState: RequestState.loading));
-
-    final result = await baseProductsRepository.getMostRecentProducts();
-
-    if (isClosed) return; // ✅ التحقق بعد الانتهاء من الطلبية
-
+  Future<void> getAllProducts() async {
+    emit(state.copyWith(allProductsState: RequestState.loading));
+    final result = await baseProductsRepository.getAllProducts();
     result.fold(
       (failure) {
-        if (isClosed) return; // ✅ التحقق قبل emit
         emit(
           state.copyWith(
-            productsState: RequestState.error,
-            productsMessage: failure,
+            allProductsState: RequestState.error,
+            allProductsMessage: failure,
           ),
         );
       },
-      (products) {
-        if (isClosed) return; // ✅ التحقق قبل emit
+      (allProducts) {
         emit(
           state.copyWith(
-            productsState: RequestState.loaded,
-            products: products,
+            allProductsState: RequestState.loaded,
+            allProducts: allProducts,
           ),
         );
       },
@@ -48,7 +40,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       (failure) => emit(
         state.copyWith(
           productsTopRatedState: RequestState.error,
-          productsTopRatedMessage: 'failure.message',
+          productsTopRatedMessage:failure,
         ),
       ),
       (productsTopRated) => emit(
@@ -61,32 +53,25 @@ class ProductsCubit extends Cubit<ProductsState> {
   }
 
   Future<void> getProductsByCategories(String categoryName) async {
-    if (isClosed) return; // ✅ التحقق الأولي
+    emit(state.copyWith(productsByCategoryNameState: RequestState.loading));
 
-    emit(state.copyWith(productsByCategoryState: RequestState.loading));
-
-    final result = await baseProductsRepository.getProductsByCategories(
+    final result = await baseProductsRepository.getProductsByCategoryName(
       categoryName,
     );
-
-    if (isClosed) return; // ✅ التحقق بعد الانتهاء من الطلبية
-
     result.fold(
       (failure) {
-        if (isClosed) return; // ✅ التحقق قبل emit
         emit(
           state.copyWith(
-            productsByCategoryState: RequestState.error,
-            productsByCategoryMessage: failure,
+            productsByCategoryNameState: RequestState.error,
+            productsByCategoryNameMessage: failure,
           ),
         );
       },
       (products) {
-        if (isClosed) return; // ✅ التحقق قبل emit
         emit(
           state.copyWith(
-            productsByCategoryState: RequestState.loaded,
-            productsByCategory: products,
+            productsByCategoryNameState: RequestState.loaded,
+            productsByCategoryName: products,
           ),
         );
       },

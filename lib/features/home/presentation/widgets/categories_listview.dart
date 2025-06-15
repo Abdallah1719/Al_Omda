@@ -33,10 +33,7 @@ class CategoriesListView extends StatelessWidget {
             ),
             items:
                 categories.map<Widget>((category) {
-                  return GestureDetector(
-                    onTap: () {},
-                    child: CategoryItem(category: category),
-                  );
+                  return CategoryItem(category: category);
                 }).toList(),
           );
         }

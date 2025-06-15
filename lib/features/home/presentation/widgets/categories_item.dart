@@ -1,5 +1,5 @@
 import 'package:al_omda/features/home/data/models/home_categories_model.dart';
-import 'package:al_omda/features/products/presentation/screens/products-by_categories_screen.dart';
+import 'package:al_omda/features/products/presentation/screens/products_by_categories_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 

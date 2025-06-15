@@ -1,5 +1,4 @@
 import 'package:al_omda/core/services/service_locator.dart';
-import 'package:al_omda/features/cart/presentation/controller/cubit/cart_cubit.dart';
 import 'package:al_omda/core/global_widgets/products_shimmer_loading.dart';
 import 'package:al_omda/features/products/data/models/products_model.dart';
 import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
@@ -16,19 +15,18 @@ class ProductsScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<ProductsCubit>()..getMostRecentProducts(),
+          create: (context) => getIt<ProductsCubit>()..getAllProducts(),
         ),
-        BlocProvider(create: (context) => getIt<CartCubit>()..addToCart),
       ],
       child: Scaffold(
         appBar: AppBar(title: Text('Products'), centerTitle: true),
         body: BlocBuilder<ProductsCubit, ProductsState>(
           builder: (context, state) {
-            if (state.productsState == RequestState.loading) {
+            if (state.allProductsState == RequestState.loading) {
               return const ProductsShimmerLoading();
             }
-            if (state.productsState == RequestState.loaded) {
-              final List<ProductsModel> products = state.products;
+            if (state.allProductsState == RequestState.loaded) {
+              final List<ProductModel> products = state.allProducts;
 
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -48,10 +46,11 @@ class ProductsScreen extends StatelessWidget {
                 ),
               );
             }
-            if (state.productsState == RequestState.error) {
-              return Center(child: Text(state.productsMessage));
+            if (state.allProductsState == RequestState.error) {
+              return Center(child: Text(state.allProductsMessage));
+            } else {
+              return SizedBox.shrink();
             }
-            return const Center(child: Text('حدث خطأ غير متوقع'));
           },
         ),
       ),

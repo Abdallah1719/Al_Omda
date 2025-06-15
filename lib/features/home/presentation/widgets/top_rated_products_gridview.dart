@@ -16,7 +16,7 @@ class TopRatedProductsGridView extends StatelessWidget {
           return const ProductsShimmerLoading();
         }
         if (state.productsTopRatedState == RequestState.loaded) {
-          final List<ProductsModel> products = state.productsTopRated;
+          final List<ProductModel> products = state.productsTopRated;
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: GridView.builder(

@@ -3,7 +3,6 @@ import 'package:al_omda/features/home/data/models/home_categories_model.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_state.dart';
 import 'package:al_omda/features/home/presentation/widgets/categories_screen_shimmer_loading.dart';
-import 'package:al_omda/features/products/presentation/screens/products-by_categories_screen.dart';
 import 'package:al_omda/features/home/presentation/widgets/categories_item.dart';
 import 'package:al_omda/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -33,22 +32,7 @@ class CategoriesScreen extends StatelessWidget {
               ),
               itemCount: categories.length,
               itemBuilder: (context, index) {
-                final category = state.categoriesList[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => ProductsByCategoryScreen(
-                              categoryName: category.slug,
-                            ),
-                        // ),
-                      ),
-                    );
-                  },
-                  child: CategoryItem(category: categories[index]),
-                );
+                return CategoryItem(category: categories[index]);
               },
             );
           }
