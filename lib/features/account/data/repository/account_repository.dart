@@ -27,7 +27,7 @@ class AccountRepository implements BaseAccountRepository {
     Map<String, dynamic> data,
   ) async {
     try {
-      final updateResponse = await api.post(
+      await api.post(
         ApiConstances.updateProfilePath,
         data: data,
         isFormData: true,
@@ -38,37 +38,28 @@ class AccountRepository implements BaseAccountRepository {
       // }
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-    } 
+    }
   }
 
   @override
   Future<Either<String, List<MyAddresessModel>>> getMyAddresess() async {
     try {
       final response = await api.get(ApiConstances.myAddressesPath);
-      if (response is Map<String, dynamic>) {
-        final dataList = response['data'] as List?;
-
-        if (dataList != null && dataList.isNotEmpty) {
-          final List<MyAddresessModel> addresses =
-              dataList
-                  .map(
-                    (item) =>
-                        MyAddresessModel.fromJson(item as Map<String, dynamic>),
-                  )
-                  .toList();
-
-          return Right(addresses);
-        } else {
-          return Left("لا توجد بيانات لعرضها");
-        }
-      } else {
-        return Left("البيانات المستلمة ليست بالشكل المتوقع");
-      }
-    } on ServerException catch (e) {
-      return Left(e.errorModel.errorMessage);
-    } catch (e) {
-      return Left("حدث خطأ غير متوقع: $e");
+      final dataList = response['data'] as List;
+      final List<MyAddresessModel> addresses =
+          dataList
+              .map(
+                (item) =>
+                    MyAddresessModel.fromJson(item as Map<String, dynamic>),
+              )
+              .toList();
+      return Right(addresses);
     }
+    
+    on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+    
   }
 
   @override

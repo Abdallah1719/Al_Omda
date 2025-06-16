@@ -18,8 +18,7 @@ class MyAddresessScreen extends StatelessWidget {
             if (state is AccountLoading) {
               return Center(child: CircularProgressIndicator());
             } else if (state is MyAddressesLoaded) {
-              final List<MyAddresessModel> addresses =
-                  state.myAddresessList.addresses;
+              final List<MyAddresessModel> addresses = state.myAddresessList;
 
               return Padding(
                 padding: const EdgeInsets.all(16.0),
