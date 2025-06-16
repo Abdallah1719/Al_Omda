@@ -37,5 +37,8 @@
     "last_name" : " الاسم الثانى ",
     "email" : "البريد الالكترونى",
     "edit_info" : " تعديل المعلومات",
+    "first_name_required":" الاسم الاول مطلوب ",
+    "last_name_required":" الاسم الاخير مطلوب",
+    "email_required":" البريد الالكترونى غير صحيح",
     "lang":"Engilsh"
 }

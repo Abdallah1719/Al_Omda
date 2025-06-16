@@ -37,6 +37,9 @@
     "last_name" : " Last Name",
     "email" : "Email",
     "edit_info" : "Edit Information",
+    "first_name_required":" First Name Required",
+    "last_name_required":" Last Name Required",
+    "email_required":" Email Required",
     "lang":"العربية"
     
 

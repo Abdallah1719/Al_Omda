@@ -26,15 +26,15 @@ class AccountCubit extends Cubit<AccountState> {
     required String email,
   }) async {
     if (firstName.trim().isEmpty) {
-      emit(AccountError('الاسم الأول مطلوب'));
+      emit(AccountError('First Name Required'));
       return;
     }
     if (lastName.trim().isEmpty) {
-      emit(AccountError('الاسم الأخير مطلوب'));
+      emit(AccountError(' Last Name Required'));
       return;
     }
     if (email.trim().isEmpty || !email.contains('@')) {
-      emit(AccountError('بريد إلكتروني غير صحيح'));
+      emit(AccountError('Email Required'));
       return;
     }
     emit(AccountLoading());

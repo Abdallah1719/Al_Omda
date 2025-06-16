@@ -36,12 +36,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "country": MessageLookupByLibrary.simpleMessage("الدولة"),
         "edit_info": MessageLookupByLibrary.simpleMessage(" تعديل المعلومات"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
+        "email_required":
+            MessageLookupByLibrary.simpleMessage(" البريد الالكترونى غير صحيح"),
         "first_name": MessageLookupByLibrary.simpleMessage("الاسم الاول "),
+        "first_name_required":
+            MessageLookupByLibrary.simpleMessage(" الاسم الاول مطلوب "),
         "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "lang": MessageLookupByLibrary.simpleMessage("Engilsh"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "last_name": MessageLookupByLibrary.simpleMessage(" الاسم الثانى "),
+        "last_name_required":
+            MessageLookupByLibrary.simpleMessage(" الاسم الاخير مطلوب"),
         "log_in": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "loginNow": MessageLookupByLibrary.simpleMessage("تسجيل الدخول الآن"),
         "my_addresess": MessageLookupByLibrary.simpleMessage("عناويني"),

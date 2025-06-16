@@ -32,27 +32,19 @@ class AccountRepository implements BaseAccountRepository {
         data: data,
         isFormData: true,
       );
-
-      // if (updateResponse?['data']?['msg'] != null &&
-      //     updateResponse['data']['msg'].toString().contains('Successfully')) {
       final accountResponse = await api.post(ApiConstances.accountInfoPath);
       final accountInfo = AccountInfoModel.fromJson(accountResponse);
       return Right(accountInfo);
       // }
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-    }
-    // catch (e) {
-    //   return Left("حدث خطأ غير متوقع: ${e.toString()}");
-    // }
+    } 
   }
 
   @override
   Future<Either<String, List<MyAddresessModel>>> getMyAddresess() async {
     try {
       final response = await api.get(ApiConstances.myAddressesPath);
-
-      // التأكد من أن الـ response هو Map<String, dynamic>
       if (response is Map<String, dynamic>) {
         final dataList = response['data'] as List?;
 

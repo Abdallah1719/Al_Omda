@@ -38,12 +38,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "edit_info": MessageLookupByLibrary.simpleMessage("Edit Information"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "email_required":
+            MessageLookupByLibrary.simpleMessage(" Email Required"),
         "first_name": MessageLookupByLibrary.simpleMessage(" First Name"),
+        "first_name_required":
+            MessageLookupByLibrary.simpleMessage(" First Name Required"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get started"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "lang": MessageLookupByLibrary.simpleMessage("العربية"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "last_name": MessageLookupByLibrary.simpleMessage(" Last Name"),
+        "last_name_required":
+            MessageLookupByLibrary.simpleMessage(" Last Name Required"),
         "log_in": MessageLookupByLibrary.simpleMessage("Log In"),
         "loginNow": MessageLookupByLibrary.simpleMessage("Login now"),
         "my_addresess": MessageLookupByLibrary.simpleMessage("My Addresess"),

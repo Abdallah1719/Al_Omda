@@ -430,6 +430,36 @@ class S {
     );
   }
 
+  /// ` First Name Required`
+  String get first_name_required {
+    return Intl.message(
+      ' First Name Required',
+      name: 'first_name_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Last Name Required`
+  String get last_name_required {
+    return Intl.message(
+      ' Last Name Required',
+      name: 'last_name_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Email Required`
+  String get email_required {
+    return Intl.message(
+      ' Email Required',
+      name: 'email_required',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `العربية`
   String get lang {
     return Intl.message(
