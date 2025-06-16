@@ -20,8 +20,8 @@ class Accountscreen extends StatelessWidget {
       create:
           (context) =>
               getIt<AccountCubit>()
-                ..getAccountInfo()
-                ..navigateToEditScreen(),
+                ..getAccountInfo(),
+               
       child: Column(
         children: [
           VerticalSpace(3),

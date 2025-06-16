@@ -2,7 +2,6 @@ import 'package:al_omda/features/account/data/models/account_info_model.dart';
 import 'package:al_omda/features/account/data/models/my_addresess_model.dart';
 import 'package:al_omda/features/account/data/models/my_orders_model.dart';
 import 'package:al_omda/features/account/domain/repository/base_account_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'account_state.dart';
@@ -10,90 +9,45 @@ part 'account_state.dart';
 class AccountCubit extends Cubit<AccountState> {
   final BaseAccountRepository baseAccountRepository;
   AccountCubit(this.baseAccountRepository) : super(AccountInitial());
+
   Future<void> getAccountInfo() async {
     emit(AccountLoading());
-    // try {
+
     final result = await baseAccountRepository.getAccountInfo();
     result.fold(
       (error) => emit(AccountError(error)),
-      (accountInfo) => emit(AccountSuccess(accountInfo)),
+      (accountInfo) => emit(AccountInfoLoaded(accountInfo)),
     );
-    // } catch (e) {
-    //   emit(AccountError('حدث خطأ غير متوقع'));
-    // }
   }
 
-  void navigateToEditScreen() {
-    final state = this.state;
-    print('Current State in navigateToEditScreen: $state'); // <-- print جديد
-
-    if (state is AccountSuccess) {
-      print('navigateToEditScreen: state is AccountSuccess'); // ✅ تم التحقق
-
-      final account = state.accountInfo;
-
-      final firstNameCtrl = TextEditingController(text: account.firstName);
-      final lastNameCtrl = TextEditingController(text: account.lastName);
-      final emailCtrl = TextEditingController(text: account.email);
-
-      emit(
-        AccountEditing(
-          account: account,
-          firstNameController: firstNameCtrl,
-          lastNameController: lastNameCtrl,
-          emailController: emailCtrl,
-        ),
-      );
-    } else {
-      print(
-        'navigateToEditScreen: state is NOT AccountSuccess',
-      ); // ❌ مش AccountSuccess
-    }
-  }
-
-  Future<void> updateProfileInfo({
-    required TextEditingController firstNameController,
-    required TextEditingController lastNameController,
-    required TextEditingController emailController,
+  Future<void> updateAccountInfo({
+    required String firstName,
+    required String lastName,
+    required String email,
   }) async {
-    emit(AccountLoading());
-
-    final firstName = firstNameController.text.trim();
-    final lastName = lastNameController.text.trim();
-    final email = emailController.text.trim();
-
-    if (firstName.isEmpty) {
+    if (firstName.trim().isEmpty) {
       emit(AccountError('الاسم الأول مطلوب'));
       return;
     }
-
-    if (lastName.isEmpty) {
+    if (lastName.trim().isEmpty) {
       emit(AccountError('الاسم الأخير مطلوب'));
       return;
     }
-
-    if (email.isEmpty || !email.contains('@')) {
+    if (email.trim().isEmpty || !email.contains('@')) {
       emit(AccountError('بريد إلكتروني غير صحيح'));
       return;
     }
-
+    emit(AccountLoading());
     final formData = {
-      "firstName": firstName,
-      "lastName": lastName,
-      "email": email,
+      "firstName": firstName.trim(),
+      "lastName": lastName.trim(),
+      "email": email.trim(),
     };
-
-    print("Form Data Being Sent: $formData"); // <-- مهم جداً
-
-    try {
-      final result = await baseAccountRepository.updateAccountInfo(formData);
-      result.fold(
-        (error) => emit(AccountError(error)),
-        (updatedAccount) => emit(AccountSuccess(updatedAccount)),
-      );
-    } catch (e) {
-      emit(AccountError('فشل في تحديث البيانات'));
-    }
+    final result = await baseAccountRepository.updateAccountInfo(formData);
+    result.fold(
+      (error) => emit(AccountError(error)),
+      (updatedAccountInfo) => emit(AccountInfoLoaded(updatedAccountInfo)),
+    );
   }
 
   Future<void> getMyAddresess() async {
@@ -107,7 +61,7 @@ class AccountCubit extends Cubit<AccountState> {
         final myAddresessList = MyAddresessList(
           addresses: addresses,
         ); // ← هنا نستخدم اللست مباشرة
-        emit(MyAddresessSuccess(myAddresessList));
+        emit(MyAddressesLoaded(myAddresessList));
       });
     } catch (e) {
       emit(AccountError('حدث خطأ غير متوقع'));
@@ -125,7 +79,7 @@ class AccountCubit extends Cubit<AccountState> {
         final myOrdersList = MyOrdersList(
           orders: orders,
         ); // ← هنا نستخدم اللست مباشرة
-        emit(MyOrdersSuccess(myOrdersList));
+        emit(MyOrdersLoaded(myOrdersList));
       });
     } catch (e) {
       emit(AccountError('حدث خطأ غير متوقع'));

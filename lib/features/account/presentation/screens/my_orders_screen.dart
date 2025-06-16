@@ -30,7 +30,7 @@ class MyOrdersScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is AccountLoading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state is MyOrdersSuccess) {
+            } else if (state is MyOrdersLoaded) {
               final orders = state.myOrdersList.orders;
               return ListView.builder(
                 itemCount: orders.length,

@@ -17,7 +17,7 @@ class MyAddresessScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is AccountLoading) {
               return Center(child: CircularProgressIndicator());
-            } else if (state is MyAddresessSuccess) {
+            } else if (state is MyAddressesLoaded) {
               final List<MyAddresessModel> addresses =
                   state.myAddresessList.addresses;
 
