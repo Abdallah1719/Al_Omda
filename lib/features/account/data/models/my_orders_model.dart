@@ -12,18 +12,3 @@ class MyOrdersModel {
     );
   }
 }
-
-class MyOrdersList {
-  final List<MyOrdersModel> orders;
-
-  MyOrdersList({required this.orders});
-
-  factory MyOrdersList.fromJson(List<dynamic> jsonList) {
-    List<MyOrdersModel> orders =
-        jsonList
-            .map((item) => MyOrdersModel.fromJson(item as Map<String, dynamic>))
-            .toList();
-
-    return MyOrdersList(orders: orders);
-  }
-}

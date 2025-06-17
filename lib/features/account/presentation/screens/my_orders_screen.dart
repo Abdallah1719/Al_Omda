@@ -1,5 +1,4 @@
 import 'package:al_omda/core/services/service_locator.dart';
-
 import 'package:al_omda/features/account/presentation/controller/cubit/account_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +30,7 @@ class MyOrdersScreen extends StatelessWidget {
             if (state is AccountLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is MyOrdersLoaded) {
-              final orders = state.myOrdersList.orders;
+              final orders = state.myOrdersList;
               return ListView.builder(
                 itemCount: orders.length,
                 itemBuilder: (context, index) {
@@ -63,7 +62,6 @@ class MyOrdersScreen extends StatelessWidget {
                 ),
               );
             } else {
-              // حالة افتراضية إذا لم يتم العثور على حالة مناسبة
               return const Center(child: Text("No data available"));
             }
           },

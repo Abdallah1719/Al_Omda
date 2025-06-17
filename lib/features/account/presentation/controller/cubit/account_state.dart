@@ -17,7 +17,7 @@ class MyAddressesLoaded extends AccountState {
 }
 
 class MyOrdersLoaded extends AccountState {
-  final MyOrdersList myOrdersList;
+  final List<MyOrdersModel> myOrdersList;
   MyOrdersLoaded(this.myOrdersList);
 }
 

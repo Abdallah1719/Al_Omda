@@ -62,18 +62,12 @@ class AccountCubit extends Cubit<AccountState> {
   Future<void> getOrders() async {
     emit(AccountLoading());
 
-    try {
-      final result = await baseAccountRepository.getMyOrders();
-      result.fold((error) => emit(AccountError(error)), (
-        List<MyOrdersModel> orders,
-      ) {
-        final myOrdersList = MyOrdersList(
-          orders: orders,
-        ); // ← هنا نستخدم اللست مباشرة
-        emit(MyOrdersLoaded(myOrdersList));
-      });
-    } catch (e) {
-      emit(AccountError('حدث خطأ غير متوقع'));
-    }
+    // try {
+    final result = await baseAccountRepository.getMyOrders();
+
+    result.fold(
+      (error) => emit(AccountError(error)),
+      (orders) => emit(MyOrdersLoaded(orders)),
+    );
   }
 }
