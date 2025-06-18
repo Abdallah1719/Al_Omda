@@ -11,6 +11,7 @@ class AccountRepository implements BaseAccountRepository {
   final ApiMethods api;
   AccountRepository(this.api);
 
+  // Account Info
   @override
   Future<Either<String, AccountInfoModel>> getAccountInfo() async {
     try {
@@ -22,6 +23,7 @@ class AccountRepository implements BaseAccountRepository {
     }
   }
 
+  // Edit Account Info
   @override
   Future<Either<String, AccountInfoModel>> updateAccountInfo(
     Map<String, dynamic> data,
@@ -41,56 +43,40 @@ class AccountRepository implements BaseAccountRepository {
     }
   }
 
+  // My Addresess List
   @override
   Future<Either<String, List<MyAddresessModel>>> getMyAddresess() async {
     try {
       final response = await api.get(ApiConstances.myAddressesPath);
       final dataList = response['data'] as List;
-      final List<MyAddresessModel> addresses =
+      final List<MyAddresessModel> addressesList =
           dataList
               .map(
                 (item) =>
                     MyAddresessModel.fromJson(item as Map<String, dynamic>),
               )
               .toList();
-      return Right(addresses);
-    }
-    
-    on ServerException catch (e) {
+      return Right(addressesList);
+    } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
-    
   }
 
+  // My Orders List
   @override
   Future<Either<String, List<MyOrdersModel>>> getMyOrders() async {
     try {
       final response = await api.get(ApiConstances.myOrdersPath);
-
-    
-      if (response is Map<String, dynamic>) {
-        final dataList = response['data'] as List?;
-
-        if (dataList != null && dataList.isNotEmpty) {
-          final List<MyOrdersModel> orders =
-              dataList
-                  .map(
-                    (item) =>
-                        MyOrdersModel.fromJson(item as Map<String, dynamic>),
-                  )
-                  .toList();
-
-          return Right(orders);
-        } else {
-          return Left("لا توجد بيانات لعرضها");
-        }
-      } else {
-        return Left("البيانات المستلمة ليست بالشكل المتوقع");
-      }
+      final dataList = response['data'] as List;
+      final List<MyOrdersModel> ordersList =
+          dataList
+              .map(
+                (item) => MyOrdersModel.fromJson(item as Map<String, dynamic>),
+              )
+              .toList();
+      return Right(ordersList);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
-    } catch (e) {
-      return Left("حدث خطأ غير متوقع: $e");
     }
   }
 }
