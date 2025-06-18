@@ -48,3 +48,16 @@ class ProductModel {
   );
 
 }
+
+class ProductInCart {
+  final ProductModel product;
+  final int quantity;
+
+  const ProductInCart({
+    required this.product,
+    required this.quantity,
+  });
+
+  // عشان نسهل الوصول للـ ID
+  int get productId => product.id;
+}

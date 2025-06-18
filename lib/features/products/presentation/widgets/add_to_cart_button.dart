@@ -1,4 +1,5 @@
 import 'package:al_omda/core/services/service_locator.dart';
+import 'package:al_omda/core/utils/enum.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_cubit.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_state.dart';
 import 'package:al_omda/features/products/data/models/products_model.dart';
@@ -17,16 +18,20 @@ class AddToCartButton extends StatelessWidget {
       create: (context) => getIt<ProductsCubit>()..addToCart,
       child: Padding(
         padding: const EdgeInsets.all(12),
-        child: BlocBuilder<CartCubit, CartState>(
+        child: BlocBuilder<ProductsCubit, ProductsState>(
           builder: (context, state) {
             bool isInCart = false;
             int quantity = 0;
 
-            if (state is CartLoaded) {
-              final matchedItems =
-                  state.items
-                      .where((cartItem) => cartItem.productId == product.id)
-                      .toList();
+            if ( state.productsByCategoryNameState == RequestState.loaded) {
+            
+              // final matchedItems =
+              //     state.productsInCart
+              //         .where((productsInCart) => productsInCart.productId == product.id)
+              //         .toList();
+              final matchedItems = state.productsInCart
+    .where((item) => item.productId == product.id)
+    .toList();
 
               isInCart = matchedItems.isNotEmpty;
               quantity =
