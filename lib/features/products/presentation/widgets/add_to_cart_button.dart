@@ -2,6 +2,7 @@ import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_cubit.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_state.dart';
 import 'package:al_omda/features/products/data/models/products_model.dart';
+import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +14,7 @@ class AddToCartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<CartCubit>()..addToCart,
+      create: (context) => getIt<ProductsCubit>()..addToCart,
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: BlocBuilder<CartCubit, CartState>(
@@ -45,7 +46,7 @@ class AddToCartButton extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         if (quantity > 1) {
-                          getIt<CartCubit>().addToCart(
+                          getIt<ProductsCubit>().addToCart(
                             product.id,
                             quantity - 1,
                           );
@@ -58,7 +59,7 @@ class AddToCartButton extends StatelessWidget {
                     Text('$quantity'),
                     IconButton(
                       onPressed:
-                          () => BlocProvider.of<CartCubit>(
+                          () => BlocProvider.of<ProductsCubit>(
                             context,
                           ).addToCart(product.id, quantity + 1),
                       icon: Icon(Icons.add, color: Colors.green),
@@ -67,7 +68,7 @@ class AddToCartButton extends StatelessWidget {
                 )
                 : ElevatedButton.icon(
                   onPressed:
-                      () => BlocProvider.of<CartCubit>(
+                      () => BlocProvider.of<ProductsCubit>(
                         context,
                       ).addToCart(product.id, quantity + 1),
                   label: Text("Add to Cart"),

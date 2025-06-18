@@ -60,4 +60,29 @@ class ProductsRepository implements BaseProductsRepository {
       return Left(e.errorModel.errorMessage);
     }
   }
+
+  @override
+ Future<Either<String, List<ProductModel>>> addToCart(
+    int productId,
+    int newQuantity,
+  ) async {
+    try {
+  final response = await api.post(
+    ApiConstances.addToCart,
+    data: {"product_id": productId, "quantity": newQuantity},
+  );
+  
+    
+    final itemsList = response["data"]["cart"]["items"] as List;
+       final List<ProductModel> productsInCart =
+          itemsList
+              .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+              .toList();
+      return Right(productsInCart);
+} on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+    }
+
+
 }

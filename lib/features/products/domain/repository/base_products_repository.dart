@@ -7,4 +7,8 @@ abstract class BaseProductsRepository {
   Future<Either<String, List<ProductModel>>> getProductsByCategoryName(
     String categoryName,
   );
+  Future<Either<String, List<ProductModel>>> addToCart(
+    int productId,
+    int newQuantity,
+  );
 }

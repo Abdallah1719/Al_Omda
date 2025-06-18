@@ -16,13 +16,7 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  Future<void> addToCart(int productId, int newQuantity) async {
-    final result = await baseCartRepository.addToCart(productId, newQuantity);
-    result.fold(
-      (failure) => emit(CartError(failure)),
-      (updatedItems) => emit(CartLoaded(updatedItems)),
-    );
-  }
+ 
 
   Future<void> removeFromCart(int productId) async {
     final currentState = state;

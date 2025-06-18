@@ -19,19 +19,19 @@ class CartRepository implements BaseCartRepository {
     }
   }
 
-  @override
-  Future<Either<String, List<CartItemModel>>> addToCart(
-    int productId,
-    int newQuantity,
-  ) async {
-    try {
-      final List<CartItemModel> updatedCart = await cartRemoteDataSource
-          .addProductToCart(productId, newQuantity);
-      return Right(updatedCart);
-    } catch (e) {
-      return Left("فشل في إضافة المنتج للسلة");
-    }
-  }
+  // @override
+  // Future<Either<String, List<CartItemModel>>> addToCart(
+  //   int productId,
+  //   int newQuantity,
+  // ) async {
+  //   try {
+  //     final List<CartItemModel> updatedCart = await cartRemoteDataSource
+  //         .addProductToCart(productId, newQuantity);
+  //     return Right(updatedCart);
+  //   } catch (e) {
+  //     return Left("فشل في إضافة المنتج للسلة");
+  //   }
+  // }
 
   @override
   Future<List<CartItemModel>> removeFromCart(int productId) async {

@@ -77,4 +77,26 @@ class ProductsCubit extends Cubit<ProductsState> {
       },
     );
   }
+
+   Future<void> addToCart(int productId, int newQuantity) async {
+  emit(state.copyWith(productsInCartState: RequestState.loading));
+
+  final result = await baseProductsRepository.addToCart(productId, newQuantity);
+
+  result.fold(
+    (failure) {
+      emit(state.copyWith(
+        productsInCartState: RequestState.error,
+        productsInCartMessage: failure,
+      ));
+    },
+    (updatedProductsInCart) {
+      emit(state.copyWith(
+        productsInCartState: RequestState.loaded,
+        productsInCartMessage: 'Product added to cart successfully',
+        productsInCart: updatedProductsInCart,
+      ));
+    },
+  );
+}
 }
