@@ -4,5 +4,5 @@ import 'package:dartz/dartz.dart';
 abstract class BaseCartRepository {
   Future<Either<String, List<CartItemModel>>> getCartItems();
   
-  Future<List<CartItemModel>> removeFromCart(int productId);
+
 }

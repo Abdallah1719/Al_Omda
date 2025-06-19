@@ -18,32 +18,5 @@ class CartCubit extends Cubit<CartState> {
 
  
 
-  Future<void> removeFromCart(int productId) async {
-    final currentState = state;
-
-    if (currentState is CartLoaded) {
-      final List<CartItem> oldItems = currentState.items;
-
-      // 1. تحديث محلي فوري
-      final updatedItems =
-          oldItems.where((item) => item.productId != productId).toList();
-      emit(CartLoaded(updatedItems));
-
-      try {
-        // 2. إرسال طلب الحذف
-        final serverItems = await baseCartRepository.removeFromCart(productId);
-
-        // 3. استخدام البيانات المباشرة من السيرفر
-        emit(CartLoaded(serverItems));
-      } catch (e) {
-        // 4. معالجة الأخطاء
-        emit(CartLoaded(oldItems)); // استعادة الحالة القديمة
-        emit(CartError(e.toString()));
-
-        // 5. محاولة إعادة التحميل بعد 2 ثانية
-        await Future.delayed(Duration(seconds: 2));
-        await getCartItems();
-      }
-    }
-  }
+  
 }

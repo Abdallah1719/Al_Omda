@@ -62,27 +62,81 @@ class ProductsRepository implements BaseProductsRepository {
   }
 
   @override
- Future<Either<String, List<ProductModel>>> addToCart(
+  Future<Either<String, List<ProductModel>>> addToCart(
     int productId,
     int newQuantity,
   ) async {
     try {
-  final response = await api.post(
-    ApiConstances.addToCart,
-    data: {"product_id": productId, "quantity": newQuantity},
-  );
-  
-    
-    final itemsList = response["data"]["cart"]["items"] as List;
-       final List<ProductModel> productsInCart =
+      final response = await api.post(
+        ApiConstances.addToCart,
+        data: {"product_id": productId, "quantity": newQuantity},
+      );
+
+      final itemsList = response["data"]["cart"]["items"] as List;
+      final List<ProductModel> productsInCart =
           itemsList
               .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
               .toList();
       return Right(productsInCart);
-} on ServerException catch (e) {
+    } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
+  }
+
+  // Future<Either<String,List<ProductModel>>> removeFromCart(int productId) async {
+  //   try {
+  //     final response = await api.post(
+  //       ApiConstances.removeFromCart,
+  //       data: {"product_id": productId},
+  //     );
+  //     return Right(response);
+  //   } on ServerException catch (e) {
+  //     return Left(e.errorModel.errorMessage);
+  //   }
+  // }
+  // @override
+  // Future<Either<String, List<ProductModel>>> removeFromCart(int productId) async {
+  // try {
+  //   final response = await api.post(
+  //     ApiConstances.removeFromCart,
+  //     data: {"product_id": productId},
+  //   );
+
+  //   final itemsList = response["data"]["cart"]["items"] as List;
+  //   final List<ProductModel> updatedCart =
+  //       itemsList.map((e) => ProductModel.fromJson(e as Map<String, dynamic>)).toList();
+
+  //   return Right(updatedCart);
+
+  // } on ServerException catch (e) {
+  //   return Left(e.errorModel.errorMessage);
+  // }
+  @override
+  Future<Either<String, List<ProductModel>>> removeFromCart(
+    int productId,
+  ) async {
+    try {
+      final response = await api.post(
+        ApiConstances.removeFromCart,
+        data: {"product_id": productId},
+      );
+
+      final data = response['data'] as Map<String, dynamic>?;
+      final cart = data?['cart'] as Map<String, dynamic>?;
+      final itemsList = cart?['items'] as List?;
+
+      if (itemsList != null && itemsList.isNotEmpty) {
+        final List<ProductModel> updatedCart =
+            itemsList
+                .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+                .toList();
+
+        return Right(updatedCart);
+      } else {
+        return Right([]); // السلة فارغة بعد الحذف
+      }
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
     }
-
-
+  }
 }

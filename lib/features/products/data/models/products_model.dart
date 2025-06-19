@@ -8,6 +8,7 @@ class ProductModel {
   final bool cart;
   final int cartQuantity;
   final bool inStock;
+  final int quantity;
   
   ProductModel({
     required this.id,
@@ -19,6 +20,7 @@ class ProductModel {
     required this.cart,
     required this.cartQuantity,
     required this.inStock,
+     required this.quantity,
   });
 
   ProductModel copyWith({bool? cart, int? cartQuantity}) {
@@ -32,6 +34,9 @@ class ProductModel {
       cart: cart ?? this.cart,
       cartQuantity: cartQuantity ?? this.cartQuantity,
       inStock: inStock,
+      quantity: quantity,
+
+      
     );
   }
 
@@ -45,19 +50,7 @@ class ProductModel {
     cart: json["cart"] ?? false,
     cartQuantity: json["cart_quantity"] ?? 0,
     inStock: json["in_stock"] ?? true,
+    quantity: json["quantity"],
   );
 
-}
-
-class ProductInCart {
-  final ProductModel product;
-  final int quantity;
-
-  const ProductInCart({
-    required this.product,
-    required this.quantity,
-  });
-
-  // عشان نسهل الوصول للـ ID
-  int get productId => product.id;
 }

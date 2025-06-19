@@ -77,8 +77,8 @@ class CartScreen extends StatelessWidget {
                             ),
                             trailing: IconButton(
                               icon: Icon(Icons.delete, color: Colors.red),
-                              onPressed:
-                                  () => cubit.removeFromCart(item.productId),
+                              onPressed: () {},
+                              // () => cubit.removeFromCart(item.productId),
                             ),
                           ),
                         ),

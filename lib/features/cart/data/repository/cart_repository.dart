@@ -33,13 +33,13 @@ class CartRepository implements BaseCartRepository {
   //   }
   // }
 
-  @override
-  Future<List<CartItemModel>> removeFromCart(int productId) async {
-    try {
-      final items = await cartRemoteDataSource.removeFromCart(productId);
-      return items;
-    } catch (e) {
-      throw Exception("فشل في حذف المنتج من السلة");
-    }
-  }
+  // @override
+  // Future<List<CartItemModel>> removeFromCart(int productId) async {
+  //   try {
+  //     final items = await cartRemoteDataSource.removeFromCart(productId);
+  //     return items;
+  //   } catch (e) {
+  //     throw Exception("فشل في حذف المنتج من السلة");
+  //   }
+  // }
 }

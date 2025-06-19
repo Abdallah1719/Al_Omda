@@ -11,4 +11,5 @@ abstract class BaseProductsRepository {
     int productId,
     int newQuantity,
   );
+  Future<Either<String, List<ProductModel>>> removeFromCart(int productId);
 }
