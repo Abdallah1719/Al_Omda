@@ -1,4 +1,5 @@
 import 'package:al_omda/features/order/presentation/screens/make_order_screen.dart';
+import 'package:al_omda/features/products/presentation/controller/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,8 +11,17 @@ class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<CartCubit>()..getCartItems(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<CartCubit>()..getCartItems()),
+        BlocProvider(
+          create:
+              (context) =>
+                  getIt<ProductsCubit>()
+                    ..addProductToCart
+                    ..removeProductFromCart,
+        ),
+      ],
       child: Builder(
         builder: (context) {
           final cubit = context.read<CartCubit>();
@@ -72,13 +82,16 @@ class CartScreen extends StatelessWidget {
                             ),
                             title: Text(item.title),
                             subtitle: Text(
-                              "${item.price} L.E × ${item.quantity} = ${(item.price * item.quantity)} L.E",
+                              "//${item.price} L.E × ${item.quantity} = ${(item.price * item.quantity)} L.E",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             trailing: IconButton(
                               icon: Icon(Icons.delete, color: Colors.red),
-                              onPressed: () {},
-                              // () => cubit.removeFromCart(item.productId),
+                              onPressed: () {
+                                context
+                                    .read<ProductsCubit>()
+                                    .removeProductFromCart(item.productId);
+                              },
                             ),
                           ),
                         ),

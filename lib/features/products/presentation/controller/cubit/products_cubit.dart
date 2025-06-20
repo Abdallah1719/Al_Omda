@@ -8,6 +8,7 @@ part 'products_state.dart';
 class ProductsCubit extends Cubit<ProductsState> {
   final BaseProductsRepository baseProductsRepository;
   ProductsCubit(this.baseProductsRepository) : super(ProductsState());
+  // get all products
   Future<void> getAllProducts() async {
     emit(state.copyWith(allProductsState: RequestState.loading));
     final result = await baseProductsRepository.getAllProducts();
@@ -31,11 +32,10 @@ class ProductsCubit extends Cubit<ProductsState> {
     );
   }
 
+  // get Home Products Top Rated
   Future<void> getHomeProductsTopRated() async {
     emit(state.copyWith(productsTopRatedState: RequestState.loading));
-
     final result = await baseProductsRepository.getHomeProductsTopRated();
-
     result.fold(
       (failure) => emit(
         state.copyWith(
@@ -52,9 +52,9 @@ class ProductsCubit extends Cubit<ProductsState> {
     );
   }
 
-  Future<void> getProductsByCategories(String categoryName) async {
+  // get Products By Category Name
+  Future<void> getProductsByCategoryName(String categoryName) async {
     emit(state.copyWith(productsByCategoryNameState: RequestState.loading));
-
     final result = await baseProductsRepository.getProductsByCategoryName(
       categoryName,
     );
@@ -78,35 +78,13 @@ class ProductsCubit extends Cubit<ProductsState> {
     );
   }
 
-  //    Future<void> addToCart(int productId, int newQuantity) async {
-  //   emit(state.copyWith(productsInCartState: RequestState.loading));
-
-  //   final result = await baseProductsRepository.addToCart(productId, newQuantity);
-
-  //   result.fold(
-  //     (failure) {
-  //       emit(state.copyWith(
-  //         productsInCartState: RequestState.error,
-  //         productsInCartMessage: failure,
-  //       ));
-  //     },
-  //     (updatedProductsInCart) {
-  //       emit(state.copyWith(
-  //         productsInCartState: RequestState.loaded,
-  //         productsInCartMessage: 'Product added to cart successfully',
-  //         productsInCart: updatedProductsInCart,
-  //       ));
-  //     },
-  //   );
-  // }
-  Future<void> addToCart(int productId, int newQuantity) async {
+  // add Product To Cart
+  Future<void> addProductToCart(int productId, int newQuantity) async {
     emit(state.copyWith(productsInCartState: RequestState.loading));
-
     final result = await baseProductsRepository.addProductToCart(
       productId,
       newQuantity,
     );
-
     result.fold(
       (failure) {
         emit(
@@ -128,14 +106,12 @@ class ProductsCubit extends Cubit<ProductsState> {
     );
   }
 
-  // removeFromCart
-  Future<void> removeFromCart(int productId) async {
+  // remove Product From Cart
+  Future<void> removeProductFromCart(int productId) async {
     emit(state.copyWith(productsInCartState: RequestState.loading));
-
     final result = await baseProductsRepository.removeProductFromCart(
       productId,
     );
-
     result.fold(
       (failure) {
         emit(

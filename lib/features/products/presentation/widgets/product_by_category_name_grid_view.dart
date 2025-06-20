@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductsByCategoryNameGridView extends StatelessWidget {
   const ProductsByCategoryNameGridView({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsCubit, ProductsState>(
@@ -16,10 +15,8 @@ class ProductsByCategoryNameGridView extends StatelessWidget {
         if (state.productsByCategoryNameState == RequestState.loading) {
           return const ProductsShimmerLoading();
         }
-
         if (state.productsByCategoryNameState == RequestState.loaded) {
           final List<ProductModel> products = state.productsByCategoryName;
-
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: GridView.builder(
@@ -38,14 +35,12 @@ class ProductsByCategoryNameGridView extends StatelessWidget {
             ),
           );
         }
-
         if (state.productsByCategoryNameState == RequestState.error) {
           return SizedBox(
             height: 200,
             child: Center(child: Text(state.productsByCategoryNameMessage)),
           );
         }
-
         return SizedBox.shrink();
       },
     );

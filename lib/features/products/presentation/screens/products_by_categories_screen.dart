@@ -18,7 +18,8 @@ class ProductsByCategoryScreen extends StatelessWidget {
         BlocProvider(
           create:
               (context) =>
-                  getIt<ProductsCubit>()..getProductsByCategories(categoryName),
+                  getIt<ProductsCubit>()
+                    ..getProductsByCategoryName(categoryName),
         ),
       ],
       child: Scaffold(
