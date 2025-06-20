@@ -8,6 +8,7 @@ import 'package:dartz/dartz.dart';
 class ProductsRepository implements BaseProductsRepository {
   final ApiMethods api;
   ProductsRepository(this.api);
+  // get All Products
   @override
   Future<Either<String, List<ProductModel>>> getAllProducts() async {
     try {
@@ -15,7 +16,9 @@ class ProductsRepository implements BaseProductsRepository {
       final List<dynamic> dataList = response['data']['data'] as List;
       final List<ProductModel> allProducts =
           dataList
-              .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+              .map(
+                (item) => ProductModel.fromJson(item as Map<String, dynamic>),
+              )
               .toList();
       return Right(allProducts);
     } on ServerException catch (e) {
@@ -23,24 +26,25 @@ class ProductsRepository implements BaseProductsRepository {
     }
   }
 
+  // get Home Products Top Rated
   @override
   Future<Either<String, List<ProductModel>>> getHomeProductsTopRated() async {
     try {
       final response = await api.get(ApiConstances.productsTopRatedPath);
-
       final data = response['data']['data'] as List;
-
       final List<ProductModel> productsTopRated =
           data
-              .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+              .map(
+                (item) => ProductModel.fromJson(item as Map<String, dynamic>),
+              )
               .toList();
-
       return Right(productsTopRated);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
   }
 
+  // get Products By Category Name
   @override
   Future<Either<String, List<ProductModel>>> getProductsByCategoryName(
     String categoryName,
@@ -53,7 +57,9 @@ class ProductsRepository implements BaseProductsRepository {
       final List<dynamic> dataList = response['data']['data'] as List;
       final List<ProductModel> products =
           dataList
-              .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+              .map(
+                (item) => ProductModel.fromJson(item as Map<String, dynamic>),
+              )
               .toList();
       return Right(products);
     } on ServerException catch (e) {
@@ -61,8 +67,9 @@ class ProductsRepository implements BaseProductsRepository {
     }
   }
 
+  // add Product To Cart
   @override
-  Future<Either<String, List<ProductModel>>> addToCart(
+  Future<Either<String, List<ProductModel>>> addProductToCart(
     int productId,
     int newQuantity,
   ) async {
@@ -71,11 +78,12 @@ class ProductsRepository implements BaseProductsRepository {
         ApiConstances.addToCart,
         data: {"product_id": productId, "quantity": newQuantity},
       );
-
       final itemsList = response["data"]["cart"]["items"] as List;
       final List<ProductModel> productsInCart =
           itemsList
-              .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
+              .map(
+                (item) => ProductModel.fromJson(item as Map<String, dynamic>),
+              )
               .toList();
       return Right(productsInCart);
     } on ServerException catch (e) {
@@ -83,36 +91,9 @@ class ProductsRepository implements BaseProductsRepository {
     }
   }
 
-  // Future<Either<String,List<ProductModel>>> removeFromCart(int productId) async {
-  //   try {
-  //     final response = await api.post(
-  //       ApiConstances.removeFromCart,
-  //       data: {"product_id": productId},
-  //     );
-  //     return Right(response);
-  //   } on ServerException catch (e) {
-  //     return Left(e.errorModel.errorMessage);
-  //   }
-  // }
-  // @override
-  // Future<Either<String, List<ProductModel>>> removeFromCart(int productId) async {
-  // try {
-  //   final response = await api.post(
-  //     ApiConstances.removeFromCart,
-  //     data: {"product_id": productId},
-  //   );
-
-  //   final itemsList = response["data"]["cart"]["items"] as List;
-  //   final List<ProductModel> updatedCart =
-  //       itemsList.map((e) => ProductModel.fromJson(e as Map<String, dynamic>)).toList();
-
-  //   return Right(updatedCart);
-
-  // } on ServerException catch (e) {
-  //   return Left(e.errorModel.errorMessage);
-  // }
+  // remove Product From Cart
   @override
-  Future<Either<String, List<ProductModel>>> removeFromCart(
+  Future<Either<String, List<ProductModel>>> removeProductFromCart(
     int productId,
   ) async {
     try {
@@ -120,7 +101,6 @@ class ProductsRepository implements BaseProductsRepository {
         ApiConstances.removeFromCart,
         data: {"product_id": productId},
       );
-
       final data = response['data'] as Map<String, dynamic>?;
       final cart = data?['cart'] as Map<String, dynamic>?;
       final itemsList = cart?['items'] as List?;
@@ -133,7 +113,7 @@ class ProductsRepository implements BaseProductsRepository {
 
         return Right(updatedCart);
       } else {
-        return Right([]); // السلة فارغة بعد الحذف
+        return Right([]);
       }
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

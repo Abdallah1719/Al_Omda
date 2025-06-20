@@ -1,6 +1,6 @@
 import 'package:al_omda/core/utils/enum.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_state.dart';
-import 'package:al_omda/features/home/presentation/widgets/homeSlider_shimmer_loading.dart';
+import 'package:al_omda/features/home/presentation/widgets/home_slider_shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:al_omda/features/home/presentation/controller/cubit/home_cubit.dart';

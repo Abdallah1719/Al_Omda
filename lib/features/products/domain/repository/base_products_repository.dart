@@ -7,9 +7,11 @@ abstract class BaseProductsRepository {
   Future<Either<String, List<ProductModel>>> getProductsByCategoryName(
     String categoryName,
   );
-  Future<Either<String, List<ProductModel>>> addToCart(
+  Future<Either<String, List<ProductModel>>> addProductToCart(
     int productId,
     int newQuantity,
   );
-  Future<Either<String, List<ProductModel>>> removeFromCart(int productId);
+  Future<Either<String, List<ProductModel>>> removeProductFromCart(
+    int productId,
+  );
 }

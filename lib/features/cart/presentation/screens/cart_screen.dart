@@ -66,9 +66,9 @@ class CartScreen extends StatelessWidget {
                               height: 60,
                               fit: BoxFit.fill,
                               placeholder:
-                                  (_, __) => CircularProgressIndicator(),
+                                  (_, _) => CircularProgressIndicator(),
                               errorWidget:
-                                  (_, __, ___) => Icon(Icons.shopping_bag),
+                                  (_, _, _) => Icon(Icons.shopping_bag),
                             ),
                             title: Text(item.title),
                             subtitle: Text(

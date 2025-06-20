@@ -40,7 +40,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       (failure) => emit(
         state.copyWith(
           productsTopRatedState: RequestState.error,
-          productsTopRatedMessage:failure,
+          productsTopRatedMessage: failure,
         ),
       ),
       (productsTopRated) => emit(
@@ -78,96 +78,82 @@ class ProductsCubit extends Cubit<ProductsState> {
     );
   }
 
-//    Future<void> addToCart(int productId, int newQuantity) async {
-//   emit(state.copyWith(productsInCartState: RequestState.loading));
+  //    Future<void> addToCart(int productId, int newQuantity) async {
+  //   emit(state.copyWith(productsInCartState: RequestState.loading));
 
-//   final result = await baseProductsRepository.addToCart(productId, newQuantity);
+  //   final result = await baseProductsRepository.addToCart(productId, newQuantity);
 
-//   result.fold(
-//     (failure) {
-//       emit(state.copyWith(
-//         productsInCartState: RequestState.error,
-//         productsInCartMessage: failure,
-//       ));
-//     },
-//     (updatedProductsInCart) {
-//       emit(state.copyWith(
-//         productsInCartState: RequestState.loaded,
-//         productsInCartMessage: 'Product added to cart successfully',
-//         productsInCart: updatedProductsInCart,
-//       ));
-//     },
-//   );
-// }
-Future<void> addToCart(int productId, int newQuantity) async {
-  emit(state.copyWith(productsInCartState: RequestState.loading));
+  //   result.fold(
+  //     (failure) {
+  //       emit(state.copyWith(
+  //         productsInCartState: RequestState.error,
+  //         productsInCartMessage: failure,
+  //       ));
+  //     },
+  //     (updatedProductsInCart) {
+  //       emit(state.copyWith(
+  //         productsInCartState: RequestState.loaded,
+  //         productsInCartMessage: 'Product added to cart successfully',
+  //         productsInCart: updatedProductsInCart,
+  //       ));
+  //     },
+  //   );
+  // }
+  Future<void> addToCart(int productId, int newQuantity) async {
+    emit(state.copyWith(productsInCartState: RequestState.loading));
 
-  final result = await baseProductsRepository.addToCart(productId, newQuantity);
+    final result = await baseProductsRepository.addProductToCart(
+      productId,
+      newQuantity,
+    );
 
-  result.fold(
-    (failure) {
-      emit(state.copyWith(
-        productsInCartState: RequestState.error,
-        productsInCartMessage: failure,
-      ));
-    },
-    (updatedProductsInCart) {
-      emit(state.copyWith(
-        productsInCartState: RequestState.loaded,
-        productsInCartMessage: 'Product added to cart successfully',
-        productsInCart: updatedProductsInCart,
-      ));
-    },
-  );
+    result.fold(
+      (failure) {
+        emit(
+          state.copyWith(
+            productsInCartState: RequestState.error,
+            productsInCartMessage: failure,
+          ),
+        );
+      },
+      (updatedProductsInCart) {
+        emit(
+          state.copyWith(
+            productsInCartState: RequestState.loaded,
+            productsInCartMessage: 'Product added to cart successfully',
+            productsInCart: updatedProductsInCart,
+          ),
+        );
+      },
+    );
+  }
+
+  // removeFromCart
+  Future<void> removeFromCart(int productId) async {
+    emit(state.copyWith(productsInCartState: RequestState.loading));
+
+    final result = await baseProductsRepository.removeProductFromCart(
+      productId,
+    );
+
+    result.fold(
+      (failure) {
+        emit(
+          state.copyWith(
+            productsInCartState: RequestState.error,
+            productsInCartMessage: failure,
+          ),
+        );
+      },
+      (updatedCart) {
+        emit(
+          state.copyWith(
+            productsInCartState: RequestState.loaded,
+            productsInCartMessage: 'Product removed from cart successfully',
+            productsInCart: updatedCart,
+          ),
+        );
+      },
+    );
+  }
 }
-// Future<void> removeFromCart(int productId) async {
-//     final currentState = state;
-
-//     if (currentState is CartLoaded) {
-//       final List<CartItem> oldItems = currentState.items;
-
-//       // 1. تحديث محلي فوري
-//       final updatedItems =
-//           oldItems.where((item) => item.productId != productId).toList();
-//       emit(CartLoaded(updatedItems));
-
-//       try {
-//         // 2. إرسال طلب الحذف
-//         final serverItems = await baseCartRepository.removeFromCart(productId);
-
-//         // 3. استخدام البيانات المباشرة من السيرفر
-//         emit(CartLoaded(serverItems));
-//       } catch (e) {
-//         // 4. معالجة الأخطاء
-//         emit(CartLoaded(oldItems)); // استعادة الحالة القديمة
-//         emit(CartError(e.toString()));
-
-//         // 5. محاولة إعادة التحميل بعد 2 ثانية
-//         await Future.delayed(Duration(seconds: 2));
-//         await getCartItems();
-//       }
-//     }
-//   }
-Future<void> removeFromCart(int productId) async {
-  emit(state.copyWith(productsInCartState: RequestState.loading));
-
-  final result = await baseProductsRepository.removeFromCart(productId);
-
-  result.fold(
-    (failure) {
-      emit(state.copyWith(
-        productsInCartState: RequestState.error,
-        productsInCartMessage: failure,
-      ));
-    },
-    (updatedCart) {
-      emit(state.copyWith(
-        productsInCartState: RequestState.loaded,
-        productsInCartMessage: 'Product removed from cart successfully',
-        productsInCart: updatedCart,
-      ));
-    },
-  );
-}
-}
-

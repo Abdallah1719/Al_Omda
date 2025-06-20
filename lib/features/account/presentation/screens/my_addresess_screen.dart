@@ -48,9 +48,7 @@ class MyAddresessScreen extends StatelessWidget {
                           ),
                           trailing: IconButton(
                             icon: Icon(Icons.delete, color: Colors.red[400]),
-                            onPressed: () {
-                              // TODO: استخدم Cubit لحذف هذا العنوان
-                            },
+                            onPressed: () {},
                           ),
                         ),
                       );
@@ -65,9 +63,7 @@ class MyAddresessScreen extends StatelessWidget {
                         ),
                         icon: Icon(Icons.add),
                         label: Text("إضافة عنوان جديد"),
-                        onPressed: () {
-                          // TODO: افتح صفحة إضافة عنوان جديد
-                        },
+                        onPressed: () {},
                       );
                     }
                   },

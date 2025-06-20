@@ -181,7 +181,7 @@
 // //                       SnackBar(content: Text('Please select date and time')),
 // //                     );
 // //                   } else {
-// //                     // TODO: Submit order
+// //
 // //                     print(
 // //                       "Order Confirmed with Date: $selectedDate and Time: $selectedTime",
 // //                     );
@@ -1414,15 +1414,9 @@ class MakeOrderView extends StatelessWidget {
     );
   }
 
-  void _showAddressOptions(BuildContext context) {
-    // Navigate to address selection screen
-    print('Navigate to address selection');
-  }
+  void _showAddressOptions(BuildContext context) {}
 
-  void _addNewAddress(BuildContext context) {
-    // Navigate to add new address screen
-    print('Navigate to add new address');
-  }
+  void _addNewAddress(BuildContext context) {}
 
   String _getDayOfWeek(DateTime date) {
     switch (date.weekday) {

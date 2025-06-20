@@ -63,7 +63,7 @@ class AppTheme {
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: R.colors.darkgreen,
       selectionHandleColor: Colors.blue,
-      selectionColor: Colors.green.withOpacity(0.3),
+      selectionColor: Colors.green,
     ),
     // Button Theme
     buttonTheme: ButtonThemeData(
@@ -107,7 +107,7 @@ class AppTheme {
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: Colors.red,
       selectionHandleColor: Colors.blue,
-      selectionColor: Colors.green.withOpacity(0.3),
+      selectionColor: Colors.green,
     ),
   );
 

@@ -1,4 +1,3 @@
-import 'package:al_omda/features/cart/domain/entities/cart.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_state.dart';
 import 'package:al_omda/features/cart/domain/repository/base_cart_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
