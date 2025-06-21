@@ -1,14 +1,22 @@
-import 'package:al_omda/features/cart/domain/entities/cart.dart';
+import 'package:equatable/equatable.dart';
 
-class CartItemModel extends CartItem {
+class CartItemModel extends Equatable {
+  final int productId;
+  final String title;
+  final int price;
+  final String image;
+  final String unitName;
+  final String weight;
+  final int quantity;
+
   const CartItemModel({
-    required super.productId,
-    required super.title,
-    required super.price,
-    required super.image,
-    required super.unitName,
-    required super.weight,
-    required super.quantity,
+    required this.productId,
+    required this.title,
+    required this.price,
+    required this.image,
+    required this.unitName,
+    required this.weight,
+    required this.quantity,
   });
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
@@ -22,4 +30,14 @@ class CartItemModel extends CartItem {
       quantity: json['quantity'] ?? 1,
     );
   }
+  @override
+  List<Object?> get props => [
+    productId,
+    title,
+    price,
+    image,
+    unitName,
+    weight,
+    quantity,
+  ];
 }

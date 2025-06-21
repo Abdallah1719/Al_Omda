@@ -35,8 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _homeCubit = getIt<HomeCubit>();
     _productsCubit = getIt<ProductsCubit>();
-    
-    // Initial data load
     _loadData();
   }
 
@@ -48,10 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    // Only dispose if they are not singletons in service locator
-    // If they are registered as singletons, don't dispose them
-    // _homeCubit.close();
-    // _productsCubit.close();
     super.dispose();
   }
 
@@ -64,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
       child: BlocListener<LocaleCubit, String>(
         listener: (context, locale) {
-          // Reload data when language changes
           _loadData();
         },
         child: Scaffold(

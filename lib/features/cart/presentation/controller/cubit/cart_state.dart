@@ -1,32 +1,17 @@
-import 'package:al_omda/features/cart/domain/entities/cart.dart';
-import 'package:equatable/equatable.dart';
+import 'package:al_omda/features/cart/data/models/cart_model.dart';
 
-abstract class CartState extends Equatable {}
+abstract class CartState {}
 
-class CartInitial extends CartState {
-  @override
-  List<Object?> get props => [];
-}
+class CartInitial extends CartState {}
 
-class CartLoading extends CartState {
-  @override
-  List<Object?> get props => [];
-}
+class CartLoading extends CartState {}
 
 class CartLoaded extends CartState {
-  final List<CartItem> items;
-
+  final List<CartItemModel> items;
   CartLoaded(this.items);
-
-  @override
-  List<Object?> get props => [items];
 }
 
 class CartError extends CartState {
   final String message;
-
   CartError(this.message);
-
-  @override
-  List<Object?> get props => [message];
 }

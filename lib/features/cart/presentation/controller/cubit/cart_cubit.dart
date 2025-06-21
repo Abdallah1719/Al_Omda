@@ -1,10 +1,24 @@
+import 'package:al_omda/core/services/service_locator.dart';
+import 'package:al_omda/features/cart/data/models/cart_model.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_state.dart';
 import 'package:al_omda/features/cart/domain/repository/base_cart_repository.dart';
+import 'package:al_omda/features/products/domain/repository/base_products_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartCubit extends Cubit<CartState> {
   final BaseCartRepository baseCartRepository;
   CartCubit(this.baseCartRepository) : super(CartInitial());
+
+  void removeItemInstantly(int productId) async {
+    if (state is CartLoaded) {
+      await getIt<BaseProductsRepository>().removeProductFromCart(productId);
+      final currentItems = List<CartItemModel>.from(
+        (state as CartLoaded).items,
+      );
+      currentItems.removeWhere((item) => item.productId == productId);
+      emit(CartLoaded(currentItems));
+    }
+  }
 
   Future<void> getCartItems() async {
     emit(CartLoading());
@@ -14,8 +28,4 @@ class CartCubit extends Cubit<CartState> {
       (items) => emit(CartLoaded(items)),
     );
   }
-
- 
-
-  
 }
