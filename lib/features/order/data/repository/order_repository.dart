@@ -8,31 +8,9 @@ import 'package:dartz/dartz.dart';
 class OrderRepository extends BaseOrderRepository {
   final ApiMethods api;
 
-  OrderRepository({required this.api});
+  OrderRepository(this.api);
 
-  @override
-  // Future<Either<String, bool>> makeOrder({
-  //   required String date,
-  //   required String time,
-  //   required int paymentId,
-  //   required int addressId,
-  // }) async {
-  //   final response = await api.post(
-  //     ApiConstances.makeOrder,
-  //     data: {
-  //       'shipping_day': date,
-  //       'shipping_time': time,
-  //       'payment_id': paymentId,
-  //       'address_id': addressId,
-  //     },
-  //   );
-  //   return response;
-  // }
-  //   Future<void> clearCartAfterOrder() async {
-  //   // Call cart repository to clear items
-  //   await _cartRepository.clearCart();
-  // }
-  // }}
+ 
   @override
   Future<Either<String, OrderResponseModel>> makeOrder(
     OrderRequestModel request,

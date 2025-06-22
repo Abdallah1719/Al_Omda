@@ -1,9 +1,8 @@
-
-
 import 'package:al_omda/core/services/service_locator.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_cubit.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_state.dart';
 import 'package:al_omda/features/order/presentation/controller/cubit/order_cubit.dart';
+import 'package:al_omda/features/order/presentation/controller/cubit/order_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,22 +13,36 @@ class MakeOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => OrderCubit()),
-        BlocProvider(create: (context) => getIt<CartCubit>()),
-
-        // CartCubit already provided from previous screen
+        BlocProvider(create: (context) => getIt<OrderCubit>()..initialize()),
+        // الحل الأساسي: استدعاء getCartItems عند إنشاء CartCubit
+        BlocProvider(create: (context) => getIt<CartCubit>()..getCartItems()),
       ],
       child: const MakeOrderView(),
     );
   }
 }
 
-class MakeOrderView extends StatelessWidget {
+class MakeOrderView extends StatefulWidget {
   const MakeOrderView({super.key});
 
-  // بيانات ثابتة
-  static const int currentAddressId = 1;
-  static const String currentAddress = 'new cairo\nRehab-city\nbbbnhgh';
+  @override
+  State<MakeOrderView> createState() => _MakeOrderViewState();
+}
+
+class _MakeOrderViewState extends State<MakeOrderView> {
+  @override
+  void initState() {
+    super.initState();
+    // ضمان إضافي لجلب بيانات السلة
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final cartCubit = context.read<CartCubit>();
+      if (cartCubit.state is! CartLoaded) {
+        cartCubit.getCartItems();
+      }
+    });
+  }
+
+  // Static data
   static const double deliveryFee = 20.0;
   static const double discountValue = 0.0;
 
@@ -66,26 +79,92 @@ class MakeOrderView extends StatelessWidget {
         builder: (context, state) {
           final cubit = context.read<OrderCubit>();
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildAddressSection(context, cubit),
-                const SizedBox(height: 16),
-                _buildDeliveryFeeSection(),
-                const SizedBox(height: 16),
-                _buildShippingDateSection(context, cubit),
-                const SizedBox(height: 16),
-                _buildShippingTimeSection(context, cubit),
-                const SizedBox(height: 16),
-                _buildPaymentMethodSection(context, cubit),
-                const SizedBox(height: 16),
-                _buildTotalsSection(context), // Updated to use cart data
-                const SizedBox(height: 24),
-                _buildOrderButton(context, cubit, state),
-              ],
-            ),
+          if (state is OrderLoading && cubit.availableAddresses.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          return BlocBuilder<CartCubit, CartState>(
+            builder: (context, cartState) {
+              // إظهار loading للسلة
+              if (cartState is CartLoading) {
+                return const Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 16),
+                      Text('Loading cart items...'),
+                    ],
+                  ),
+                );
+              }
+
+              // إظهار error للسلة
+              if (cartState is CartError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.error, size: 48, color: Colors.red),
+                      SizedBox(height: 16),
+                      Text('Error loading cart: ${cartState.message}'),
+                      SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed:
+                            () => context.read<CartCubit>().getCartItems(),
+                        child: Text('Retry'),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              // إظهار empty cart
+              if (cartState is CartLoaded &&
+                  cartState.cartModel.items.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.shopping_cart_outlined,
+                        size: 48,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(height: 16),
+                      Text('Your cart is empty'),
+                      SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('Go Back'),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              return SingleChildScrollView(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildAddressSection(context, cubit),
+                    const SizedBox(height: 16),
+                    _buildDeliveryFeeSection(),
+                    const SizedBox(height: 16),
+                    _buildShippingDateSection(context, cubit),
+                    const SizedBox(height: 16),
+                    _buildShippingTimeSection(context, cubit),
+                    const SizedBox(height: 16),
+                    _buildPaymentMethodSection(context, cubit),
+                    const SizedBox(height: 16),
+                    _buildTotalsSection(context),
+                    const SizedBox(height: 24),
+                    _buildOrderButton(context, cubit, state),
+                  ],
+                ),
+              );
+            },
           );
         },
       ),
@@ -110,13 +189,26 @@ class MakeOrderView extends StatelessWidget {
           ),
           child: Row(
             children: [
-              const Expanded(
-                child: Text(currentAddress, style: TextStyle(fontSize: 16)),
+              Expanded(
+                child: BlocBuilder<OrderCubit, OrderState>(
+                  builder: (context, state) {
+                    final addressText = cubit.selectedAddressText;
+                    final hasAddresses = cubit.availableAddresses.isNotEmpty;
+
+                    return Text(
+                      hasAddresses ? addressText : 'Loading addresses...',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: hasAddresses ? Colors.black : Colors.grey,
+                      ),
+                    );
+                  },
+                ),
               ),
               Row(
                 children: [
                   GestureDetector(
-                    onTap: () => _showAddressOptions(context),
+                    onTap: () => _showAddressOptions(context, cubit),
                     child: const Row(
                       children: [
                         Icon(Icons.edit, size: 18, color: Colors.green),
@@ -130,7 +222,7 @@ class MakeOrderView extends StatelessWidget {
                   ),
                   const SizedBox(width: 16),
                   GestureDetector(
-                    onTap: () => _addNewAddress(context),
+                    onTap: () => _addNewAddress(context, cubit),
                     child: const Row(
                       children: [
                         Icon(Icons.add, size: 18, color: Colors.green),
@@ -151,6 +243,22 @@ class MakeOrderView extends StatelessWidget {
         const Text(
           'Make sure this address is correct.',
           style: TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+        // Show address validation error if exists
+        BlocBuilder<OrderCubit, OrderState>(
+          builder: (context, state) {
+            final addressError = cubit.validateAddress(cubit.selectedAddressId);
+            if (addressError != null) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Text(
+                  addressError,
+                  style: const TextStyle(color: Colors.red, fontSize: 12),
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
         ),
       ],
     );
@@ -311,11 +419,68 @@ class MakeOrderView extends StatelessWidget {
     );
   }
 
+  // Widget _buildPaymentMethodSection(BuildContext context, OrderCubit cubit) {
+  //   return BlocBuilder<OrderCubit, OrderState>(
+  //     builder: (context, state) {
+  //       final selectedPaymentMethod = cubit.selectedPaymentMethod;
+  //       final paymentError = cubit.validatePaymentMethod(selectedPaymentMethod);
+
+  //       return Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           const Text(
+  //             'Payment Method',
+  //             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  //           ),
+  //           const SizedBox(height: 8),
+  //           ...paymentMethods.map(
+  //             (method) => Container(
+  //               margin: const EdgeInsets.only(bottom: 8),
+  //               child: RadioListTile<String>(
+  //                 title: Row(
+  //                   children: [
+  //                     Icon(method['icon'], size: 20),
+  //                     const SizedBox(width: 8),
+  //                     Text(method['name']),
+  //                   ],
+  //                 ),
+  //                 value: method['id'].toString(),
+  //                 groupValue: selectedPaymentMethod,
+  //                 onChanged: (value) {
+  //                   if (value != null) {
+  //                     cubit.updatePaymentMethod(value);
+  //                   }
+  //                 },
+  //                 activeColor: Colors.green,
+  //                 shape: RoundedRectangleBorder(
+  //                   borderRadius: BorderRadius.circular(8),
+  //                   side: BorderSide(
+  //                     color:
+  //                         selectedPaymentMethod == method['id'].toString()
+  //                             ? Colors.green
+  //                             : Colors.grey.shade300,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //           if (paymentError != null) ...[
+  //             const SizedBox(height: 4),
+  //             Text(
+  //               paymentError,
+  //               style: const TextStyle(color: Colors.red, fontSize: 12),
+  //             ),
+  //           ],
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
   Widget _buildPaymentMethodSection(BuildContext context, OrderCubit cubit) {
     return BlocBuilder<OrderCubit, OrderState>(
       builder: (context, state) {
         final selectedPaymentMethod = cubit.selectedPaymentMethod;
-        final paymentError = cubit.validatePaymentMethod(selectedPaymentMethod);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -356,20 +521,12 @@ class MakeOrderView extends StatelessWidget {
                 ),
               ),
             ),
-            if (paymentError != null) ...[
-              const SizedBox(height: 4),
-              Text(
-                paymentError,
-                style: const TextStyle(color: Colors.red, fontSize: 12),
-              ),
-            ],
           ],
         );
       },
     );
   }
 
-  // Updated to use cart data
   Widget _buildTotalsSection(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, cartState) {
@@ -377,15 +534,9 @@ class MakeOrderView extends StatelessWidget {
         double finalTotal = 0.0;
 
         if (cartState is CartLoaded) {
-          // // Calculate subtotal from cart items
-          // subtotal = cartState.cartModel.items.fold(0.0, (total, item) {
-          //   return cartState.cartModel.summary.finalTotal;
-          subtotal =
-              cartState
-                  .cartModel
-                  .summary
-                  .total; // أو استخدم summary.subTotal لو متاح
-          finalTotal = cartState.cartModel.summary.finalTotal;
+          subtotal = cartState.cartModel.summary.total;
+          // حساب المجموع الأخير مع رسوم التوصيل
+          finalTotal = subtotal + deliveryFee - discountValue;
         }
 
         return Container(
@@ -397,7 +548,6 @@ class MakeOrderView extends StatelessWidget {
           ),
           child: Column(
             children: [
-              // Show cart items summary
               if (cartState is CartLoaded &&
                   cartState.cartModel.items.isNotEmpty) ...[
                 _buildCartItemsHeader(),
@@ -408,8 +558,6 @@ class MakeOrderView extends StatelessWidget {
                 const SizedBox(height: 8),
                 const Divider(thickness: 1),
               ],
-
-              // Show totals
               _buildTotalRow('Subtotal:', '${subtotal.toStringAsFixed(0)} L.E'),
               if (discountValue > 0)
                 _buildTotalRow(
@@ -450,27 +598,6 @@ class MakeOrderView extends StatelessWidget {
     );
   }
 
-  Widget _buildCartItemRow(dynamic item) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2),
-      child: Row(
-        children: [
-          const SizedBox(width: 28), // Indent for alignment
-          Expanded(
-            child: Text(
-              '${item.productName ?? 'Product'} x${item.quantity}',
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-          ),
-          Text(
-            '${(item.price * item.quantity).toStringAsFixed(0)} L.E',
-            style: const TextStyle(fontSize: 14, color: Colors.grey),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildTotalRow(String label, String amount, {bool isTotal = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -503,23 +630,23 @@ class MakeOrderView extends StatelessWidget {
     OrderState state,
   ) {
     final isLoading = state is OrderLoading;
-    final isFormValid = cubit.isFormValid;
 
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, cartState) {
         final hasCartItems =
             cartState is CartLoaded && cartState.cartModel.items.isNotEmpty;
-        final canOrder = isFormValid && hasCartItems;
+        final isFormValid = cubit.isFormValid;
+        final hasAddresses = cubit.availableAddresses.isNotEmpty;
+        final canOrder =
+            isFormValid && hasCartItems && hasAddresses && !isLoading;
 
         return SizedBox(
           width: double.infinity,
           child: ElevatedButton(
             onPressed:
-                isLoading || !canOrder
+                !canOrder
                     ? null
                     : () {
-                      // Set address first (in real app, this would be set earlier)
-                      cubit.updateSelectedAddress(currentAddressId);
                       cubit.makeOrder();
                     },
             style: ElevatedButton.styleFrom(
@@ -540,7 +667,13 @@ class MakeOrderView extends StatelessWidget {
                       ),
                     )
                     : Text(
-                      !hasCartItems ? 'No Items in Cart' : 'Make Your Order',
+                      !hasCartItems
+                          ? 'No Items in Cart'
+                          : !hasAddresses
+                          ? 'No Addresses Available'
+                          : !isFormValid
+                          ? 'Complete Order Info'
+                          : 'Make Your Order',
                       style: TextStyle(
                         color: canOrder ? Colors.white : Colors.grey.shade600,
                         fontSize: 18,
@@ -595,7 +728,7 @@ class MakeOrderView extends StatelessWidget {
   }
 
   void _showSuccessDialog(BuildContext context, String message) {
-    showDialog(
+    showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder:
@@ -625,8 +758,8 @@ class MakeOrderView extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(); // Close dialog
-                  // Clear cart after successful order
                   context.read<CartCubit>().getCartItems(); // Refresh cart
+                  context.read<OrderCubit>().resetForm(); // Reset order form
                   Navigator.of(context).pop(); // Go back to previous screen
                 },
                 child: const Text('موافق'),
@@ -636,9 +769,116 @@ class MakeOrderView extends StatelessWidget {
     );
   }
 
-  void _showAddressOptions(BuildContext context) {}
+  void _showAddressOptions(BuildContext context, OrderCubit cubit) {
+    if (cubit.availableAddresses.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No addresses available. Please add an address first.'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
 
-  void _addNewAddress(BuildContext context) {}
+    showModalBottomSheet<void>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder:
+          (context) => Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Select Address',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                ...cubit.availableAddresses.map(
+                  (address) => Container(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    child: RadioListTile<int>(
+                      title: Text(
+                        '${address.street}\n${address.city}, ${address.id}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                      value: address.id,
+                      groupValue: cubit.selectedAddressId,
+                      onChanged: (value) {
+                        if (value != null) {
+                          cubit.updateSelectedAddress(value);
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      activeColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                          color:
+                              cubit.selectedAddressId == address.id
+                                  ? Colors.green
+                                  : Colors.grey.shade300,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text('Cancel'),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          cubit.refreshAddresses();
+                          Navigator.of(context).pop();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                        ),
+                        child: const Text(
+                          'Refresh',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+    );
+  }
+
+  void _addNewAddress(BuildContext context, OrderCubit cubit) {
+    // TODO: Navigate to add address screen
+    // After adding new address, refresh the addresses list
+    showDialog<void>(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Add New Address'),
+            content: const Text(
+              'This feature will navigate to add address screen.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+    );
+  }
 
   String _getDayOfWeek(DateTime date) {
     switch (date.weekday) {
@@ -660,4 +900,54 @@ class MakeOrderView extends StatelessWidget {
         return '';
     }
   }
+}
+
+// استبدل دالة _buildCartItemRow بهذا الكود المحدث
+Widget _buildCartItemRow(dynamic item) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 2),
+    child: Row(
+      children: [
+        const SizedBox(width: 28),
+        Expanded(
+          child: Text(
+            // جرب هذه الخيارات حسب البنية الصحيحة لـ CartItemModel
+            '${_getProductName(item)} x${item.quantity ?? 0}',
+            style: const TextStyle(fontSize: 14, color: Colors.grey),
+          ),
+        ),
+        Text(
+          '${_getItemTotal(item).toStringAsFixed(0)} L.E',
+          style: const TextStyle(fontSize: 14, color: Colors.grey),
+        ),
+      ],
+    ),
+  );
+}
+
+// دالة مساعدة للحصول على اسم المنتج
+String _getProductName(dynamic item) {
+  try {
+    // طباعة بنية البيانات للتحقق (احذف هذا السطر بعد التحقق)
+    print('Item structure: ${item.toString()}');
+
+    // جرب هذه الخصائص المختلفة حسب البنية الصحيحة
+    if (item?.productName != null) return item.productName.toString();
+    if (item?.name != null) return item.name.toString();
+    if (item?.product?.name != null) return item.product.name.toString();
+    if (item?.title != null) return item.title.toString();
+
+    // إذا لم تجد أي من هذه الخصائص، استخدم قيمة افتراضية
+    return 'Product';
+  } catch (e) {
+    print('Error getting product name: $e');
+    return 'Product';
+  }
+}
+
+// دالة مساعدة لحساب إجمالي العنصر
+int _getItemTotal(dynamic item) {
+  final price = item.price ?? 0.0;
+  final quantity = item.quantity ?? 0;
+  return price * quantity;
 }
