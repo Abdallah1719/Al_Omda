@@ -75,3 +75,8 @@ class OrderError extends OrderState {
   final String error;
   OrderError(this.error);
 }
+
+class OrderBalanceError extends OrderState {
+  final String message;
+  OrderBalanceError(this.message);
+}

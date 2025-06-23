@@ -231,23 +231,23 @@ class OrderRequestModel {
 // order_response_model.dart
 class OrderResponseModel {
   final String message;
-  final bool success;
-  final OrderData? data;
-  final bool? requiresConfirmation; // Add this to handle confirmation requests
+  // final bool success;
+  // final OrderData? data;
+  // final bool? requiresConfirmation; // Add this to handle confirmation requests
 
   OrderResponseModel({
     required this.message,
-    required this.success,
-    this.data,
-    this.requiresConfirmation,
+    // required this.success,
+    // this.data,
+    // this.requiresConfirmation,
   });
 
   factory OrderResponseModel.fromJson(Map<String, dynamic> json) {
     return OrderResponseModel(
-      message: json['message'] ?? '',
-      success: json['success'] ?? false,
-      data: json['data'] != null ? OrderData.fromJson(json['data']) : null,
-      requiresConfirmation: json['requires_confirmation'] ?? false,
+      message: json["data"]['msg'] ?? '',
+      // success: json['success'] ?? false,
+      // data: json['data'] != null ? OrderData.fromJson(json['data']) : null,
+      // requiresConfirmation: json['requires_confirmation'] ?? false,
     );
   }
 }
