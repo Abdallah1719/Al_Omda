@@ -1,4 +1,4 @@
-import 'package:al_omda/features/cart/data/models/cart_model.dart';
+import 'package:al_omda/features/cart/data/models/cart_items_model.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductItemInCart extends StatelessWidget {
   const ProductItemInCart({super.key, required this.item});
-  final CartItemModel item;
+  final CartItemsModel item;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ProductItemInCart extends StatelessWidget {
         trailing: IconButton(
           icon: Icon(Icons.delete, color: Colors.red),
           onPressed: () {
-            context.read<CartCubit>().removeItemInstantly(item.productId);
+            context.read<CartCubit>().removeProductFromCart(item.productId);
           },
         ),
       ),

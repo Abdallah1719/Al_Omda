@@ -1,7 +1,7 @@
-// 6. presentation/widgets/cart_summary_widget.dart
-// =====================================
+
+import 'package:al_omda/features/cart/data/models/cart_summary_model.dart';
 import 'package:flutter/material.dart';
-import 'package:al_omda/features/cart/data/models/cart_model.dart';
+
 
 class CartSummaryWidget extends StatelessWidget {
   final CartSummaryModel summary;

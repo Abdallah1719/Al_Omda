@@ -42,7 +42,6 @@ class CartScreen extends StatelessWidget {
 
               return Column(
                 children: [
-                  // قائمة المنتجات
                   Expanded(
                     child: ListView.builder(
                       padding: EdgeInsets.all(16),
@@ -53,10 +52,9 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // الملخص الإجمالي
+                
                   CartSummaryWidget(summary: cartModel.summary),
 
-                  // زر الطلب
                   Padding(
                     padding: EdgeInsets.all(16),
                     child: SizedBox(

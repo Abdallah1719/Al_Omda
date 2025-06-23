@@ -30,7 +30,7 @@ class AccountRepository implements BaseAccountRepository {
   ) async {
     try {
       await api.post(
-        ApiConstances.updateProfilePath,
+        ApiConstances.updateAccountInfoPath,
         data: data,
         isFormData: true,
       );
