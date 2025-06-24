@@ -58,7 +58,7 @@ class TotalsSection extends StatelessWidget {
                         const SizedBox(width: 28),
                         Expanded(
                           child: Text(
-                            '${item.title ?? 'Product'} x${item.quantity ?? 0}',
+                            '${item.title} x${item.quantity}',
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: const TextStyle(
@@ -68,7 +68,7 @@ class TotalsSection extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '${((item.price ?? 0) * (item.quantity ?? 0)).toStringAsFixed(0)} L.E',
+                          '${((item.price) * (item.quantity)).toStringAsFixed(0)} L.E',
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.grey,

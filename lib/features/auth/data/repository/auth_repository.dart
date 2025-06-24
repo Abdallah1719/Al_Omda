@@ -31,4 +31,32 @@ class AuthRepository implements BaseAuthRepository {
       return left(e.errorModel.errorMessage);
     }
   }
+   @override
+  Future<Either<String, String>> logoutUser() async {
+    try {
+      final token = getIt<CacheHelper>().getData(key: "token");
+      if (token != null) {
+        await api.post(
+          ApiConstances.logoutPath, 
+        );
+      }
+      
+      // مسح البيانات من الكاش
+      await getIt<CacheHelper>().removeData(key: "token");
+      await getIt<CacheHelper>().removeData(key: "prv");
+      
+      return const Right("تم تسجيل الخروج بنجاح");
+    } on ServerException catch (e) {
+      // حتى لو فشل طلب السيرفر، امسح البيانات المحلية
+      await getIt<CacheHelper>().removeData(key: "token");
+      await getIt<CacheHelper>().removeData(key: "prv");
+      return left(e.errorModel.errorMessage);
+    } catch (e) {
+      // في حالة أي خطأ آخر، امسح البيانات المحلية
+      await getIt<CacheHelper>().removeData(key: "token");
+      await getIt<CacheHelper>().removeData(key: "prv");
+      return const Right("تم تسجيل الخروج بنجاح");
+    }
+  }
 }
+

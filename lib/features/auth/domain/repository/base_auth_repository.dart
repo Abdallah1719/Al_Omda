@@ -6,4 +6,5 @@ abstract class BaseAuthRepository {
     required String mobile,
     required String password,
   });
+    Future<Either<String, String>> logoutUser();
 }

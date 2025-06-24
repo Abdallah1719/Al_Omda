@@ -1,3 +1,5 @@
+import 'package:al_omda/core/routes/routes_constances.dart';
+import 'package:al_omda/core/routes/routes_methods.dart';
 import 'package:al_omda/features/cart/presentation/controller/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +45,7 @@ class OrderButton extends StatelessWidget {
                         return;
                       }
                       cubit.makeOrder();
+                      goToNextView(context, RoutesConstances.homePath);
                     },
             style: ElevatedButton.styleFrom(
               backgroundColor:
@@ -84,4 +87,10 @@ class OrderButton extends StatelessWidget {
       },
     );
   }
+}
+
+void goToNextView(context, path) {
+  Future.delayed(Duration(seconds: 1), () {
+    RoutesMethods.replacementNavigate(context, path);
+  });
 }
