@@ -1,8 +1,6 @@
-
 import 'package:al_omda/features/order/presentation/controller/cubit/order_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:al_omda/features/order/presentation/controller/cubit/order_cubit.dart';
 
 class ShippingDateSection extends StatelessWidget {
@@ -16,7 +14,6 @@ class ShippingDateSection extends StatelessWidget {
       builder: (context, state) {
         final selectedDate = cubit.selectedDate;
         final dateError = cubit.validateDate(selectedDate);
-
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -57,7 +54,10 @@ class ShippingDateSection extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: dateError == null ? Colors.green.shade50 : Colors.red.shade50,
+                color:
+                    dateError == null
+                        ? Colors.green.shade50
+                        : Colors.red.shade50,
                 border: Border.all(
                   color: dateError == null ? Colors.green : Colors.red,
                 ),
@@ -85,7 +85,10 @@ class ShippingDateSection extends StatelessWidget {
     );
   }
 
-  Future<void> _selectShippingDate(BuildContext context, OrderCubit cubit) async {
+  Future<void> _selectShippingDate(
+    BuildContext context,
+    OrderCubit cubit,
+  ) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -103,14 +106,22 @@ class ShippingDateSection extends StatelessWidget {
 
   String _getDayOfWeek(DateTime date) {
     switch (date.weekday) {
-      case 1: return 'Mon';
-      case 2: return 'Tue';
-      case 3: return 'Wed';
-      case 4: return 'Thu';
-      case 5: return 'Fri';
-      case 6: return 'Sat';
-      case 7: return 'Sun';
-      default: return '';
+      case 1:
+        return 'Mon';
+      case 2:
+        return 'Tue';
+      case 3:
+        return 'Wed';
+      case 4:
+        return 'Thu';
+      case 5:
+        return 'Fri';
+      case 6:
+        return 'Sat';
+      case 7:
+        return 'Sun';
+      default:
+        return '';
     }
   }
 }

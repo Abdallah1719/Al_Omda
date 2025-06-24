@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class DeliveryFeeSection extends StatelessWidget {
@@ -13,10 +12,7 @@ class DeliveryFeeSection extends StatelessWidget {
           'Delivery Fee:',
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        Text(
-          '20 L.E',
-          style: TextStyle(fontSize: 16, color: Colors.green),
-        ),
+        Text('20 L.E', style: TextStyle(fontSize: 16, color: Colors.green)),
       ],
     );
   }

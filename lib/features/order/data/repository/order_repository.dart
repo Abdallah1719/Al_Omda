@@ -19,15 +19,12 @@ class OrderRepository implements BaseOrderRepository {
     bool? confirmOrder,
   }) async {
     try {
-      // تحضير البيانات
       final Map<String, dynamic> data = {
         'address_id': addressId,
         'payment_id': paymentId,
         'shipping_day': shippingDay,
         'shipping_time': shippingTime,
       };
-
-      // إضافة المعاملات الاختيارية إذا كانت موجودة
       if (confirmOrder != null) {
         data['confirm'] = confirmOrder;
         data['confirm_order'] = confirmOrder;

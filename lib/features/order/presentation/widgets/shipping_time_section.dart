@@ -1,8 +1,6 @@
-
 import 'package:al_omda/features/order/presentation/controller/cubit/order_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:al_omda/features/order/presentation/controller/cubit/order_cubit.dart';
 
 class ShippingTimeSection extends StatelessWidget {
@@ -40,7 +38,10 @@ class ShippingTimeSection extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: timeError == null ? Colors.green.shade50 : Colors.red.shade50,
+                color:
+                    timeError == null
+                        ? Colors.green.shade50
+                        : Colors.red.shade50,
                 border: Border.all(
                   color: timeError == null ? Colors.green : Colors.red,
                 ),

@@ -1,15 +1,11 @@
-
 import 'package:al_omda/features/order/presentation/controller/cubit/order_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:al_omda/features/order/presentation/controller/cubit/order_cubit.dart';
 
 class AddressSection extends StatelessWidget {
   final OrderCubit cubit;
-
   const AddressSection({super.key, required this.cubit});
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -62,7 +58,8 @@ class AddressSection extends StatelessWidget {
                   ),
                   const SizedBox(width: 16),
                   GestureDetector(
-                    onTap: () => _addNewAddress(context, cubit),
+                    onTap: () {},
+                    //  => _addNewAddress(context, cubit),
                     child: const Row(
                       children: [
                         Icon(Icons.add, size: 18, color: Colors.green),
@@ -119,93 +116,95 @@ class AddressSection extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Select Address',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            ...cubit.availableAddresses.map(
-              (address) => Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                child: RadioListTile<int>(
-                  title: Text(
-                    '${address.street}\n${address.city}, ${address.id}',
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                  value: address.id,
-                  groupValue: cubit.selectedAddressId,
-                  onChanged: (value) {
-                    if (value != null) {
-                      cubit.updateSelectedAddress(value);
-                      Navigator.of(context).pop();
-                    }
-                  },
-                  activeColor: Colors.green,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    side: BorderSide(
-                      color: cubit.selectedAddressId == address.id
-                          ? Colors.green
-                          : Colors.grey.shade300,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Row(
+      builder:
+          (context) => Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Cancel'),
+                const Text(
+                  'Select Address',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                ...cubit.availableAddresses.map(
+                  (address) => Container(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    child: RadioListTile<int>(
+                      title: Text(
+                        '${address.street}\n${address.city}, ${address.id}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                      value: address.id,
+                      groupValue: cubit.selectedAddressId,
+                      onChanged: (value) {
+                        if (value != null) {
+                          cubit.updateSelectedAddress(value);
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      activeColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                          color:
+                              cubit.selectedAddressId == address.id
+                                  ? Colors.green
+                                  : Colors.grey.shade300,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      cubit.refreshAddresses();
-                      Navigator.of(context).pop();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text('Cancel'),
+                      ),
                     ),
-                    child: const Text(
-                      'Refresh',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                    // const SizedBox(width: 8),
+                    // Expanded(
+                    //   child: ElevatedButton(
+                    //     onPressed: () {
+                    //       cubit.refreshAddresses();
+                    //       Navigator.of(context).pop();
+                    //     },
+                    //     style: ElevatedButton.styleFrom(
+                    //       backgroundColor: Colors.green,
+                    //     ),
+                    //     child: const Text(
+                    //       'Refresh',
+                    //       style: TextStyle(color: Colors.white),
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 
-  void _addNewAddress(BuildContext context, OrderCubit cubit) {
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Add New Address'),
-        content: const Text(
-          'This feature will navigate to add address screen.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
+  // void _addNewAddress(BuildContext context, OrderCubit cubit) {
+  //   showDialog<void>(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       title: const Text('Add New Address'),
+  //       content: const Text(
+  //         'This feature will navigate to add address screen.',
+  //       ),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () => Navigator.of(context).pop(),
+  //           child: const Text('OK'),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
