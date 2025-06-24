@@ -10,4 +10,5 @@ final class AuthFailure extends AuthState {
   AuthFailure({required this.errorMassage});
 }
 final class Loginsucess extends AuthState {}
+class LogoutSuccess extends AuthState {}
 

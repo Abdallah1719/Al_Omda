@@ -22,4 +22,21 @@ class AuthCubit extends Cubit<AuthState> {
       (loginModel) => emit(Loginsucess()),
     );
   }
+  
+  Future<void> logout() async {
+    emit(Authlodding());
+    final response = await baseAuthRepository.logoutUser();
+    response.fold(
+      (errorMessage) => emit(AuthFailure(errorMassage: errorMessage)),
+      (successMessage) => emit(LogoutSuccess()),
+    );
+  }
+
+  // تنظيف الـ controllers عند الـ dispose
+  @override
+  Future<void> close() {
+    mobileController.dispose();
+    passwordController.dispose();
+    return super.close();
+  }
 }
